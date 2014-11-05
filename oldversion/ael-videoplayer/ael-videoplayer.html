@@ -1,0 +1,561 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<script type="application/dart" src="ael-videoplayer.dart"></script>
+
+<!-- Xikolo HTML5 video player -->
+<script type="application/javascript" src="../hpi-videoplayer/jquery-1.11.1.min.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/device.min.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/screenfull.min.js"></script>
+
+<script type="application/javascript" src="../hpi-videoplayer/chapters.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/controls.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/html_builder.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/slideviewer.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/user_interface.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/video_player.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/cuepoints.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/captions.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/most_watched.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/preview.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/tagging.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/history.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/loading_overlay.js.js"></script>
+<script type="application/javascript" src="../hpi-videoplayer/custom_preview.js.js"></script>
+
+<style>
+  @font-face{ 
+    font-family: 'Xikolo';
+    src: url('../hpi-videoplayer/Xikolo.eot');
+    src: url('../hpi-videoplayer/Xikolo.eot?#iefix') format('embedded-opentype'),
+         url('../hpi-videoplayer/Xikolo.woff') format('woff'),
+         url('../hpi-videoplayer/Xikolo.ttf') format('truetype'),
+         url('../hpi-videoplayer/Xikolo.svg#Xikolo') format('svg');
+  }
+</style>
+
+<polymer-element name="ael-videoplayer" attributes="video">
+  <template>
+    <style>
+      .televideoplayer {
+        height: 100%;
+        min-height: 100%;
+      }
+      
+      .videoPlayer {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+      .videoPlayer .video {
+        position: absolute;
+        float: left;
+        top: 0;
+      }
+      .videoPlayer i {
+        font-style: normal;
+      }
+      .videoPlayer .a {
+        left: 0;
+      }
+      .videoPlayer .b {
+        right: 0;
+      }
+      .videoPlayer video {
+        height: inherit;
+        width: inherit;
+      }
+      .videoPlayer .clear {
+        clear: both;
+      }
+      .videoPlayer:hover .resizer {
+        display: block;
+      }
+      .videoPlayer .resizer {
+        position: relative;
+        font-size: 30px;
+        color: #424242;
+        height: 30px;
+        width: 30px;
+        margin-left: -22px;
+        z-index: 6;
+        display: none;
+        cursor: 'move';
+      }
+      .videoPlayer .chapterContent {
+        position: absolute;
+        height: 450px;
+        top: 0px;
+        right: 0px;
+        width: 250px;
+        margin-right: -250px;
+        overflow-y: auto;
+        -webkit-transition: margin-right 1s;
+        -moz-transition: margin-right 1s;
+        -ms-transition: margin-right 1s;
+        transition: margin-right 1s;
+      }
+      .videoPlayer .chapterContent.visible {
+        margin-right: 0px;
+      }
+      .videoPlayer .slidePreview {
+        display: none;
+        position: fixed;
+        width: 240px;
+        height: 180px;
+        z-index: 100;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        border: 1px solid #7d7c7c;
+        background-color: #ebebec;
+        padding: 2px;
+      }
+      .videoPlayer .slidePreview img {
+        height: 100%;
+      }
+      .videoPlayer .slidePreview .arrow {
+        background-image: url('/images/html5player/arrow_down.png');
+        height: 10px;
+        width: 18px;
+        position: absolute;
+        top: 178px;
+        left: 10px;
+      }
+      .videoPlayer .controlsContainer {
+        position: absolute;
+        bottom: 0px;
+        clear: both;
+        width: 100%;
+        height: 44px;
+        overflow: visible;
+      }
+      .videoPlayer .controls {
+        position: relative;
+        bottom: 0;
+        height: 44px;
+        margin-top: 2px;
+        width: 100%;
+        font-size: 12px;
+        color: #ffffff;
+        border-spacing: 0;
+      }
+      .videoPlayer .controls div:last-child {
+        border: none;
+      }
+      .videoPlayer .controls .progressbar {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 44px;
+        background-color: #424242;
+        vertical-align: middle;
+        overflow: hidden;
+        max-width: 2000px;
+      }
+      .videoPlayer .controls .progressbar .currentTime {
+        float: left;
+        margin-right: 14px;
+      }
+      .videoPlayer .controls .progressbar .totalTime {
+        float: right;
+        margin-left: 14px;
+      }
+      .videoPlayer .controls .progressbar .progress {
+        display: block;
+        height: 14px;
+        border: 1px solid #5a6065;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-bottom: 0;
+        background-color: #424242;
+      }
+      .videoPlayer .controls .progressbar .progress .slider {
+        display: inline-block;
+        background-color: #de6212;
+        height: 14px;
+        width: 0;
+      }
+      .videoPlayer .controls .progressbar .progress .buffer {
+        display: inline-block;
+        background-color: #565656;
+        height: 14px;
+        width: 0;
+      }
+      .videoPlayer .controls .progressbar .slideContainer {
+        display: block;
+        height: 14x;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-bottom: 2px;
+      }
+      .videoPlayer .controls .control {
+        height: 44px;
+        width: 1%;
+        padding-left: 14px;
+        padding-right: 14px;
+        border-right: 2px solid #ededed;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        background-color: #424242;
+      }
+      .videoPlayer .controls .button {
+        background-color: #424242;
+        width: 44px;
+        min-width: 44px;
+        text-align: center;
+        vertical-align: middle;
+        border-right: 2px solid #ededed;
+        cursor: pointer;
+      }
+      .videoPlayer .controls .button:hover {
+        background-color: #2e2e2e;
+      }
+      .videoPlayer .controls .button i {
+        font-size: 24px;
+      }
+      .videoPlayer .controls .play {
+        width: 72px;
+      }
+      .videoPlayer .controls .play i {
+        font-size: 28px;
+      }
+      .videoPlayer .controls .speed span {
+        font-weight: bold;
+        font-size: 12px;
+      }
+      .videoPlayer .controls .mute {
+        border-right: none;
+      }
+      .videoPlayer .controls .mute:hover {
+        background-color: #424242;
+      }
+      .videoPlayer .controls .fullscreen {
+        border-right: none;
+      }
+      .videoPlayer .controls .fullscreen i {
+        font-size: 18px;
+      }
+      .videoPlayer .controls .hd i {
+        font-size: 32px;
+      }
+      .videoPlayer .controls .volumebar {
+        width: 60px;
+        height: 44px;
+        border-right: 2px solid #ededed;
+        background-color: #424242;
+        vertical-align: middle;
+        padding-left: 0px;
+        padding-right: 14px;
+      }
+      .videoPlayer .controls .volumebar .volume {
+        display: block;
+        height: 12px;
+        border: 1px solid #5a6065;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .videoPlayer .controls .volumebar .volume .slider {
+        display: inline-block;
+        background-color: #de6212;
+        width: 100%;
+        height: 14px;
+      }
+      .videoPlayer .hovering {
+        background-color: #2e2e2e;
+      }
+      .videoPlayer .slideDiv {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border-right: 2px solid #424242;
+        background-color: #5a6065;
+        float: left;
+        height: 14px;
+      }
+      .videoPlayer .slideDiv div:last-child {
+        border-right: none;
+      }
+      .videoPlayer .slideDiv:hover {
+        background-color: #6d757b;
+      }
+      .videoPlayer .chapters {
+        background-color: #333;
+        display: inline-block;
+      }
+      .videoPlayer .chapters ul {
+        margin: 5px;
+        padding: 0px;
+        list-style-type: none;
+        color: white;
+      }
+      .videoPlayer .chapters ul li {
+        background-color: #f4f4f4;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .videoPlayer .chapters ul li:nth-child(even) {
+        background-color: #666;
+      }
+      .videoPlayer .chapters ul li:nth-child(odd) {
+        background-color: #555;
+      }
+      .videoPlayer .chapters ul li.active {
+        background-repeat: no-repeat;
+        background-position: 0% center;
+      }
+      .videoPlayer .chapters ul li p {
+        margin: 5px 5px 5px 35px;
+      }
+      .videoPlayer .chapters ul li p:first-child {
+        font-weight: bold;
+        margin-bottom: 0px;
+      }
+      
+      .xikolo-icon {
+        vertical-align: middle;
+      }
+      
+      .primary-color {
+        color: #afbfff;
+      }
+      
+      .televideoplayer {
+        width: 100%;
+        min-width: 100%;
+        position: relative;
+      }
+      
+      .videoPlayer video .inactive {
+        display: none;
+      }
+      .videoPlayer .controlsContainer {
+        height: 46px;
+      }
+      .videoPlayer .controls {
+        margin-top: 0px;
+      }
+      .videoPlayer .controls .play {
+        width: 44px;
+        border-left: 2px solid #ededed;
+      }
+      .videoPlayer .controls .fullscreen {
+        border-right: 2px solid #ededed;
+      }
+      .videoPlayer .controls .fullscreen .icon-fullscreen-on, .videoPlayer .controls .fullscreen .icon-fullsceen-off {
+        font-size: 22px;
+      }
+      .videoPlayer .controls .most-watched .icon-most-watched {
+        font-size: 28px;
+      }
+      .videoPlayer .controls .progressbar .progress {
+        position: relative;
+      }
+      .videoPlayer .controls .progressbar .progress .slider {
+        background-color: #afbfff;
+      }
+      .videoPlayer .controls .progressbar .progress .cuePoint {
+        width: 14px;
+        height: 14px;
+        background: #4e6cef;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        border-radius: 7px;
+        position: absolute;
+        display: inline-block;
+        cursor: pointer;
+        z-index: 1;
+      }
+      .videoPlayer .controls .progressbar .progress .mostWatched {
+        height: 14px;
+        background-color: rgba(166, 53, 56, 0.8);
+        position: absolute;
+        display: inline-block;
+      }
+      .videoPlayer .controls .progressbar .progress .previewRange {
+        font-family: calibri;
+        font-size: 20px;
+        position: absolute;
+        height: 100%;
+      }
+      .videoPlayer .controls .progressbar .progress .previewRange:before {
+        content: " ";
+        position: absolute;
+        border-left: 1px solid #95A635;
+        border-top: 1px solid #95A635;
+        border-bottom: 1px solid #95A635;
+        padding: 6px 2px 6px 2px;
+        left: 0px;
+      }
+      .videoPlayer .controls .progressbar .progress .previewRange:after {
+        content: " ";
+        position: absolute;
+        border-right: 1px solid #95A635;
+        border-top: 1px solid #95A635;
+        border-bottom: 1px solid #95A635;
+        padding: 6px 2px 6px 2px;
+        right: 0px;
+      }
+      .videoPlayer .controls .progressbar .progress .taggingPreview {
+        height: 14px;
+        background-color: #394ea6;
+        position: absolute;
+        display: inline-block;
+        z-index: 2;
+      }
+      .videoPlayer .controls .preview.button {
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+      .videoPlayer .controls .preview.button .icon-preview {
+        vertical-align: -25%;
+        margin-right: 5px;
+      }
+      .videoPlayer .controls .preview.button span {
+        margin-left: 4px;
+        font-weight: bold;
+      }
+      .videoPlayer .controls .streamselection.button {
+        position: relative;
+      }
+      .videoPlayer .controls .streamselection.button .dropdown-menu {
+        position: absolute;
+        list-style: none;
+        bottom: 100%;
+        display: none;
+        margin: 0;
+        padding: 0;
+        left: -2px;
+      }
+      .videoPlayer .controls .streamselection.button .dropdown-menu li {
+        float: none;
+        position: relative;
+        font-size: 12px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #424242;
+        min-width: 46px;
+        min-height: 22px;
+        cursor: pointer;
+        border-top: 2px solid #ededed;
+        border-right: 2px solid #ededed;
+        border-left: 2px solid #ededed;
+        padding: 4px 0px;
+        line-height: 22px;
+      }
+      .videoPlayer .controls .streamselection.button .dropdown-menu li:last-of-type {
+        border-bottom: 2px solid #ededed;
+      }
+      .videoPlayer .controls .streamselection.button .dropdown-menu li:hover {
+        background-color: #2e2e2e;
+      }
+      .videoPlayer .controls .streamselection.button .dropdown-menu li.selected {
+        color: #afbfff !important;
+      }
+      .videoPlayer .controls td {
+        border-top: 2px solid #ededed;
+      }
+      .videoPlayer .controls .volumebar .volume .slider {
+        background-color: #afbfff;
+      }
+      
+      .loadingOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        color: #fff;
+        -webkit-user-select: none;
+      }
+      .loadingOverlay i {
+        position: relative;
+        top: calc(50% - 12px - 23px);
+        font-style: initial;
+        font-size: 5em;
+      }
+      .loadingOverlay .loadingText {
+        font-size: 2rem;
+        display: inline-block;
+        line-height: 2rem;
+        position: absolute;
+        top: calc(50% - 0.5rem);
+        padding-left: 1rem;
+      }
+    </style>
+  
+    <!-- Fonts / Icons -->
+    <style>
+      .xikolo-icon {
+        font-family: 'Xikolo';
+        font-size: 1.5em;
+        vertical-align: sub;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .xikolo-icon.small-icon {
+        font-size: 1.0em;
+        vertical-align: top;
+      }
+      .xikolo-glyphicon {
+        font-size: 1.5em;
+        vertical-align: sub;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .icon-pause:before {
+        content: "\e651";
+      }
+      .icon-play:before {
+        content: "\e652";
+      }
+      .icon-reload:before {
+        content: "\e65b";
+      }
+      .icon-next-track:before {
+        content: "\e653";
+      }
+      .icon-fast-forward:before {
+        content: "\e654";
+      }
+      .icon-volume-on:before {
+        content: "\e655";
+      }
+      .icon-volume-off:before {
+        content: "\e656";
+      }
+      .icon-HD:before {
+        content: "\e657";
+      }
+      .icon-SD:before {
+        content: "\e65c";
+      }
+      .icon-fullscreen-on:before {
+        content: "\e658";
+      }
+      .icon-fullscreen-off:before {
+        content: "\e659";
+      }
+      .icon-cc:before {
+        content: "\e67e";
+      }
+      .icon-most-watched:before {
+        content: "\e67b";
+      }
+      .icon-preview:before {
+        content: "\e63a";
+      }
+      .icon-stream-selection:before {
+        content: "\e600";
+      }
+      .icon-loading:before {
+        content: "\e629";
+      }
+    </style>
+
+    <div id="container" horizontal layout>
+      <div id="televideoplayer" class="televideoplayer"></div>
+    </div>
+  </template>
+
+</polymer-element>
