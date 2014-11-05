@@ -1,0 +1,25 @@
+{
+  "name": "TemplateBinding",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./src/TemplateBinding.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Polymer/TemplateBinding.git"
+  },
+  "author": "",
+  "license": "Apache License 2.0",
+  "gitHead": "cdd89f1fb6273ede781c9e00a512720df1adffff",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-concat": "~0.3.0",
+    "web-component-tester": "^1.0.1"
+  }
+}
