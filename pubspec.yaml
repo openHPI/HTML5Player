@@ -1,0 +1,8 @@
+name: html5-video-player
+description: HTML5 Video Player
+dependencies:
+  browser: any
+  core_elements: any
+  paper_elements: any
+  polymer: any
+  
