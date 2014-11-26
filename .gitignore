@@ -1,8 +1,0 @@
-packages
-.DS_Store
-**/*.dart.js*
-.idea
-pubspec.lock
-.buildlog
-out/
-.pub/

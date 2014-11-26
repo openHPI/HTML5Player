@@ -1,0 +1,39 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+
+<link rel="import" href="video-stream.html">
+
+<polymer-element name="video-player" attributes="time duration speed quality" vertical layout>
+  <template>
+    <style>
+      :host{
+        display: block;
+        min-height: 300px;
+      }
+      #video {
+        background-color: red;
+        min-height: 200px;
+      }
+      #controlbar {
+        background-color: black;
+        color: white;
+        height: 100px;
+      }
+      
+      button {
+        font-size: 24pt;
+        margin-bottom: 20px;
+      }
+    </style>
+    <div id="video" flex horizontal layout start>
+      <content></content>
+      <!--<button on-click="{{increment}}">Click me</button><br>
+      <span>(click count: {{time}})</span>-->
+    </div>
+    <div id="controlbar">
+      Control Bar
+    </div>
+  </template>
+  <script type="application/dart" src="video-player.dart"></script>
+</polymer-element>
+
