@@ -20,12 +20,17 @@
     
     <p>Hello world from Dart!</p>
     
-    <div id="sample_container_id">
-      <video-player time="0" duration="1789" speed="1" quality="hd">
-        <video-stream></video-stream>
-        <video-stream flex></video-stream>
+      <video-player time="0" duration="1789" speed="1.5" quality="hd">
+        <video-stream
+          poster="https://i.vimeocdn.com/video/487347291_640.jpg"
+          sd_src="https://player.vimeo.com/external/104628823.sd.mp4?s=ccdc2af7081a3079f259f64949897005&download=1">
+        </video-stream>
+        <video-stream
+          poster="https://i.vimeocdn.com/video/487212736_960.jpg"
+          sd_src="https://player.vimeo.com/external/104618127.hd.mp4?s=abee5b914eb293b37f3cdf3e115c818d&download=1"
+          ratio="4:3">
+        </video-stream>
       </video-player>
-    </div>
 
     <!-- bootstrap polymer -->
     <script type="application/dart">export 'package:polymer/init.dart';</script>

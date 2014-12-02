@@ -11,12 +11,9 @@ h1, p {
   color: #333;
 }
 
-#sample_container_id {
-  width: 100%;
+video-player {
+  width: 750px;
   position: relative;
   border: 1px solid #ccc;
   background-color: #fff;
-}
-
-video-player{
 }

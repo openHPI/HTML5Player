@@ -1,5 +1,4 @@
 import 'package:polymer/polymer.dart';
-import 'dart:html';
 
 /**
  * A Polymer element.
@@ -9,13 +8,13 @@ class VideoPlayer extends PolymerElement {
   @published int time = 0;
   @published int duration = 0;
   @published double speed = 1.0;
-  @published String quality = "sd";
+  @published String quality;
 
   VideoPlayer.created() : super.created() {
-  }
-
-  void increment() {
-    time++;
+    this.querySelector("video-stream:last-child").setAttribute("flex", "");
+    this.querySelectorAll("video-stream").forEach(
+        (stream) => stream..resize()..setAttribute("speed", speed)
+    );
   }
 }
 

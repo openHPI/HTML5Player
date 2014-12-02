@@ -1348,3 +1348,942 @@ build.dart --machine --changed=web\video_player.html
 
 build.dart finished [1258 ms]
 
+---
+build.dart --machine --full
+
+build.dart finished [2656 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1245 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1197 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1198 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1183 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1198 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1253 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1174 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1234 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1218 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1209 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1216 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1312 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1275 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1266 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1237 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1217 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1223 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1187 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1244 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1234 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1231 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1207 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1244 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1302 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1186 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1146 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1214 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1252 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1193 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1216 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1214 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1247 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1202 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1185 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1313 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1207 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1233 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1236 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1247 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1146 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1144 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1223 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1167 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1254 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1184 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1239 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1217 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1241 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1212 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1239 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1157 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1242 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1214 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1258 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1196 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1172 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1220 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1246 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1174 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1177 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1265 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1208 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1166 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1171 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1200 ms]
+
+---
+build.dart --machine --changed=web\video_player.css
+
+build.dart finished [1168 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1225 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1278 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1171 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1159 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1229 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1156 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1200 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1177 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1152 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1172 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1407 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1182 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1180 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1182 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1196 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1172 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1237 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+
+build.dart finished [1290 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1206 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1332 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1195 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1252 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1185 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1166 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1164 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+
+build.dart finished [1147 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+
+build.dart finished [1165 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1185 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1199 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1218 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1288 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":514,"charEnd":618}}]
+build.dart finished [1273 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1261 ms]
+
+---
+build.dart --machine --changed=web\imdb2014-w1-2 lecturer.mp4.crdownload
+
+build.dart finished [1400 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1194 ms]
+
+---
+build.dart --machine --changed=web\imdb2014-w1-2 desktop.mp4.crdownload
+
+build.dart finished [1284 ms]
+
+---
+build.dart --machine --changed=web\imdb2014-w1-2 lecturer.mp4 --removed=web\imdb2014-w1-2 lecturer.mp4.crdownlo...
+
+build.dart finished [1289 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1282 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1191 ms]
+
+---
+build.dart --machine --changed=web\imdb2014-w1-2 desktop.mp4 --removed=web\imdb2014-w1-2 desktop.mp4.crdownload
+
+build.dart finished [1232 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1254 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1260 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1227 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1290 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1294 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1361 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":559,"charEnd":663}}]
+build.dart finished [1209 ms]
+
+---
+build.dart --machine --changed=web\lecturer.mp4 --removed=web\imdb2014-w1-2 lecturer.mp4
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":559,"charEnd":663}}]
+build.dart finished [1288 ms]
+
+---
+build.dart --machine --changed=web\desktop.mp4 --removed=web\imdb2014-w1-2 desktop.mp4
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":559,"charEnd":663}}]
+build.dart finished [1260 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1179 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1308 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1324 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+
+build.dart finished [1352 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":572,"charEnd":676}}]
+build.dart finished [1337 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":568,"charEnd":672}}]
+build.dart finished [1424 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":532,"charEnd":636}}]
+build.dart finished [1261 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":532,"charEnd":636}}]
+build.dart finished [1271 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":532,"charEnd":636}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":876}}]
+build.dart finished [1175 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Named entity expected. Got none.","line":23,"charStart":532,"charEnd":636}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1125 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1125 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1326 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1340 ms]
+
+---
+build.dart --machine --removed=web\desktop.mp4 --removed=web\lecturer.mp4
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1129 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1175 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1325 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1341 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1250 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1156 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1204 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1232 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1193 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1309 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1233 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1315 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1261 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1293 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1103 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1166 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1109 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1280 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1191 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1363 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1219 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1139 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1215 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1409 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1398 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1416 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":690,"charEnd":879}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":919,"charEnd":1108}}]
+build.dart finished [1459 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1497 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1437 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1373 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1109 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1332 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1330 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":893}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":933,"charEnd":1122}}]
+build.dart finished [1161 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1175 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1125 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1126 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1121 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1234 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1093 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1125 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1159 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1141 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1373 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1156 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1202 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1250 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1279 ms]
+
