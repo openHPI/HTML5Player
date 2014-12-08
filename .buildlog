@@ -2287,3 +2287,308 @@ build.dart --machine --changed=web\video_player.html
 [{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
 build.dart finished [1279 ms]
 
+---
+build.dart --machine --changed=web/elements/video-player.dart
+Unhandled exception:
+Uncaught Error: FileSystemException: Cannot open file, path = '/Users/gberecz/workspace/HTML5Player/packages/polymer/builder.dart' (OS Error: No such file or directory, errno = 2)
+Stack Trace:
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:349)
+#1      _RootZone.runUnary (dart:async/zone.dart:1151)
+#2      _Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:496)
+#3      _Future._propagateToListeners (dart:async/future_impl.dart:579)
+#4      _Future._completeWithValue (dart:async/future_impl.dart:339)
+#5      _Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:401)
+#6      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#7      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#8      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#9      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+
+#0      _rootHandleUncaughtError.<anonymous closure> (dart:async/zone.dart:883)
+#1      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#2      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#3      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#4      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+build.dart finished [169 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.html --changed=web/elements/video-stream.dart --change...
+Unhandled exception:
+Uncaught Error: FileSystemException: Cannot open file, path = '/Users/gberecz/workspace/HTML5Player/packages/polymer/builder.dart' (OS Error: No such file or directory, errno = 2)
+Stack Trace:
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:349)
+#1      _RootZone.runUnary (dart:async/zone.dart:1151)
+#2      _Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:496)
+#3      _Future._propagateToListeners (dart:async/future_impl.dart:579)
+#4      _Future._completeWithValue (dart:async/future_impl.dart:339)
+#5      _Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:401)
+#6      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#7      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#8      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#9      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+
+#0      _rootHandleUncaughtError.<anonymous closure> (dart:async/zone.dart:883)
+#1      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#2      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#3      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#4      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+build.dart finished [109 ms]
+
+---
+build.dart --machine --clean
+Unhandled exception:
+Uncaught Error: FileSystemException: Cannot open file, path = '/Users/gberecz/workspace/HTML5Player/packages/polymer/builder.dart' (OS Error: No such file or directory, errno = 2)
+Stack Trace:
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:349)
+#1      _RootZone.runUnary (dart:async/zone.dart:1151)
+#2      _Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:496)
+#3      _Future._propagateToListeners (dart:async/future_impl.dart:579)
+#4      _Future._completeWithValue (dart:async/future_impl.dart:339)
+#5      _Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:401)
+#6      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#7      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#8      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#9      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+
+#0      _rootHandleUncaughtError.<anonymous closure> (dart:async/zone.dart:883)
+#1      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#2      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#3      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#4      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+build.dart finished [89 ms]
+
+---
+build.dart --machine --full
+Unhandled exception:
+Uncaught Error: FileSystemException: Cannot open file, path = '/Users/gberecz/workspace/HTML5Player/packages/polymer/builder.dart' (OS Error: No such file or directory, errno = 2)
+Stack Trace:
+#0      _File.open.<anonymous closure> (dart:io/file_impl.dart:349)
+#1      _RootZone.runUnary (dart:async/zone.dart:1151)
+#2      _Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:496)
+#3      _Future._propagateToListeners (dart:async/future_impl.dart:579)
+#4      _Future._completeWithValue (dart:async/future_impl.dart:339)
+#5      _Future._asyncComplete.<anonymous closure> (dart:async/future_impl.dart:401)
+#6      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#7      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#8      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#9      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+
+#0      _rootHandleUncaughtError.<anonymous closure> (dart:async/zone.dart:883)
+#1      _asyncRunCallbackLoop (dart:async/schedule_microtask.dart:41)
+#2      _asyncRunCallback (dart:async/schedule_microtask.dart:48)
+#3      _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:84)
+#4      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:131)
+build.dart finished [105 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1754 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+build.dart finished [1837 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1886 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1986 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1446 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1699 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1548 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1441 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Unexpected end tag (source). Ignored.","line":23,"charStart":582,"charEnd":591}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1616 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Unexpected end tag (source). Ignored.","line":23,"charStart":582,"charEnd":591}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1542 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.html
+[{"method":"warning","params":{"file":"web/elements/video-stream.html","message":"Unexpected end tag (source). Ignored.","line":23,"charStart":582,"charEnd":591}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1566 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1514 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1857 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1665 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":25,"charStart":750,"charEnd":939}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":29,"charStart":979,"charEnd":1168}}]
+build.dart finished [1603 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1581 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1739 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":692,"charEnd":881}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":921,"charEnd":1110}}]
+build.dart finished [1606 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1503 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1517 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1428 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1802 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1596 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1522 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1995 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1889 ms]
+
+---
+build.dart --machine --changed=web/elements/video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1628 ms]
+
+---
+build.dart --machine --changed=web/elements/video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2209 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1677 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2148 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2119 ms]
+
+---
+build.dart --machine --changed=web/video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2114 ms]
+
+---
+build.dart --machine --clean
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1746 ms]
+
+---
+build.dart --machine --full
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [1585 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.2s (0.0s awaiting secondary inputs)."}}]
+build.dart finished [1914 ms]
+

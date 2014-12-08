@@ -10,7 +10,9 @@ class VideoStream extends PolymerElement {
   @published String poster;
   @published String ratio;
   @published String speed;
+  @published String volume;
 
+  
   @observable
   VideoStream.created() : super.created() {
   }
@@ -22,7 +24,11 @@ class VideoStream extends PolymerElement {
   }
   
   void speedChanged() {
-    this.shadowRoot.querySelector("video").playbackRate = speed;
+    this.shadowRoot.querySelector("video").playbackRate = double.parse(speed);
+  }
+  
+  void volumeChanged() {
+      this.shadowRoot.querySelector("video").volume = double.parse(volume);
   }
   
   double ratioAsDouble(String ratio){
