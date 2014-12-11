@@ -1,8 +1,18 @@
-name: html5-video-player
+name:  HTML5Player
+version: 0.0.1
+authors:
+  - Berecz, Georg <Georg.Berecz@student.hpi.de>
+  - Blechschmidt, Frank <Frank.Blechschmidt@sap.com>
+  - Boockmeyer, Arne <Arne.Boockmeyer@student.hpi.de>
+  - Echzell, Hagen <Hagen.Echzell@student.hpi.de>
 description: HTML5 Video Player
+homepage: https://github.com/jprberlin/HTML5Player
 dependencies:
-  browser: any
   core_elements: any
   paper_elements: any
   polymer: any
-  
+transformers:
+- polymer:
+    entry_points:
+    - example/index.html
+    - example/index_single.html
