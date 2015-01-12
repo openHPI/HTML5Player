@@ -1,0 +1,28 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="video-controlbar">
+  <template>
+    <style>
+      :host{
+        display: block;
+        }
+      #controlbar {
+        background-color: black;
+        color: white;
+        height: 100px;
+      }
+      core-icon[icon="polymer"] {
+        color: #a4c639;
+        width: 32px;
+        height: 32px; 
+      }
+    </style>
+    
+    <div id="controlbar">
+      <button id="playPauseButton">Play/Pause</button>
+    </div>
+    <!-- <core-icon icon="polymer"></core-icon> -->
+  </template>
+  <script type="application/dart" src="video-controlbar.dart"></script>
+</polymer-element>

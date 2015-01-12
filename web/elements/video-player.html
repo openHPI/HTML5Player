@@ -2,6 +2,7 @@
 <link rel="import" href="packages/polymer/polymer.html">
 
 <link rel="import" href="video-stream.html">
+<link rel="import" href="video-controlbar.html">
 
 <polymer-element name="video-player" attributes="time duration speed quality volume" vertical layout>
   <template>
@@ -18,9 +19,7 @@
     <div id="video" flex horizontal layout start>
       <content></content>
     </div>
-    <div id="controlbar">
-      Control Bar
-    </div>
-  </template>
+    <video-controlbar></video-controlbar>
+   </template>
   <script type="application/dart" src="video-player.dart"></script>
 </polymer-element>
