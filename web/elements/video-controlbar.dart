@@ -1,6 +1,5 @@
 import 'package:polymer/polymer.dart';
 import 'dart:html';
-
 /**
  * A Polymer element.
  */
@@ -8,8 +7,8 @@ import 'dart:html';
 
 class VideoControlBar extends PolymerElement {
 
-  ButtonElement playPauseButton;
   Element videoPlayer;
+  ButtonElement speedButton;
   
   VideoControlBar.created() : super.created() {
   }
@@ -19,6 +18,17 @@ class VideoControlBar extends PolymerElement {
     super.attached();
     videoPlayer = this.parentNode.host;
     this.shadowRoot.querySelector('#playPauseButton').onClick.listen(videoPlayer.play);
+    
+    speedButton = $['speedButton'];
+    speedButton.onClick.listen(clickOnSpeed);
   }
-
+  
+  void clickOnSpeed(Event e){
+    document.querySelector("video-player").toggleSpeed();
+  }
+  
+  void changeSpeed(double d){
+    speedButton.setInnerHtml(d.toString());
+  }
+  
 }

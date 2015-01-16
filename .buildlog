@@ -3844,3 +3844,38 @@ build.dart --machine --changed=web\elements\video-stream.dart
 [{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
 build.dart finished [3077 ms]
 
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart --changed=web\elements\video-controlbar.html ...
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":499,"charEnd":501}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":501,"charEnd":502}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":502,"charEnd":503}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":503,"charEnd":504}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":504,"charEnd":505}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":505,"charEnd":506}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":506,"charEnd":507}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 1.4s (1.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.4s (1.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.4s (1.3s awaiting secondary inputs)."}}]
+build.dart finished [7506 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":499,"charEnd":501}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":501,"charEnd":502}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":502,"charEnd":503}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":503,"charEnd":504}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":504,"charEnd":505}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":505,"charEnd":506}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"Expected tag name. Got something else instead","line":23,"charStart":506,"charEnd":507}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2834 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2522 ms]
+
