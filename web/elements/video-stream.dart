@@ -1,26 +1,33 @@
+library videoStream;
 import 'package:polymer/polymer.dart';
+import 'dart:html';
 
-/**
- * A Polymer element.
- */
 @CustomTag('video-stream')
 class VideoStream extends PolymerElement {
+  
+  //published attributes
   @published String sd_src;
   @published String hd_src;
   @published String poster;
   @published String ratio;
-
+  
+  //referenced elements
+  VideoElement video;
   
   @observable
-  VideoStream.created() : super.created() {
+  VideoStream.created() : super.created() { }
+  
+  @override
+  void attached() {
+    video = this.shadowRoot.querySelector("video");
   }
   
   void play(){
-    this.shadowRoot.querySelector("video").play();
+    video.play();
   }
   
   void pause(){
-    this.shadowRoot.querySelector("video").pause();
+    video.pause();
   }
   
   void setCurrentTime(String currentTime){
@@ -32,7 +39,7 @@ class VideoStream extends PolymerElement {
   }
   
   void setSpeed(String speed){
-    this.shadowRoot.querySelector("video").playbackRate = speed;
+    video.playbackRate = double.parse(speed);
   }
   
   void resize() {

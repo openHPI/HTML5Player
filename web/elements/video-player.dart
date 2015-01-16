@@ -1,30 +1,39 @@
+library videoPlayer;
 import 'package:polymer/polymer.dart';
+import 'video-stream.dart';
+import 'video-controlbar.dart';
 import 'dart:html';
 
-/**
- * A Polymer element.
- */
 @CustomTag('video-player')
 class VideoPlayer extends PolymerElement {
+  
+  //published attributes
   @published int time = 0;
   @published int duration = 0;
   @published String speed = "1.0";
   @published String quality;
   @published String volume = "1.0";  // 0.0 - 1.0
-  @published bool autoPlay = false;
+  @published bool autoplay = false;
+  
+  //states
   String playPauseState = "pause";
-  ElementList<VideoElement> videoStreamList;
+  
+  //referenced elements
+  ElementList<VideoStream> videoStreamList;
+  VideoControlBar videoControlBar;
 
-  VideoPlayer.created() : super.created() {
-  }
-
+  @observable
+  VideoPlayer.created() : super.created() { }
+  
   @override
   void attached() {
-    this.querySelector("video-stream:last-child").setAttribute("flex", "");
     videoStreamList = this.querySelectorAll("video-stream");
+    videoControlBar = this.shadowRoot.querySelector("video-controlbar");
+    
+    this.querySelector("video-stream:last-child").setAttribute("flex", "");
+    
     videoStreamList.forEach(
         (stream) => stream..resize()
-                          //..alert()
     );    
   }
   
@@ -37,9 +46,20 @@ class VideoPlayer extends PolymerElement {
   
   void pause([Event e]){
     videoStreamList.forEach(
-        (stream) => stream.play()
+        (stream) => stream.pause()
     );
     playPauseState = "pause";
+  }
+  
+  void togglePlayPause([Event e]){
+    if(playPauseState=="pause"){
+      play();
+      videoControlBar.updatePlayPauseButton("av:pause");
+    }
+    else if(playPauseState=="play"){
+      pause();
+      videoControlBar.updatePlayPauseButton("av:play-arrow");
+    }
   }
   
   void setCurrentTime(String currentTime){
@@ -48,17 +68,13 @@ class VideoPlayer extends PolymerElement {
         );
   }
   
-  void togglePlayState(){
-    
-  }
-  
   void speedChanged() {
-    this.querySelectorAll("video-stream").forEach(
+    videoStreamList.forEach(
             (stream) => stream.setSpeed(speed)
         );
   }
   
-  void toggleSpeed(){
+  void toggleSpeed([Event e]){
     if(speed == "1.0"){
       speed = "1.3";
     }
@@ -71,6 +87,7 @@ class VideoPlayer extends PolymerElement {
     else {
       speed = "1.0";
     }
+    videoControlBar.updateSpeedButton(speed);
   }
   
 }
