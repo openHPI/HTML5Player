@@ -23,18 +23,14 @@ class VideoStream extends PolymerElement {
     this.shadowRoot.querySelector("video").pause();
   }
   
+  void setSpeed(String speed){
+    this.shadowRoot.querySelector("video").playbackRate = speed;
+  }
+  
   void resize() {
     double width = double.parse( this.getComputedStyle().width.replaceAll('px', '') );
     double newHeight = width * ratioAsDouble(ratio);
     this.style.height = newHeight.toString() + "px";
-  }
-  
-  void speedChanged() {
-    this.shadowRoot.querySelector("video").playbackRate = double.parse(speed);
-  }
-  
-  void volumeChanged() {
-      this.shadowRoot.querySelector("video").volume = double.parse(volume);
   }
   
   double ratioAsDouble(String ratio){
