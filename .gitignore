@@ -3,5 +3,5 @@
 .pub/
 packages/
 build/
-web/packages/
-web/element/packages/
+web/packages
+web/elements/packages
