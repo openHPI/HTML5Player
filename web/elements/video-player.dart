@@ -24,8 +24,6 @@ class VideoPlayer extends PolymerElement {
     videoStreamList = this.querySelectorAll("video-stream");
     videoStreamList.forEach(
         (stream) => stream..resize()
-                          ..setAttribute("speed", speed)
-                          ..setAttribute("volume", volume)
                           //..alert()
     );    
   }
@@ -50,7 +48,7 @@ class VideoPlayer extends PolymerElement {
   
   void speedChanged() {
     this.querySelectorAll("video-stream").forEach(
-            (stream) => stream..setAttribute("speed", speed)
+            (stream) => stream.setSpeed(speed)
         );
   }
   
