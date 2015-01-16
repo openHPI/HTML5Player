@@ -31,11 +31,11 @@ class VideoStream extends PolymerElement {
   }
   
   void setCurrentTime(String currentTime){
-    this.shadowRoot.querySelector("video").currentTime = currentTime;
+    video.currentTime = int.parse(currentTime);
   }
   
   int getCurrentTime(){
-    return this.shadowRoot.querySelector("video").currentTime;
+    return video.currentTime;
   }
   
   void setSpeed(String speed){

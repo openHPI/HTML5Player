@@ -1,6 +1,7 @@
 library videoControlBar;
 import 'package:polymer/polymer.dart';
 import 'video-player.dart';
+import 'dart:html';
 
 @CustomTag('video-controlbar')
 
@@ -15,7 +16,7 @@ class VideoControlBar extends PolymerElement {
   @override
   void attached() {
     super.attached();
-    videoPlayer = (this.parentNode).host;
+    videoPlayer = (this.parentNode as ShadowRoot).host;
     $['playPauseButton'].onClick.listen(videoPlayer.togglePlayPause);
     $['speedButton'].onClick.listen(videoPlayer.toggleSpeed);
   }
