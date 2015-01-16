@@ -1,5 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'dart:html';
+import 'video-player.dart';
 /**
  * A Polymer element.
  */
@@ -9,6 +10,7 @@ class VideoControlBar extends PolymerElement {
 
   ElementList<VideoElement> videoList;
   ButtonElement playPauseButton;
+  ButtonElement speedButton;
   
   VideoControlBar.created() : super.created() {
 
@@ -23,6 +25,8 @@ class VideoControlBar extends PolymerElement {
   
     playPauseButton = $['playPauseButton'];
     playPauseButton.onClick.listen(togglePlayer);
+    speedButton = $['speedButton'];
+    speedButton.onClick.listen(clickOnSpeed);
   }
   
   void togglePlayer(Event e) {
@@ -35,8 +39,15 @@ class VideoControlBar extends PolymerElement {
       videoList.forEach(
         (stream) => stream..pause());
       playPauseButton.setInnerHtml("play");
-    }   
+    }
+  }  
+
+  void clickOnSpeed(Event e){
+    document.querySelector("video-player").toggleSpeed();
   }
   
-
+  void changeSpeed(double d){
+    speedButton.setInnerHtml(d.toString());
+  }
+  
 }

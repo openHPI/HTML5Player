@@ -20,5 +20,28 @@ class VideoPlayer extends PolymerElement {
                           //..alert()
     );
   }
+  
+  void speedChanged() {
+    this.querySelectorAll("video-stream").forEach(
+            (stream) => stream..setAttribute("speed", speed)
+        );
+  }
+  
+  void toggleSpeed(){
+    if(speed == "1.0"){
+      speed = "1.3";
+    }
+    else if(speed == "1.3"){
+      speed = "1.7";
+    }
+    else if(speed == "1.7"){
+      speed = "0.7";
+    }
+    else {
+      speed = "1.0";
+    }
+    this.shadowRoot.querySelector("video-controlbar").changeSpeed(speed);
+  }
+  
 }
 
