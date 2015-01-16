@@ -42,6 +42,12 @@ class VideoPlayer extends PolymerElement {
     playPauseState = "pause";
   }
   
+  void setCurrentTime(String currentTime){
+    videoStreamList.forEach(
+            (stream) => stream.setCurrentTime(currentTime)
+        );
+  }
+  
   void togglePlayState(){
     
   }
@@ -65,7 +71,6 @@ class VideoPlayer extends PolymerElement {
     else {
       speed = "1.0";
     }
-    this.shadowRoot.querySelector("video-controlbar").changeSpeed(speed);
   }
   
 }
