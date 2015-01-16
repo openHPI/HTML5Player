@@ -1,7 +1,8 @@
 .DS_Store
 .buildlog
-.pub/
+.pub/**
 packages/
 build/
 web/packages
 web/elements/packages
+pubspec.lock
