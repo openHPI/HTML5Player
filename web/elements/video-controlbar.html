@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/av_icons.html">
 
 <polymer-element name="video-controlbar">
   <template>
@@ -10,19 +11,17 @@
       #controlbar {
         background-color: black;
         color: white;
-        height: 100px;
       }
-      core-icon[icon="polymer"] {
-        color: #a4c639;
+      core-icon {
+        color: #fff;
         width: 32px;
         height: 32px; 
       }
     </style>
     
     <div id="controlbar">
-      <button id="playPauseButton">Play/Pause</button>
+      <core-icon id="playPauseButton" icon="av:play-arrow"></core-icon>
     </div>
-    <!-- <core-icon icon="polymer"></core-icon> -->
   </template>
   <script type="application/dart" src="video-controlbar.dart"></script>
 </polymer-element>

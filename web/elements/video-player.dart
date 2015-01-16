@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'dart:html';
 
 /**
  * A Polymer element.
@@ -10,15 +11,41 @@ class VideoPlayer extends PolymerElement {
   @published String speed = "1.0";
   @published String quality;
   @published String volume = "1.0";  // 0.0 - 1.0
+  @published bool autoPlay = false;
+  String playPauseState = "pause";
+  ElementList<VideoElement> videoStreamList;
 
   VideoPlayer.created() : super.created() {
+  }
+
+  @override
+  void attached() {
     this.querySelector("video-stream:last-child").setAttribute("flex", "");
-    this.querySelectorAll("video-stream").forEach(
+    videoStreamList = this.querySelectorAll("video-stream");
+    videoStreamList.forEach(
         (stream) => stream..resize()
                           ..setAttribute("speed", speed)
                           ..setAttribute("volume", volume)
                           //..alert()
+    );    
+  }
+  
+  void play([Event e]){
+    videoStreamList.forEach(
+        (stream) => stream.play()
     );
+    playPauseState = "play";
+  }
+  
+  void pause([Event e]){
+    videoStreamList.forEach(
+        (stream) => stream.play()
+    );
+    playPauseState = "pause";
+  }
+  
+  void togglePlayState(){
+    
   }
 }
 

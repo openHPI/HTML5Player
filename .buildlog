@@ -2825,3 +2825,1022 @@ build.dart --machine --changed=web/elements/video-controlbar.dart
 [{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
 build.dart finished [1498 ms]
 
+---
+build.dart --machine --full
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2618 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 2.7s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.7s (2.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.7s (2.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.8s (2.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.8s (2.6s awaiting secondary inputs)."}}]
+build.dart finished [6477 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2205 ms]
+
+---
+build.dart --machine --changed=web\video_player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [2836 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [5110 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [5444 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [2665 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2570 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.8s (0.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.8s (0.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.8s (0.5s awaiting secondary inputs)."}}]
+build.dart finished [3278 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [2637 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [2668 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3391 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3831 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3306 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2967 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.9s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.9s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.6s (1.0s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.6s (0.9s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.6s (1.0s awaiting secondary inputs)."}}]
+build.dart finished [4755 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [6656 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [4081 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.9s (0.5s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.0s (0.5s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.0s (1.6s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.0s (1.5s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.0s (1.6s awaiting secondary inputs)."}}]
+build.dart finished [9400 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.5s awaiting secondary inputs)."}}]
+build.dart finished [5882 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3502 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3576 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3895 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.0s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.0s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [9469 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3586 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3460 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3198 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"definition for Polymer element with tag name \"core-icon\" not found.","line":23,"charStart":468,"charEnd":497}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"definition for Polymer element with tag name \"core-icon\" not found.","line":25,"charStart":525,"charEnd":593}}]
+[{"method":"warning","params":{"file":"web/elements/video-controlbar.html","message":"definition for Polymer element with tag name \"core-icon\" not found.","line":26,"charStart":610,"charEnd":639}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+build.dart finished [3891 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3774 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3381 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3006 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3057 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [4225 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2804 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2996 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+build.dart finished [3957 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [4138 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [4485 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3321 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3184 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.html
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.0s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [5875 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3026 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2914 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3450 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2769 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2914 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.1s (2.0s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.1s (1.9s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 2.1s (2.0s awaiting secondary inputs)."}}]
+build.dart finished [10234 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [2979 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3271 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3593 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2985 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2966 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2826 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3389 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2912 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+build.dart finished [3807 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2819 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2847 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3140 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [4027 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3158 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3699 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3085 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3089 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3090 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3182 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3199 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2932 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [4336 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3691 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3886 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [4041 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2984 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3850 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3896 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.4s awaiting secondary inputs)."}}]
+build.dart finished [3832 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [2949 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 1.6s (1.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 1.6s (1.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 4.9s (4.7s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 4.9s (4.7s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 4.9s (4.8s awaiting secondary inputs)."}}]
+build.dart finished [12872 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3490 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2793 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2767 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3681 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3764 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3250 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2957 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3269 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2917 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [2946 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3713 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2682 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2776 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2785 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2541 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [2792 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2721 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2423 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2345 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2366 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2379 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2589 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2527 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2762 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [2490 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2640 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2652 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2509 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3026 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2409 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.6s (0.4s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.7s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3215 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3260 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3182 ms]
+
+---
+build.dart --machine --changed=web\elements\video-controlbar.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3204 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+build.dart finished [3494 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2829 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+build.dart finished [2718 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2878 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3115 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2850 ms]
+
+---
+build.dart --machine --changed=web\elements\video-player.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3757 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2719 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [2690 ms]
+
+---
+build.dart --machine --changed=web\elements\video-stream.dart
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":24,"charStart":705,"charEnd":894}}]
+[{"method":"warning","params":{"file":"web/video_player.html","message":"Named entity expected. Got none.","line":28,"charStart":934,"charEnd":1123}}]
+[{"method":"info","params":{"message":"Took 0.3s (0.1s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.4s (0.2s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.3s awaiting secondary inputs)."}}]
+[{"method":"info","params":{"message":"Took 0.5s (0.2s awaiting secondary inputs)."}}]
+build.dart finished [3077 ms]
+

@@ -9,12 +9,18 @@ class VideoStream extends PolymerElement {
   @published String hd_src;
   @published String poster;
   @published String ratio;
-  @published String speed;
-  @published String volume;
 
   
   @observable
   VideoStream.created() : super.created() {
+  }
+  
+  void play(){
+    this.shadowRoot.querySelector("video").play();
+  }
+  
+  void pause(){
+    this.shadowRoot.querySelector("video").pause();
   }
   
   void resize() {
@@ -42,10 +48,6 @@ class VideoStream extends PolymerElement {
       // default ratio = 16:9
       return 9/16;
     }
-  }
-  
-  void test(){
-    alert("asd");
   }
   
 }
