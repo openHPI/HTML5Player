@@ -3,6 +3,7 @@ import 'package:polymer/polymer.dart';
 import 'video-stream.dart';
 import 'video-controlbar.dart';
 import 'dart:html';
+import 'dart:async';
 
 @CustomTag('video-player')
 class VideoPlayer extends PolymerElement {
@@ -34,7 +35,13 @@ class VideoPlayer extends PolymerElement {
     
     videoStreamList.forEach(
         (stream) => stream..resize()
-    );    
+    );
+    
+    videoControlBar.updateDuration(duration);
+    
+    new Timer.periodic(const Duration(milliseconds: 500), (timer) {
+        videoControlBar.updateProgress(videoStreamList[0].getCurrentTime(), duration);
+    });
   }
   
   void play([Event e]){
@@ -64,14 +71,15 @@ class VideoPlayer extends PolymerElement {
   
   void setCurrentTime(String currentTime){
     videoStreamList.forEach(
-            (stream) => stream.setCurrentTime(currentTime)
-        );
+      (stream) => stream.setCurrentTime(currentTime)
+    );
   }
   
   void speedChanged() {
+    videoControlBar.updateSpeedButton(speed+"x");
     videoStreamList.forEach(
-            (stream) => stream.setSpeed(speed)
-        );
+      (stream) => stream.setSpeed(speed)
+    );
   }
   
   void toggleSpeed([Event e]){
@@ -87,7 +95,6 @@ class VideoPlayer extends PolymerElement {
     else {
       speed = "1.0";
     }
-    videoControlBar.updateSpeedButton(speed);
   }
   
 }

@@ -35,7 +35,7 @@ class VideoStream extends PolymerElement {
   }
   
   int getCurrentTime(){
-    return video.currentTime;
+    return video.currentTime.floor();
   }
   
   void setSpeed(String speed){

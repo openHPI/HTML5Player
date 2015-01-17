@@ -2,26 +2,60 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/core_elements/src/core-icons/av-icons.html">
 
-<polymer-element name="video-controlbar">
+<polymer-element name="video-controlbar" flex horizontal layout>
   <template>
     <style>
+      @font-face{
+        font-family:"NeoSansStdRegular";
+        url(NeoSansStdRegular.woff) format("woff"),
+        url(NeoSansStdRegular.ttf) format("truetype"),
+        url(NeoSansStdRegular.svg#NeoSansStdRegular) format("svg");
+        font-weight:400;
+        font-style:normal;
+        font-stretch:normal
+      }
       :host{
         display: block;
-        }
-      #controlbar {
-        background-color: black;
+        background-color: rgb(66, 66, 66);
         color: white;
+        font-family: NeoSansStdRegular, sans-serif;
+        font-weight: bold;
       }
-      core-icon {
-        color: #fff;
-        width: 32px;
-        height: 32px; 
+      .control{
+        display: block;
+        line-height: 24px;
+        padding: 10px;
+        font-size: 12px;
+        border-right: 2px solid white;
+      }
+      .control:last-child, #progressBar{
+        border-right-style: none;
+      }
+      .progress{
+        height: 12px;
+        border: 1px solid rgb(90, 96, 101);
+      }
+      #slider{
+        height: 100%;
+        background-color: rgb(222, 98, 18);
+        width: 50%;
       }
     </style>
     
-    <div id="controlbar">
-      <core-icon id="playPauseButton" icon="av:play-arrow"></core-icon>
-      <button id="speedButton">1.0</button>    </div>
+    <core-icon class="control" id="playPauseButton" icon="av:play-arrow"></core-icon>
+    <div class="control" id="progressBar" flex>
+      <div class="progress">
+        <div id="slider"></div>
+      </div>
+    </div>
+    <div class="control" id="progressCounter">
+      <span id="currentTime">0:00</span> / <span id="durationTime">0:00</span>
+    </div>
+    <div class="control" id="speedButton">1.0x</div>
+    <div class="control" id="hdButton">HD</div>
+    <div class="control" id="volumeButton">Volume</div>
+    <div class="control" id="fullScreenButton">FS</div>
+    
   </template>
   <script type="application/dart" src="video-controlbar.dart"></script>
 </polymer-element>

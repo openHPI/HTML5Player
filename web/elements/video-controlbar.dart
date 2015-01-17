@@ -2,6 +2,7 @@ library videoControlBar;
 import 'package:polymer/polymer.dart';
 import 'video-player.dart';
 import 'dart:html';
+import 'dart:math';
 
 @CustomTag('video-controlbar')
 
@@ -25,7 +26,26 @@ class VideoControlBar extends PolymerElement {
     $['playPauseButton'].attributes['icon'] = iconPath;
   }
   
-  void updateSpeedButton(String d){
-    $['speedButton'].setInnerHtml(d);
+  void updateProgress(int currentTime, int duration){
+    $['currentTime'].setInnerHtml(secondsToMinutes(currentTime));
+    double percentage = min( ((currentTime / duration) * 100), 100 );
+    $['slider'].style.width="$percentage%";
+  }
+  
+  void updateDuration(int duration){
+    $['durationTime'].setInnerHtml(secondsToMinutes(duration));
+  }
+  
+  void updateSpeedButton(String speed){
+    $['speedButton'].setInnerHtml(speed);
+  }
+  
+  
+  String secondsToMinutes(int number){
+    int minutes = number ~/ 60;
+    int seconds = number % 60;
+    String placeholder;
+    if(seconds<10){placeholder="0";}else{placeholder="";}
+    return '$minutes:$placeholder$seconds';
   }
 }
