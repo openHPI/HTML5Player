@@ -69,6 +69,14 @@ class VideoPlayer extends PolymerElement {
     }
   }
   
+  void toggleCurrentTime([MouseEvent e]){
+    double rate = e.offset.x / videoControlBar.getProgressBarWidth();
+    if (rate > 1.0) rate = 1.0;
+    else if (rate < 0.0) rate = 0.0;
+    setCurrentTime((rate * duration).round().toString());
+  }
+  
+  
   void setCurrentTime(String currentTime){
     videoStreamList.forEach(
       (stream) => stream.setCurrentTime(currentTime)

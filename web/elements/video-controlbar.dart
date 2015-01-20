@@ -20,6 +20,7 @@ class VideoControlBar extends PolymerElement {
     videoPlayer = (this.parentNode as ShadowRoot).host;
     $['playPauseButton'].onClick.listen(videoPlayer.togglePlayPause);
     $['speedButton'].onClick.listen(videoPlayer.toggleSpeed);
+    $['progress'].onClick.listen(videoPlayer.toggleCurrentTime);
   }
   
   void updatePlayPauseButton(String iconPath){
@@ -40,6 +41,10 @@ class VideoControlBar extends PolymerElement {
     $['speedButton'].setInnerHtml(speed);
   }
   
+  double getProgressBarWidth(){
+    Element e = $['progress'];
+    return double.parse(e.getComputedStyle().width.replaceFirst(new RegExp(r'px'), ''));
+  }
   
   String secondsToMinutes(int number){
     int minutes = number ~/ 60;
