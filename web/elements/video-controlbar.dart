@@ -20,7 +20,7 @@ class VideoControlBar extends PolymerElement {
     videoPlayer = (this.parentNode as ShadowRoot).host;
     $['playPauseButton'].onClick.listen(videoPlayer.togglePlayPause);
     $['speedButton'].onClick.listen(videoPlayer.toggleSpeed);
-    $['progress'].onClick.listen(videoPlayer.toggleCurrentTime);
+    $['progress'].onClick.listen(toggleCurrentTime);
   }
   
   void updatePlayPauseButton(String iconPath){
@@ -31,6 +31,13 @@ class VideoControlBar extends PolymerElement {
     $['currentTime'].setInnerHtml(secondsToMinutes(currentTime));
     double percentage = min( ((currentTime / duration) * 100), 100 );
     $['slider'].style.width="$percentage%";
+  }
+  
+  void toggleCurrentTime([MouseEvent e]){
+    double rate = e.offset.x / getProgressBarWidth();
+    rate = min(rate, 1.0);
+    rate = max(rate, 0.0);
+    videoPlayer.setCurrentTime((rate * videoPlayer.duration).round().toString());
   }
   
   void updateDuration(int duration){
