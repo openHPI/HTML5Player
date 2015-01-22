@@ -30,6 +30,10 @@ class VideoStream extends PolymerElement {
     video.pause();
   }
   
+  void setVolume(int volume){
+    video.volume = volume/100;
+  }
+  
   void setCurrentTime(int currentTime){
     video.currentTime = currentTime;
   }
@@ -38,8 +42,8 @@ class VideoStream extends PolymerElement {
     return video.currentTime.floor();
   }
   
-  void setSpeed(String speed){
-    video.playbackRate = double.parse(speed);
+  void setSpeed(double speed){
+    video.playbackRate = speed;
   }
   
   void resize() {

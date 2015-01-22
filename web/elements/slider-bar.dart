@@ -27,7 +27,7 @@ class SliderBar extends PolymerElement{
     MouseEvent m = (e as MouseEvent);
     int newValue = ( paperProgress.max * m.offset.x / getPaperProgressWidth() ).round();
     value = newValue;
-    CustomEvent progressMovedEvent = new CustomEvent('progressMoved', detail: newValue);
+    CustomEvent progressMovedEvent = new CustomEvent('sliderMoved', detail: newValue);
     dispatchEvent(progressMovedEvent);
   }
   

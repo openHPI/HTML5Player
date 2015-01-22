@@ -11,9 +11,9 @@ class VideoPlayer extends PolymerElement {
   //published attributes
   @published int time = 0;
   @published int duration = 0;
-  @published String speed = "1.0";
+  @published double speed = 1.0;
   @published String quality;
-  @published String volume = "1.0";  // 0.0 - 1.0
+  @published int volume = 80;
   @published bool autoplay = false;
   
   //states
@@ -67,31 +67,37 @@ class VideoPlayer extends PolymerElement {
     }
   }
   
-  void setCurrentTime(int currentTime){
+  void setCurrentTime([Event e]){
     videoStreamList.forEach(
-      (stream) => stream.setCurrentTime(currentTime)
+      (stream) => stream.setCurrentTime((e as CustomEvent).detail)
+    );
+  }
+  
+  void volumeChanged(){
+    videoStreamList.forEach(
+      (stream) => stream.setVolume(volume)
     );
   }
   
   void speedChanged() {
-    videoControlBar.updateSpeedButton(speed+"x");
+    videoControlBar.speed = speed;
     videoStreamList.forEach(
       (stream) => stream.setSpeed(speed)
     );
   }
   
   void toggleSpeed([Event e]){
-    if(speed == "1.0"){
-      speed = "1.3";
+    if(speed == 1.0){
+      speed = 1.3;
     }
-    else if(speed == "1.3"){
-      speed = "1.7";
+    else if(speed == 1.3){
+      speed = 1.7;
     }
-    else if(speed == "1.7"){
-      speed = "0.7";
+    else if(speed == 1.7){
+      speed = 0.7;
     }
     else {
-      speed = "1.0";
+      speed = 1.0;
     }
   }
   

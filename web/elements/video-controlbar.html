@@ -3,7 +3,7 @@
 <link rel="import" href="packages/core_elements/av_icons.html">
 <link rel="import" href="slider-bar.html">
 
-<polymer-element name="video-controlbar" attributes="duration progress" flex horizontal layout>
+<polymer-element name="video-controlbar" attributes="duration progress volume" flex horizontal layout>
   <template>
     <style>
       @font-face{
@@ -29,7 +29,7 @@
         font-size: 12px;
         border-right: 2px solid white;
       }
-      .control:last-child{
+      .control:last-child, #volumeButton{
         border-right-style: none;
       }
       .clickable{
@@ -38,16 +38,23 @@
       #progressCounter{
         padding-left: 10px;
       }
+      #volumeBar{
+        width: 75px;
+        margin-top: 4px;
+      }
     </style>
     
-    <core-icon class="control clickable icon" id="playPauseButton" icon="av:play-arrow"></core-icon>
+    <core-icon class="control clickable" id="playPauseButton" icon="av:play-arrow"></core-icon>
     <div class="control" id="progress" horizontal layout flex>
       <slider-bar id="progressBar" value="{{progress}}" max="{{duration}}" flex></slider-bar>
       <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
-    <div class="control clickable" id="speedButton">1.0x</div>
+    <div class="control clickable" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
     <div class="control clickable" id="hdButton">HD</div>
-    <div class="control clickable" id="volumeButton">Volume</div>
+    <core-icon class="control clickable" id="volumeButton" icon="av:volume-up"></core-icon>
+    <div class="control" id="volume" horizontal layout>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
+    </div>
     <div class="control clickable" id="fullScreenButton">FS</div>
     
   </template>
