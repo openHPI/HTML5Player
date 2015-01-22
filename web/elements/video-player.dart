@@ -37,10 +37,8 @@ class VideoPlayer extends PolymerElement {
         (stream) => stream..resize()
     );
     
-    videoControlBar.updateDuration(duration);
-    
     new Timer.periodic(const Duration(milliseconds: 500), (timer) {
-        videoControlBar.updateProgress(videoStreamList[0].getCurrentTime(), duration);
+        videoControlBar.progress = videoStreamList[0].getCurrentTime();
     });
   }
   
@@ -69,7 +67,7 @@ class VideoPlayer extends PolymerElement {
     }
   }
   
-  void setCurrentTime(String currentTime){
+  void setCurrentTime(int currentTime){
     videoStreamList.forEach(
       (stream) => stream.setCurrentTime(currentTime)
     );

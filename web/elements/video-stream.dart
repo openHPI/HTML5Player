@@ -30,8 +30,8 @@ class VideoStream extends PolymerElement {
     video.pause();
   }
   
-  void setCurrentTime(String currentTime){
-    video.currentTime = int.parse(currentTime);
+  void setCurrentTime(int currentTime){
+    video.currentTime = currentTime;
   }
   
   int getCurrentTime(){

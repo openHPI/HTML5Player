@@ -1,0 +1,33 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_progress.html">
+
+<polymer-element name="slider-bar" attributes="max value">
+  <template>
+    <style>
+      :host{
+        border: 1px solid rgb(90, 96, 101);
+        height: 12px;
+        display: block;
+      }
+      paper-progress{
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+      paper-progress::shadow #activeProgress {
+        background-color: rgb(222, 98, 18);
+      }
+      paper-progress::shadow #secondaryProgress {
+        background-color: rgb(86, 86, 86);
+      }
+      paper-progress::shadow #progressContainer {
+        background-color: transparent;
+      }
+    </style>
+    
+    <paper-progress on-click="{{clicked}}" value="{{value}}" secondaryProgress="0" max="{{max}}"></paper-progress>
+    
+  </template>
+  <script type="application/dart" src="slider-bar.dart"></script>
+</polymer-element>

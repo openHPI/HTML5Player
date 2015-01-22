@@ -1,8 +1,9 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/core_elements/src/core-icons/av-icons.html">
+<link rel="import" href="packages/core_elements/av_icons.html">
+<link rel="import" href="slider-bar.html">
 
-<polymer-element name="video-controlbar" flex horizontal layout>
+<polymer-element name="video-controlbar" attributes="duration progress" flex horizontal layout>
   <template>
     <style>
       @font-face{
@@ -28,33 +29,26 @@
         font-size: 12px;
         border-right: 2px solid white;
       }
-      .control:last-child, #progressBar{
+      .control:last-child{
         border-right-style: none;
       }
-      .progress{
-        height: 12px;
-        border: 1px solid rgb(90, 96, 101);
+      .clickable{
+        cursor: pointer;
       }
-      #slider{
-        height: 100%;
-        background-color: rgb(222, 98, 18);
-        width: 50%;
+      #progressCounter{
+        padding-left: 10px;
       }
     </style>
     
-    <core-icon class="control" id="playPauseButton" icon="av:play-arrow"></core-icon>
-    <div class="control" id="progressBar" flex>
-      <div class="progress" id="progress">
-        <div id="slider"></div>
-      </div>
+    <core-icon class="control clickable icon" id="playPauseButton" icon="av:play-arrow"></core-icon>
+    <div class="control" id="progress" horizontal layout flex>
+      <slider-bar id="progressBar" value="{{progress}}" max="{{duration}}" flex></slider-bar>
+      <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
-    <div class="control" id="progressCounter">
-      <span id="currentTime">0:00</span> / <span id="durationTime">0:00</span>
-    </div>
-    <div class="control" id="speedButton">1.0x</div>
-    <div class="control" id="hdButton">HD</div>
-    <div class="control" id="volumeButton">Volume</div>
-    <div class="control" id="fullScreenButton">FS</div>
+    <div class="control clickable" id="speedButton">1.0x</div>
+    <div class="control clickable" id="hdButton">HD</div>
+    <div class="control clickable" id="volumeButton">Volume</div>
+    <div class="control clickable" id="fullScreenButton">FS</div>
     
   </template>
   <script type="application/dart" src="video-controlbar.dart"></script>

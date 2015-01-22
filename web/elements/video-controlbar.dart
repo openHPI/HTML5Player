@@ -1,5 +1,6 @@
 library videoControlBar;
 import 'package:polymer/polymer.dart';
+import 'slider-bar.dart';
 import 'video-player.dart';
 import 'dart:html';
 import 'dart:math';
@@ -8,6 +9,10 @@ import 'dart:math';
 
 class VideoControlBar extends PolymerElement {
 
+  //published attributes
+  @published int duration = 1;
+  @published int progress = 0;
+  
   //referenced elements
   VideoPlayer videoPlayer;
   
@@ -20,37 +25,19 @@ class VideoControlBar extends PolymerElement {
     videoPlayer = (this.parentNode as ShadowRoot).host;
     $['playPauseButton'].onClick.listen(videoPlayer.togglePlayPause);
     $['speedButton'].onClick.listen(videoPlayer.toggleSpeed);
-    $['progress'].onClick.listen(toggleCurrentTime);
+    $['progressBar'].on['progressMoved'].listen(jumpToTime);
   }
   
   void updatePlayPauseButton(String iconPath){
     $['playPauseButton'].attributes['icon'] = iconPath;
   }
   
-  void updateProgress(int currentTime, int duration){
-    $['currentTime'].setInnerHtml(secondsToMinutes(currentTime));
-    double percentage = min( ((currentTime / duration) * 100), 100 );
-    $['slider'].style.width="$percentage%";
-  }
-  
-  void toggleCurrentTime([MouseEvent e]){
-    double rate = e.offset.x / getProgressBarWidth();
-    rate = min(rate, 1.0);
-    rate = max(rate, 0.0);
-    videoPlayer.setCurrentTime((rate * videoPlayer.duration).round().toString());
-  }
-  
-  void updateDuration(int duration){
-    $['durationTime'].setInnerHtml(secondsToMinutes(duration));
+  void jumpToTime([Event e]){
+    videoPlayer.setCurrentTime((e as CustomEvent).detail);
   }
   
   void updateSpeedButton(String speed){
     $['speedButton'].setInnerHtml(speed);
-  }
-  
-  double getProgressBarWidth(){
-    Element e = $['progress'];
-    return double.parse(e.getComputedStyle().width.replaceFirst(new RegExp(r'px'), ''));
   }
   
   String secondsToMinutes(int number){
