@@ -4,7 +4,7 @@
 <link rel="import" href="video-stream.html">
 <link rel="import" href="video-controlbar.html">
 
-<polymer-element name="video-player" attributes="time duration speed quality volume autoplay" vertical layout>
+<polymer-element name="video-player" attributes="autoplay setProgress duration quality speed volume" vertical layout>
   <template>
     <style>
       :host{
@@ -14,7 +14,8 @@
     <div id="videoArea" flex horizontal layout start>
       <content></content>
     </div>
-    <video-controlbar duration="{{duration}}" volume="{{volume}}" speed="{{speed}}"></video-controlbar>
+    <video-controlbar isPlaying="{{isPlaying}}" setProgress="{{setProgress}}" progressIndicator="{{progressIndicator}}"
+      duration="{{duration}}" quality="{{quality}}" speed="{{speed}}" volume="{{volume}}"></video-controlbar>
    </template>
   <script type="application/dart" src="video-player.dart"></script>
 </polymer-element>

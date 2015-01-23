@@ -1,6 +1,5 @@
 library videoControlBar;
 import 'package:polymer/polymer.dart';
-import 'video-player.dart';
 import 'dart:html';
 
 @CustomTag('video-controlbar')
@@ -8,13 +7,14 @@ import 'dart:html';
 class VideoControlBar extends PolymerElement {
 
   //published attributes
-  @published int duration = 1;
-  @published int progress = 0;
-  @published int volume;
+  @published bool isPlaying;
+  @published double setProgress;
+  @published int progressIndicator;
+  @published int duration;
+  @published String quality;
   @published double speed;
-  
-  //referenced elements
-  VideoPlayer videoPlayer;
+  @published int volume;
+  @published bool isFullscreen;
   
   @observable
   VideoControlBar.created() : super.created() { }
@@ -22,14 +22,36 @@ class VideoControlBar extends PolymerElement {
   @override
   void attached() {
     super.attached();
-    videoPlayer = (this.parentNode as ShadowRoot).host;
-    $['playPauseButton'].onClick.listen(videoPlayer.togglePlayPause);
-    $['speedButton'].onClick.listen(videoPlayer.toggleSpeed);
-    $['progressBar'].on['sliderMoved'].listen(videoPlayer.setCurrentTime);
   }
   
-  void updatePlayPauseButton(String iconPath){
-    $['playPauseButton'].attributes['icon'] = iconPath;
+  //PlayPause
+  void togglePlayPause(Event e, var details, Node target){
+    isPlaying = !isPlaying;
+  }
+  
+  void isPlayingChanged(){
+    if(isPlaying){
+      $['playPauseButton'].attributes['icon'] = "av:pause";
+    }
+    else{
+      $['playPauseButton'].attributes['icon'] = "av:play-arrow";
+    }
+  }
+  
+  //Speed
+  void toggleSpeed(Event e, var details, Node target){
+    if(speed == 1.0){
+      speed = 1.3;
+    }
+    else if(speed == 1.3){
+      speed = 1.7;
+    }
+    else if(speed == 1.7){
+      speed = 0.7;
+    }
+    else {
+      speed = 1.0;
+    }
   }
   
   String secondsToMinutes(int number){

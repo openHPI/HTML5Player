@@ -1,7 +1,6 @@
 library videoPlayer;
 import 'package:polymer/polymer.dart';
 import 'video-stream.dart';
-import 'video-controlbar.dart';
 import 'dart:html';
 import 'dart:async';
 
@@ -9,19 +8,19 @@ import 'dart:async';
 class VideoPlayer extends PolymerElement {
   
   //published attributes
-  @published int time = 0;
-  @published int duration = 0;
-  @published double speed = 1.0;
-  @published String quality;
-  @published int volume = 80;
   @published bool autoplay = false;
+  @published double setProgress = 0.0;
+  @published int duration = 1;
+  @published double speed = 1.0;
+  @published String quality = "sd";
+  @published int volume = 80;
   
-  //states
-  String playPauseState = "pause";
+  @observable bool isPlaying = false;
+  @observable int progressIndicator = 0;
+  @observable bool isFullscreen = false;
   
   //referenced elements
   ElementList<VideoStream> videoStreamList;
-  VideoControlBar videoControlBar;
 
   @observable
   VideoPlayer.created() : super.created() { }
@@ -29,7 +28,6 @@ class VideoPlayer extends PolymerElement {
   @override
   void attached() {
     videoStreamList = this.querySelectorAll("video-stream");
-    videoControlBar = this.shadowRoot.querySelector("video-controlbar");
     
     this.querySelector("video-stream:last-child").setAttribute("flex", "");
     
@@ -37,68 +35,58 @@ class VideoPlayer extends PolymerElement {
         (stream) => stream..resize()
     );
     
+    progressIndicator = setProgress.floor();
+    isPlaying = autoplay;
+    
     new Timer.periodic(const Duration(milliseconds: 500), (timer) {
-        videoControlBar.progress = videoStreamList[0].getCurrentTime();
+      progressIndicator = videoStreamList[0].getProgress().floor();
+      isPlaying = videoStreamList[0].isPlaying();
     });
+  }
+  
+  //PlayPause
+  void isPlayingChanged([Event e]){
+    if(isPlaying){
+      play();
+    }
+    else{
+      pause();
+    }
   }
   
   void play([Event e]){
     videoStreamList.forEach(
         (stream) => stream.play()
     );
-    playPauseState = "play";
+    isPlaying = true;
   }
   
   void pause([Event e]){
     videoStreamList.forEach(
         (stream) => stream.pause()
     );
-    playPauseState = "pause";
+    isPlaying = false;
   }
   
-  void togglePlayPause([Event e]){
-    if(playPauseState=="pause"){
-      play();
-      videoControlBar.updatePlayPauseButton("av:pause");
-    }
-    else if(playPauseState=="play"){
-      pause();
-      videoControlBar.updatePlayPauseButton("av:play-arrow");
-    }
-  }
-  
-  void setCurrentTime([Event e]){
+  //Progress
+  void setProgressChanged(){
     videoStreamList.forEach(
-      (stream) => stream.setCurrentTime((e as CustomEvent).detail)
+      (stream) => stream.setProgress(setProgress)
     );
   }
   
-  void volumeChanged(){
-    videoStreamList.forEach(
-      (stream) => stream.setVolume(volume)
-    );
-  }
-  
+  //Speed  
   void speedChanged() {
-    videoControlBar.speed = speed;
     videoStreamList.forEach(
       (stream) => stream.setSpeed(speed)
     );
   }
   
-  void toggleSpeed([Event e]){
-    if(speed == 1.0){
-      speed = 1.3;
-    }
-    else if(speed == 1.3){
-      speed = 1.7;
-    }
-    else if(speed == 1.7){
-      speed = 0.7;
-    }
-    else {
-      speed = 1.0;
-    }
+  //Volume
+  void volumeChanged(){
+    videoStreamList.forEach(
+      (stream) => stream.setVolume(volume)
+    );
   }
   
 }

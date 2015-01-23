@@ -21,6 +21,10 @@ class VideoStream extends PolymerElement {
   void attached() {
     video = this.shadowRoot.querySelector("video");
   }
+
+  bool isPlaying(){
+    return !video.paused;
+  }
   
   void play(){
     video.play();
@@ -34,12 +38,12 @@ class VideoStream extends PolymerElement {
     video.volume = volume/100;
   }
   
-  void setCurrentTime(int currentTime){
+  void setProgress(double currentTime){
     video.currentTime = currentTime;
   }
   
-  int getCurrentTime(){
-    return video.currentTime.floor();
+  double getProgress(){
+    return video.currentTime;
   }
   
   void setSpeed(double speed){
