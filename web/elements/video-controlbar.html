@@ -51,7 +51,7 @@
     </div>
     <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
     <div class="control" id="hdButton">HD</div>
-    <core-icon class="control" id="volumeButton" icon="av:volume-up"></core-icon>
+    <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
     <div class="control" id="volume" horizontal layout>
       <slider-bar id="volumeBar" value="{{volume}}" setValue="{{volume}}" max="100"></slider-bar>
     </div>

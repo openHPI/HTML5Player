@@ -15,6 +15,7 @@ class VideoControlBar extends PolymerElement {
   @published double speed;
   @published int volume;
   @published bool isFullscreen;
+  int returnVolume = 50;
   
   @observable
   VideoControlBar.created() : super.created() { }
@@ -51,6 +52,32 @@ class VideoControlBar extends PolymerElement {
     }
     else {
       speed = 1.0;
+    }
+  }
+  
+  //Volume
+  void toggleMute(Event e, var details, Node target){
+    if(volume>0){
+      returnVolume = volume;
+      volume = 0;
+    }
+    else{
+      volume = returnVolume;
+    } 
+  }
+  
+  void volumeChanged(){
+    if(volume==0){
+      $['volumeButton'].attributes['icon'] = "av:volume-off";
+    }
+    if(volume>0 && volume<=30){
+      $['volumeButton'].attributes['icon'] = "av:volume-mute";
+    }
+    if(volume>30 && volume<=70){
+      $['volumeButton'].attributes['icon'] = "av:volume-down";
+    }
+    if(volume>70 && volume<=100){
+      $['volumeButton'].attributes['icon'] = "av:volume-up";
     }
   }
   
