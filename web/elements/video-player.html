@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_icons.html">
 
 <link rel="import" href="video-stream.html">
 <link rel="import" href="video-controlbar.html">
@@ -9,6 +10,23 @@
     <style>
       :host{
         display: block;
+        position: relative;
+      }
+      :host ::content #resizer{
+        position: absolute;
+        top: 30%;
+        margin: -12px;
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        background-color: rgb(66, 66, 66);
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 15;
+        visibility: hidden;
+      }
+      :host(:hover) ::content #resizer{
+        visibility: visible;
       }
     </style>
     <div id="videoArea" flex horizontal layout start>

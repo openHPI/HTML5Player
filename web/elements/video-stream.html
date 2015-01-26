@@ -6,7 +6,9 @@
     <style>
       :host{
         display: block;
-        width: 150px;
+        width: 200px;
+        position: relative;
+        z-index: 10;
       }
       video{
         width: 100%;
@@ -17,7 +19,7 @@
     </style>
     
     <video _poster="{{poster}}">
-        <source _src="{{sd_src}}" type="video/mp4">
+        <source _src="{{sd_src}}" type="video/mp4" />
     </video>
     
   </template>

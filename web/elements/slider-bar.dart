@@ -9,8 +9,8 @@ class SliderBar extends PolymerElement{
   
   //published attributes
   @published int max = 1;
-  @published double value = 0.0;
-  @published double setValue = 0.0;
+  @published int value = 0;
+  @published double setValue;
   
   //referenced elements
   PaperProgress paperProgress;
@@ -26,7 +26,7 @@ class SliderBar extends PolymerElement{
   
   void clicked(Event e, var details, Node target){
     MouseEvent m = (e as MouseEvent);
-    setValue = paperProgress.max * m.offset.x / getPaperProgressWidth();
+    setValue = (paperProgress.max * m.offset.x / getPaperProgressWidth())*1.0;
   }
   
   double getPaperProgressWidth(){

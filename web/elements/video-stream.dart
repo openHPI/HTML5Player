@@ -1,5 +1,6 @@
 library videoStream;
 import 'package:polymer/polymer.dart';
+import 'dart:math';
 import 'dart:html';
 
 @CustomTag('video-stream')
@@ -51,8 +52,16 @@ class VideoStream extends PolymerElement {
   }
   
   void resize() {
-    double width = double.parse( this.getComputedStyle().width.replaceAll('px', '') );
-    double newHeight = width * ratioAsDouble(ratio);
+    double minVideoWidth = 100.0;
+    
+    double parentWidth = double.parse( this.parent.getComputedStyle().width.replaceAll('px', '') );
+    
+    double newWidth = double.parse( this.getComputedStyle().width.replaceAll('px', '') );
+    newWidth = min( parentWidth - minVideoWidth , max(minVideoWidth, newWidth) );
+    
+    double newHeight = newWidth * ratioAsDouble(ratio);
+    
+    this.style.width = newWidth.toString() + "px";
     this.style.height = newHeight.toString() + "px";
   }
   
