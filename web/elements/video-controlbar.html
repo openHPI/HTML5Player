@@ -43,6 +43,10 @@
         width: 75px;
         margin-top: 4px;
       }
+      #qualityButton{
+        width:15px;
+        text-align:center;
+      }
     </style>
     
     <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="av:play-arrow"></core-icon>
@@ -51,7 +55,7 @@
       <div id="progressCounter">{{progressIndicator | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
     <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
-    <div class="control" id="hdButton">HD</div>
+    <div class="control" id="qualityButton" on-click="{{toggleQuality}}">HD</div>
     <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
     <div class="control" id="volume" horizontal layout>
       <slider-bar id="volumeBar" value="{{volume}}" setValue="{{volume}}" max="100"></slider-bar>

@@ -116,5 +116,18 @@ class VideoPlayer extends PolymerElement {
     );
   }
   
+  void qualityChanged(){
+    if(quality == "sd"){
+      videoStreamList.forEach(
+            (stream) => stream.setSD()
+      );
+    }
+    else {
+      videoStreamList.forEach(
+        (stream) => stream.setHD()
+      );
+    }
+  }
+  
 }
 

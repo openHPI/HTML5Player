@@ -12,6 +12,8 @@ class VideoStream extends PolymerElement {
   @published String poster;
   @published String ratio;
   
+  bool notStarted = true;
+  
   //referenced elements
   VideoElement video;
   
@@ -29,6 +31,7 @@ class VideoStream extends PolymerElement {
   
   void play(){
     video.play();
+    notStarted = false;
   }
   
   void pause(){
@@ -49,6 +52,36 @@ class VideoStream extends PolymerElement {
   
   void setSpeed(double speed){
     video.playbackRate = speed;
+  }
+  
+  void setHD(){
+    if(hd_src != null){
+      var currentTime = video.currentTime;
+      video.src = hd_src;
+      if(!notStarted){
+        video.load();
+        video.currentTime = currentTime;
+        video.play();
+      }
+    }
+    else {
+      setSD();
+    }
+  }
+  
+  void setSD(){
+    if(sd_src != null){
+      var currentTime = video.currentTime;
+      video.src = sd_src;
+      if(!notStarted){
+        video.load();
+        video.currentTime = currentTime;
+        video.play();
+      }
+    }
+    else {
+      setHD();
+    }
   }
   
   void resize() {

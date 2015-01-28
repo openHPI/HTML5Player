@@ -80,6 +80,18 @@ class VideoControlBar extends PolymerElement {
       $['volumeButton'].attributes['icon'] = "av:volume-up";
     }
   }
+
+  //Quality
+  void toggleQuality(){
+    if(quality == "sd"){
+      quality = "hd";
+      $['qualityButton'].text = "HD";
+    }
+    else {
+      quality = "sd";
+      $['qualityButton'].text = "SD";
+    }
+  }
   
   String secondsToMinutes(int number){
     int minutes = number ~/ 60;
