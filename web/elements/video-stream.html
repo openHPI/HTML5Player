@@ -1,7 +1,7 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
 
-<polymer-element name="video-stream" attributes="sd_src hd_src poster ratio" vertical layout>
+<polymer-element name="video-stream" attributes="sd_src hd_src poster ratio subtitles" vertical layout>
   <template>
     <style>
       :host{
@@ -16,10 +16,16 @@
         margin: 0;
         padding: 0;
       }
+      
+      ::cue{
+        background-color:#000;
+        color:#FFF;
+      }
     </style>
     
     <video _poster="{{poster}}">
         <source _src="{{hd_src}}" type="video/mp4" />
+        <track kind="subtitles" _src="{{subtitles}}" default>
     </video>
     
   </template>

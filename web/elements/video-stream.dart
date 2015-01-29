@@ -11,6 +11,7 @@ class VideoStream extends PolymerElement {
   @published String hd_src;
   @published String poster;
   @published String ratio;
+  @published String subtitles;
   
   bool notStarted = true;
   
@@ -82,6 +83,14 @@ class VideoStream extends PolymerElement {
     else {
       setHD();
     }
+  }
+  
+  void showSubtitles(){
+    video.textTracks.first.mode = "showing";
+  }
+  
+  void hideSubtitles(){
+    video.textTracks.first.mode = "disabled";
   }
   
   void resize() {

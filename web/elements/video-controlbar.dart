@@ -15,6 +15,7 @@ class VideoControlBar extends PolymerElement {
   @published double speed;
   @published int volume;
   @published bool isFullscreen;
+  @published bool showSubtitles = false;
   int returnVolume = 50;
   
   @observable
@@ -91,6 +92,17 @@ class VideoControlBar extends PolymerElement {
       quality = "sd";
       $['qualityButton'].text = "SD";
     }
+  }
+  
+  //Subtitles
+  void toggleSubtitles(){
+    if(showSubtitles){
+      $['subtitlesButton'].style.opacity = 0.3;
+    }
+    else {
+      $['subtitlesButton'].style.opacity = 1.0;
+    }
+    showSubtitles = !showSubtitles;
   }
   
   String secondsToMinutes(int number){

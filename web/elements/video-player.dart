@@ -15,6 +15,7 @@ class VideoPlayer extends PolymerElement {
   @published double speed = 1.0;
   @published String quality = "sd";
   @published int volume = 80;
+  @published bool showSubtitles = false;
   
   @observable bool isPlaying = false;
   @observable int progressIndicator = 0;
@@ -116,6 +117,7 @@ class VideoPlayer extends PolymerElement {
     );
   }
   
+  // Quality
   void qualityChanged(){
     if(quality == "sd"){
       videoStreamList.forEach(
@@ -125,6 +127,20 @@ class VideoPlayer extends PolymerElement {
     else {
       videoStreamList.forEach(
         (stream) => stream.setHD()
+      );
+    }
+  }
+  
+  //Subtitles
+  void showSubtitlesChanged(){
+    if(showSubtitles){
+      videoStreamList.forEach(
+        (stream) => stream.showSubtitles()
+      );
+    }
+    else {
+      videoStreamList.forEach(
+        (stream) => stream.hideSubtitles()
       );
     }
   }
