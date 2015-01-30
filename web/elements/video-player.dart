@@ -42,7 +42,6 @@ class VideoPlayer extends PolymerElement {
     isPlaying = autoplay;
 
     for(int i=0; i<videoStreamList.length-1; i++){
-      print(i);
       CoreIcon resizer = new Element.tag('core-icon');
       resizer.id = "resizer";
       resizer.icon = "polymer";
