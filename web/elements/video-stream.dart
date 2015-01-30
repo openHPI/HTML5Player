@@ -93,13 +93,16 @@ class VideoStream extends PolymerElement {
     video.textTracks.first.mode = "disabled";
   }
   
-  void resize() {
+  void resize([int videoCount]) {
+    
+    videoCount --;
+    
     double minVideoWidth = 100.0;
     
     double parentWidth = double.parse( this.parent.getComputedStyle().width.replaceAll('px', '') );
     
     double newWidth = double.parse( this.getComputedStyle().width.replaceAll('px', '') );
-    newWidth = min( parentWidth - minVideoWidth , max(minVideoWidth, newWidth) );
+    newWidth = min( videoCount*parentWidth - minVideoWidth , max(minVideoWidth, newWidth) );
     
     double newHeight = newWidth * ratioAsDouble(ratio);
     

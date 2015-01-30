@@ -23,7 +23,6 @@ class VideoPlayer extends PolymerElement {
   
   double startX;
   double startWidth;
-  CoreIcon resizer = new Element.tag('core-icon');
   var mouseMoveListener;
   var mouseUpListener;
   
@@ -42,12 +41,16 @@ class VideoPlayer extends PolymerElement {
     progressIndicator = setProgress.floor();
     isPlaying = autoplay;
 
-    resizer.icon = "polymer";
-    resizer.id = "resizer";
-    this.insertBefore(resizer, videoStreamList[0].nextNode);
-    resizer.onMouseDown.listen(initDrag);
+    for(int i=0; i<videoStreamList.length-1; i++){
+      print(i);
+      CoreIcon resizer = new Element.tag('core-icon');
+      resizer.id = "resizer";
+      resizer.icon = "polymer";
+      resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
+      this.insertBefore(resizer, videoStreamList[i].nextNode);
+    }
     
-    videoStreamList.forEach((stream) => stream.resize());
+    videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
     
     new Timer.periodic(const Duration(milliseconds: 500), (timer) {
       progressIndicator = videoStreamList[0].getProgress().floor();
@@ -55,16 +58,17 @@ class VideoPlayer extends PolymerElement {
     });
   }
   
-  void initDrag([MouseEvent e]){
+  void initDrag([MouseEvent e, int scopeVideo]){
+    window.console.log(e);
     startX = e.client.x;
-    startWidth = double.parse( videoStreamList[0].getComputedStyle().width.replaceAll('px', '') );
+    startWidth = double.parse( videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
     mouseUpListener = window.onMouseUp.listen(stopDrag);
     mouseMoveListener = window.onMouseMove.listen(doDrag);
   }
   
   void doDrag([MouseEvent e]){
     videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
-    videoStreamList.forEach((stream) => stream.resize());
+    videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
   }
   
   void stopDrag([MouseEvent e]){

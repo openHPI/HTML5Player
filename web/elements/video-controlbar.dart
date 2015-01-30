@@ -24,6 +24,7 @@ class VideoControlBar extends PolymerElement {
   @override
   void attached() {
     super.attached();
+    showSubtitlesChanged();
   }
   
   //PlayPause
@@ -86,23 +87,33 @@ class VideoControlBar extends PolymerElement {
   void toggleQuality(){
     if(quality == "sd"){
       quality = "hd";
-      $['qualityButton'].text = "HD";
     }
     else {
       quality = "sd";
+    }
+  }
+  
+  void qualityChanged(){
+    if(quality == "sd"){
+      $['qualityButton'].text = "HD";
+    }
+    if(quality == "hd"){
       $['qualityButton'].text = "SD";
     }
   }
   
   //Subtitles
   void toggleSubtitles(){
-    if(showSubtitles){
-      $['subtitlesButton'].style.opacity = 0.3;
-    }
-    else {
-      $['subtitlesButton'].style.opacity = 1.0;
-    }
     showSubtitles = !showSubtitles;
+  }
+  
+  void showSubtitlesChanged(){
+    if(showSubtitles){
+      $['subtitlesButton'].style.color = "rgba(255, 255, 255, 1.0)";
+    }else{
+      $['subtitlesButton'].style.color = "rgba(255, 255, 255, 0.3)";
+    }
+    
   }
   
   String secondsToMinutes(int number){
