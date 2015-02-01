@@ -21,6 +21,7 @@ class VideoPlayer extends PolymerElement {
   @observable int progressIndicator = 0;
   @observable bool isFullscreen = false;
   
+  bool canTogglePlayPause;
   double startX;
   double startWidth;
   var mouseMoveListener;
@@ -54,7 +55,13 @@ class VideoPlayer extends PolymerElement {
     new Timer.periodic(const Duration(milliseconds: 500), (timer) {
       progressIndicator = videoStreamList[0].getProgress().floor();
       isPlaying = videoStreamList[0].isPlaying();
+      canTogglePlayPause = true;
     });
+  }
+  
+  void togglePlayPause(Event e, var details, Node target){
+    if (canTogglePlayPause)
+      isPlaying = !isPlaying;
   }
   
   void initDrag([MouseEvent e, int scopeVideo]){
@@ -73,6 +80,9 @@ class VideoPlayer extends PolymerElement {
   void stopDrag([MouseEvent e]){
     mouseMoveListener.cancel();
     mouseUpListener.cancel();
+    
+    // dragging shouldnt trigger a togglePlayPause
+    canTogglePlayPause = false;
   }
   
   //PlayPause

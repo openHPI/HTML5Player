@@ -27,11 +27,15 @@
         display: block;
         line-height: 24px;
         padding: 10px;
+        padding-top:12px;
         font-size: 12px;
         border-right: 2px solid white;
       }
       .control:last-child, #volumeButton{
         border-right-style: none;
+      }
+      .control:last-child, #volume{
+        padding-left: 8px;
       }
       .control[on-click]{
         cursor: pointer;
@@ -39,9 +43,12 @@
       #progressCounter{
         padding-left: 10px;
       }
+      #progressBar{
+        margin-top: 3px;
+      }
       #volumeBar{
         width: 75px;
-        margin-top: 4px;
+        margin-top: 3px;
       }
       #qualityButton{
         width:15px;
