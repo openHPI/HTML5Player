@@ -38,7 +38,7 @@ class VideoPlayer extends PolymerElement {
     videoStreamList = this.querySelectorAll("video-stream");
     
     this.querySelector("video-stream:last-child").setAttribute("flex", "");
-    
+    document.onFullscreenChange.listen(handleFullscreenChanged);
     progressIndicator = setProgress.floor();
     isPlaying = autoplay;
 
@@ -134,7 +134,7 @@ class VideoPlayer extends PolymerElement {
   void qualityChanged(){
     if(quality == "sd"){
       videoStreamList.forEach(
-            (stream) => stream.setSD()
+        (stream) => stream.setSD()
       );
     }
     else {
@@ -147,10 +147,15 @@ class VideoPlayer extends PolymerElement {
   // Fullscreen
   void isFullscreenChanged(){
     if(isFullscreen){
-      
+      this.requestFullscreen();
     }else{
-      
+      document.exitFullscreen();      
     }
+  }
+  
+  void handleFullscreenChanged(Event e){
+    //updates the video size
+    videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
   }
   
   //Subtitles

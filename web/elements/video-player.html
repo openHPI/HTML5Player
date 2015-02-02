@@ -11,7 +11,16 @@
       :host{
         display: block;
         position: relative;
+        width: 100%;
       }
+      
+      /* muss leider so gemacht werden */
+      :host(:-webkit-full-screen){ width: 100% }
+      :host(:-moz-full-screen){ width: 100% }
+      :host(:-ms-full-screen){ width: 100% }
+      :host(:-o-full-screen){ width: 100% }
+      :host(:full-screen){ width: 100% }
+      
       :host ::content #resizer{
         position: absolute;
         top: 30%;
