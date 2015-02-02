@@ -144,6 +144,15 @@ class VideoPlayer extends PolymerElement {
     }
   }
   
+  // Fullscreen
+  void isFullscreenChanged(){
+    if(isFullscreen){
+      
+    }else{
+      
+    }
+  }
+  
   //Subtitles
   void showSubtitlesChanged(){
     if(showSubtitles){

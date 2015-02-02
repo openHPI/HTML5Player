@@ -101,6 +101,20 @@ class VideoControlBar extends PolymerElement {
       $['qualityButton'].text = "SD";
     }
   }
+
+  //Fullscreen
+  void toggleFullscreen(){
+    isFullscreen = !isFullscreen;
+  }
+  
+  void isFullscreenChanged(){
+    if(isFullscreen){
+      $['fullscreenButton'].attributes['icon'] = "fullscreen-exit";
+    }
+    else{
+      $['fullscreenButton'].attributes['icon'] = "fullscreen";
+    }
+  }
   
   //Subtitles
   void toggleSubtitles(){

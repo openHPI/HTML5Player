@@ -68,7 +68,7 @@
     <div class="control" id="volume" horizontal layout>
       <slider-bar id="volumeBar" value="{{volume}}" setValue="{{volume}}" max="100"></slider-bar>
     </div>
-    <div class="control" id="fullScreenButton">FS</div>
+    <core-icon class="control" on-click="{{toggleFullscreen}}" id="fullscreenButton" icon="fullscreen"></core-icon>
     
   </template>
   <script type="application/dart" src="video-controlbar.dart"></script>

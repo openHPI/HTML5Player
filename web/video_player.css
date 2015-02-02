@@ -13,7 +13,4 @@ h1, p {
 
 video-player {
   width: 750px;
-  position: relative;
-  border: 1px solid #ccc;
-  background-color: #fff;
 }
