@@ -73,8 +73,28 @@ class VideoPlayer extends PolymerElement {
   }
   
   void doDrag([MouseEvent e]){
-    videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
-    videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
+    double controlbarHeight = 48.0;
+    
+    if (double.parse(videoStreamList[0].style.width.replaceAll('px', '')) < (startWidth + e.client.x - startX)){
+      window.console.log("ziehe nach rechts");
+      if ((double.parse(videoStreamList[0].style.height.replaceAll('px', '')) <= (double.parse(videoStreamList[1].style.height.replaceAll('px', '')))) && 
+              (document.documentElement.clientHeight <= double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) || 
+              (document.documentElement.clientHeight > double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
+            videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
+      }
+      videoStreamList.first.resize(videoStreamList.length);
+      videoStreamList.last.resize(videoStreamList.length);
+    }
+    else if (double.parse(videoStreamList[0].style.width.replaceAll('px', '')) > (startWidth + e.client.x - startX)) {
+      window.console.log("ziehe nach links");
+      if ((double.parse(videoStreamList[0].style.height.replaceAll('px', '')) >= (double.parse(videoStreamList[1].style.height.replaceAll('px', '')))) && 
+              (document.documentElement.clientHeight <= double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) || 
+              (document.documentElement.clientHeight > double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
+            videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
+      }
+      videoStreamList.last.resize(videoStreamList.length);
+      videoStreamList.first.resize(videoStreamList.length);
+    }
   }
   
   void stopDrag([MouseEvent e]){
@@ -155,6 +175,10 @@ class VideoPlayer extends PolymerElement {
   
   void handleFullscreenChanged(Event e){
     //updates the video size
+    if (document.fullscreenElement==null)
+      isFullscreen=false;
+    else isFullscreen=true;
+    videoStreamList[0].style.width = (double.parse( this.getComputedStyle().width.replaceAll('px', '')) / 2).toString() + "px";
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
   }
   

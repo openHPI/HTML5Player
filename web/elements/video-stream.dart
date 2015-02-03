@@ -96,18 +96,18 @@ class VideoStream extends PolymerElement {
   void resize([int videoCount]) {
     
     videoCount --;
-    
+    double controlbarHeight = 48.0;
     double minVideoWidth = 100.0;
-    
     double parentWidth = double.parse( this.parent.getComputedStyle().width.replaceAll('px', '') );
     
     double newWidth = double.parse( this.getComputedStyle().width.replaceAll('px', '') );
     newWidth = min( videoCount*parentWidth - minVideoWidth , max(minVideoWidth, newWidth) );
     
     double newHeight = newWidth * ratioAsDouble(ratio);
-    
-    this.style.width = newWidth.toString() + "px";
-    this.style.height = newHeight.toString() + "px";
+    if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
+      this.style.width = newWidth.toString() + "px";
+      this.style.height = newHeight.toString() + "px";
+    }  
   }
   
   double ratioAsDouble(String ratio){
