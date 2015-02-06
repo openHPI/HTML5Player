@@ -128,6 +128,7 @@ class VideoStream extends PolymerElement {
     videoCount --;
     double controlbarHeight = 48.0;
     double minVideoWidth = 100.0;
+    
     double parentWidth = double.parse( this.parent.getComputedStyle().width.replaceAll('px', '') );
     
     double newWidth = double.parse( this.getComputedStyle().width.replaceAll('px', '') );

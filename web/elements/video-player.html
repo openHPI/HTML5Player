@@ -41,7 +41,7 @@
     <div id="videoArea" on-click="{{videoControlBar.togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
       <content></content>
     </div>
-    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}" showSubtitles="{{showSubtitles}}"></video-controlbar>
+    <video-controlbar videoHasEnded="{{videoHasEnded}}" id="videoControlBar" isFullscreen="{{isFullscreen}}" showSubtitles="{{showSubtitles}}"></video-controlbar>
    </template>
   <script type="application/dart" src="video-player.dart"></script>
 </polymer-element>
