@@ -38,7 +38,7 @@
         visibility: visible;
       }
     </style>
-    <div id="videoArea" on-click="{{togglePlayPause}}" flex horizontal layout start>
+    <div id="videoArea" on-click="{{togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
       <content></content>
     </div>
     <video-controlbar isPlaying="{{isPlaying}}" setProgress="{{setProgress}}" progressIndicator="{{progressIndicator}}"

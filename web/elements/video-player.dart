@@ -68,8 +68,8 @@ class VideoPlayer extends PolymerElement {
     window.console.log(e);
     startX = e.client.x;
     startWidth = double.parse( videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
-    mouseUpListener = window.onMouseUp.listen(stopDrag);
-    mouseMoveListener = window.onMouseMove.listen(doDrag);
+    mouseUpListener = document.onMouseUp.listen(stopDrag);
+    mouseMoveListener = document.onMouseMove.listen(doDrag);
   }
   
   void doDrag([MouseEvent e]){
@@ -165,6 +165,10 @@ class VideoPlayer extends PolymerElement {
   }
   
   // Fullscreen
+  void toggleFullscreen(Event e, var details, Node target){
+      isFullscreen = !isFullscreen;
+  }
+  
   void isFullscreenChanged(){
     if(isFullscreen){
       this.requestFullscreen();
