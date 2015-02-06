@@ -7,15 +7,18 @@ import 'dart:html';
 class VideoControlBar extends PolymerElement {
 
   //published attributes
-  @published bool isPlaying;
-  @published double setProgress;
-  @published int progressIndicator;
+  @published bool isPlaying = false;
+  @published int progress;
+  @published int buffered;
   @published int duration;
-  @published String quality;
+  @published bool isHD;
   @published double speed;
   @published int volume;
   @published bool isFullscreen;
+  
   @published bool showSubtitles = false;
+  
+  
   int returnVolume = 50;
   
   @observable
@@ -28,7 +31,7 @@ class VideoControlBar extends PolymerElement {
   }
   
   //PlayPause
-  void togglePlayPause(Event e, var details, Node target){
+  void togglePlayPause([Event e, var details, Node target]){
     isPlaying = !isPlaying;
   }
   
@@ -85,19 +88,14 @@ class VideoControlBar extends PolymerElement {
 
   //Quality
   void toggleQuality(){
-    if(quality == "sd"){
-      quality = "hd";
-    }
-    else {
-      quality = "sd";
-    }
+    isHD = !isHD;
   }
   
-  void qualityChanged(){
-    if(quality == "sd"){
+  void isHDChanged(){
+    if(isHD){
       $['qualityButton'].text = "HD";
     }
-    if(quality == "hd"){
+    else{
       $['qualityButton'].text = "SD";
     }
   }

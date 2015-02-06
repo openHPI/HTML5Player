@@ -3,7 +3,7 @@
 <link rel="import" href="packages/core_elements/av_icons.html">
 <link rel="import" href="slider-bar.html">
 
-<polymer-element name="video-controlbar" attributes="isPlaying setProgress progressIndicator duration quality speed volume showSubtitles" horizontal layout>
+<polymer-element name="video-controlbar" attributes="isPlaying progress buffered duration isHD speed volume showSubtitles" horizontal layout>
   <template>
     <style>
       @font-face{
@@ -58,15 +58,15 @@
     
     <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="av:play-arrow"></core-icon>
     <div class="control" id="progress" horizontal layout flex>
-      <slider-bar id="progressBar" value="{{progressIndicator}}" max="{{duration}}" setValue="{{setProgress}}" flex></slider-bar>
-      <div id="progressCounter">{{progressIndicator | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
+      <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}" max="{{duration}}" flex></slider-bar>
+      <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
     <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
     <div class="control" id="qualityButton" on-click="{{toggleQuality}}">HD</div>
     <core-icon class="control" on-click="{{toggleSubtitles}}" id="subtitlesButton" icon="av:closed-caption"></core-icon>
     <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
     <div class="control" id="volume" horizontal layout>
-      <slider-bar id="volumeBar" value="{{volume}}" setValue="{{volume}}" max="100"></slider-bar>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
     </div>
     <core-icon class="control" on-click="{{toggleFullscreen}}" id="fullscreenButton" icon="fullscreen"></core-icon>
     
