@@ -2,6 +2,7 @@ name: video_player
 description: A sample Polymer application
 dependencies:
   core_elements: any
+  custom_element_apigen: any
   paper_elements: any
   polymer: any
 transformers:
