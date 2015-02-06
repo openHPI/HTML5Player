@@ -17,7 +17,6 @@ class VideoPlayer extends PolymerElement {
   @published bool showSubtitles = false;
   @published int progress = 0;
   
-  @observable bool videoHasEnded = false;
   @observable bool isPlaying = false;
   @observable bool isFullscreen = false;
 
@@ -43,7 +42,6 @@ class VideoPlayer extends PolymerElement {
     
     document.onFullscreenChange.listen(handleFullscreenChanged);
     isPlaying = autoplay;
-    videoStreamList[0].onEnded.listen(setVideoHasEnded);
     
     for(int i=0; i<videoStreamList.length-1; i++){
       CoreIcon resizer = new Element.tag('core-icon');
@@ -91,11 +89,6 @@ class VideoPlayer extends PolymerElement {
       stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
     );
     videoControlBar.volume = volume; 
-  }
-  
-  
-  void setVideoHasEnded([Event e]){
-    videoHasEnded=true;
   }
   
   /* dragging stuff */

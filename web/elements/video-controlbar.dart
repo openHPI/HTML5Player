@@ -17,7 +17,6 @@ class VideoControlBar extends PolymerElement {
   @published bool isFullscreen;
   
   @published bool showSubtitles = false;
-  @published bool videoHasEnded;
   
   int returnVolume = 50;
   
@@ -38,24 +37,20 @@ class VideoControlBar extends PolymerElement {
   void updateIcons(){
     if(isPlaying){
       $['playPauseButton'].attributes['icon'] = "av:pause";
-      videoHasEnded = false;
     }
-    else if(videoHasEnded){
-      $['playPauseButton'].attributes['icon'] = "av:replay";
-    } else {
+    else{
       $['playPauseButton'].attributes['icon'] = "av:play-arrow";
-    }  
-  }
-  
-  void videoHasEndedChanged(){
-    if (!isPlaying) updateIcons();
+      if(duration - progress < 1){
+        $['playPauseButton'].attributes['icon'] = "av:replay";
+      }
+    }
   }
   
   void isPlayingChanged(){
     updateIcons();
   }
   
-  void porgressChanged(){
+  void progressChanged(){
     updateIcons();
   }
   
