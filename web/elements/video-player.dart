@@ -17,9 +17,11 @@ class VideoPlayer extends PolymerElement {
   @published int volume = 80;
   @published bool showSubtitles = false;
   
+  @observable bool videoHasEnded = false;
   @observable bool isPlaying = false;
   @observable int progressIndicator = 0;
   @observable bool isFullscreen = false;
+
   
   bool canTogglePlayPause;
   double startX;
@@ -41,7 +43,8 @@ class VideoPlayer extends PolymerElement {
     document.onFullscreenChange.listen(handleFullscreenChanged);
     progressIndicator = setProgress.floor();
     isPlaying = autoplay;
-
+    videoStreamList[0].onEnded.listen(setVideoHasEnded);
+    
     for(int i=0; i<videoStreamList.length-1; i++){
       CoreIcon resizer = new Element.tag('core-icon');
       resizer.id = "resizer";
@@ -57,6 +60,11 @@ class VideoPlayer extends PolymerElement {
       isPlaying = videoStreamList[0].isPlaying();
       canTogglePlayPause = true;
     });
+  }
+  
+  void setVideoHasEnded([Event e]){
+    window.console.log("Video has ended !");
+    videoHasEnded=true;
   }
   
   void togglePlayPause(Event e, var details, Node target){
@@ -76,7 +84,6 @@ class VideoPlayer extends PolymerElement {
     double controlbarHeight = 48.0;
     
     if (double.parse(videoStreamList[0].style.width.replaceAll('px', '')) < (startWidth + e.client.x - startX)){
-      window.console.log("ziehe nach rechts");
       if ((double.parse(videoStreamList[0].style.height.replaceAll('px', '')) <= (double.parse(videoStreamList[1].style.height.replaceAll('px', '')))) && 
               (document.documentElement.clientHeight <= double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) || 
               (document.documentElement.clientHeight > double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
@@ -86,7 +93,6 @@ class VideoPlayer extends PolymerElement {
       videoStreamList.last.resize(videoStreamList.length);
     }
     else if (double.parse(videoStreamList[0].style.width.replaceAll('px', '')) > (startWidth + e.client.x - startX)) {
-      window.console.log("ziehe nach links");
       if ((double.parse(videoStreamList[0].style.height.replaceAll('px', '')) >= (double.parse(videoStreamList[1].style.height.replaceAll('px', '')))) && 
               (document.documentElement.clientHeight <= double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) || 
               (document.documentElement.clientHeight > double.parse( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
@@ -109,8 +115,7 @@ class VideoPlayer extends PolymerElement {
   void isPlayingChanged([Event e]){
     if(isPlaying){
       play();
-    }
-    else{
+    } else {
       pause();
     }
   }
@@ -129,11 +134,20 @@ class VideoPlayer extends PolymerElement {
     isPlaying = false;
   }
   
+  void replay(){
+    videoStreamList.forEach(
+        (stream) => stream.play()
+    );
+    isPlaying = true;
+  }
+  
   //Progress
   void setProgressChanged(){
     videoStreamList.forEach(
       (stream) => stream.setProgress(setProgress)
     );
+    window.console.log("setProgressChanged !");
+    videoHasEnded=false;
   }
   
   //Speed  
