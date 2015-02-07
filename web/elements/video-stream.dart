@@ -21,6 +21,7 @@ class VideoStream extends PolymerElement {
   @published bool isHD;
   @published double speed;
   @published int volume;
+  @published bool showSubtitles;
   
   bool notStarted = true;
   
@@ -115,12 +116,13 @@ class VideoStream extends PolymerElement {
     }
   }
   
-  void showSubtitles(){
-    video.textTracks.first.mode = "showing";
-  }
-  
-  void hideSubtitles(){
-    video.textTracks.first.mode = "disabled";
+  void showSubtitlesChanged(){
+    if(showSubtitles){
+      video.textTracks.first.mode = "showing";
+    }
+    else{
+      video.textTracks.first.mode = "disabled";
+    }
   }
   
   void resize([int videoCount]) {

@@ -10,12 +10,12 @@ class VideoPlayer extends PolymerElement {
   
   //published attributes
   @published bool autoplay = false;
+  @published int progress = 0;
   @published int duration = 1;
   @published double speed = 1.0;
   @published String quality = "sd";
   @published int volume = 80;
   @published bool showSubtitles = false;
-  @published int progress = 0;
   
   @observable bool isPlaying = false;
   @observable bool isFullscreen = false;
@@ -25,6 +25,7 @@ class VideoPlayer extends PolymerElement {
   double startWidth;
   var mouseMoveListener;
   var mouseUpListener;
+  bool showSubtitlesButton = false;
   
   //referenced elements
   ElementList<VideoStream> videoStreamList;
@@ -37,11 +38,11 @@ class VideoPlayer extends PolymerElement {
   void attached() {
     videoStreamList = this.querySelectorAll("video-stream");
     videoControlBar = $["videoControlBar"];
-
-    this.querySelector("video-stream:last-child").setAttribute("flex", "");
     
     document.onFullscreenChange.listen(handleFullscreenChanged);
-    isPlaying = autoplay;
+    
+    /* initial resizing and resizer */
+    videoStreamList.last.setAttribute("flex", "");
     
     for(int i=0; i<videoStreamList.length-1; i++){
       CoreIcon resizer = new Element.tag('core-icon');
@@ -55,12 +56,12 @@ class VideoPlayer extends PolymerElement {
     
     
     /* manage bindings */
-
     //PlayPause
     videoStreamList.forEach((stream) => 
       stream.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'))
     );
     videoControlBar.bind('isPlaying', new PathObserver(videoStreamList[0], 'isPlaying'));
+    videoControlBar.isPlaying = autoplay;
 
     //Progress
     videoStreamList.forEach((stream) => 
@@ -89,6 +90,17 @@ class VideoPlayer extends PolymerElement {
       stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
     );
     videoControlBar.volume = volume; 
+    
+    //Subtitles
+    videoStreamList.forEach((stream) => 
+      stream.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'))
+    );
+    videoControlBar.showSubtitles = showSubtitles;
+    videoStreamList.forEach((stream) => 
+      showSubtitlesButton = (showSubtitlesButton || (stream.subtitles != null))
+    );
+    videoControlBar.showSubtitlesButton = showSubtitlesButton;
+    
   }
   
   /* dragging stuff */
@@ -173,20 +185,6 @@ class VideoPlayer extends PolymerElement {
     else isFullscreen=true;
     videoStreamList[0].style.width = (double.parse( this.getComputedStyle().width.replaceAll('px', '')) / 2).toString() + "px";
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
-  }
-  
-  //Subtitles
-  void showSubtitlesChanged(){
-    if(showSubtitles){
-      videoStreamList.forEach(
-        (stream) => stream.showSubtitles()
-      );
-    }
-    else {
-      videoStreamList.forEach(
-        (stream) => stream.hideSubtitles()
-      );
-    }
   }
   
 }

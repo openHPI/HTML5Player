@@ -14,9 +14,10 @@ class VideoControlBar extends PolymerElement {
   @published bool isHD;
   @published double speed;
   @published int volume;
+  @published bool showSubtitles;
+  @published bool showSubtitlesButton;
   @published bool isFullscreen;
   
-  @published bool showSubtitles = false;
   
   int returnVolume = 50;
   
