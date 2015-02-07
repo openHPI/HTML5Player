@@ -1,0 +1,33 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_progress.html">
+
+<polymer-element name="video-thumbnail" attributes="img_src starttime">
+  <template>
+    <style>
+      :host{
+        position: relative;
+        background-color: rgb(90, 96, 101);
+        margin-right: 2px;
+        height: 12px; 
+        width: 100%;
+        display: block;
+      }
+      :host(:hover){
+        background-color: rgb(255, 255, 255);
+      }
+      img{
+        visibility: hidden;
+        height: 150px;
+        width: 200px;
+        position: absolute;
+        bottom: 20px;
+        z-index: 6000;
+      }
+    </style>
+    
+    <img id="hidden" _src="{{img_src}}">
+    
+  </template>
+  <script type="application/dart" src="video-thumbnail.dart"></script>
+</polymer-element>

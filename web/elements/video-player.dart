@@ -2,7 +2,10 @@ library videoPlayer;
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_icon.dart';
 import 'video-stream.dart';
+//needed for workaround
 import 'video-controlbar.dart';
+import 'video-thumbnail.dart';
+//
 import 'dart:html';
 
 @CustomTag('video-player')
@@ -39,6 +42,11 @@ class VideoPlayer extends PolymerElement {
     videoStreamList = this.querySelectorAll("video-stream");
     videoControlBar = $["videoControlBar"];
     
+    // CSS workarounds
+    this.querySelector("video-stream:last-of-type").setAttribute("flex", "");
+    VideoThumbnail lastThumbnail = this.querySelector("video-thumbnail:last-of-type");
+    if (lastThumbnail != null) lastThumbnail.style.marginRight="0px";
+
     document.onFullscreenChange.listen(handleFullscreenChanged);
     
     /* initial resizing and resizer */
@@ -51,57 +59,65 @@ class VideoPlayer extends PolymerElement {
       resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
       this.insertBefore(resizer, videoStreamList[i].nextNode);
     }
-    
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
     
-    
     /* manage bindings */
-    //PlayPause
-    videoStreamList.forEach((stream) => 
-      stream.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'))
-    );
-    videoControlBar.bind('isPlaying', new PathObserver(videoStreamList[0], 'isPlaying'));
-    videoControlBar.isPlaying = autoplay;
 
-    //Progress
-    videoStreamList.forEach((stream) => 
-        videoControlBar.bind('progress', new PathObserver(stream, 'progress'))
-    );
-    videoControlBar.bind('buffered', new PathObserver(videoStreamList[0], 'buffered'));
-    videoControlBar.progress = progress;
+    initBindings();
     
-    videoControlBar.duration = duration;
-    videoControlBar.bind('duration', new PathObserver(videoStreamList[0], 'duration'));
-    
-    //Quality
-    videoStreamList.forEach((stream) => 
-      stream.bind('isHD', new PathObserver(videoControlBar, 'isHD'))
-    );
-    videoControlBar.isHD = (quality=="hd");
-    
-    //Speed
-    videoStreamList.forEach((stream) => 
-      stream.bind('speed', new PathObserver(videoControlBar, 'speed'))
-    );
-    videoControlBar.speed = speed;
-    
-    //Volume
-    videoStreamList.forEach((stream) => 
-      stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
-    );
-    videoControlBar.volume = volume; 
-    
-    //Subtitles
-    videoStreamList.forEach((stream) => 
-      stream.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'))
-    );
-    videoControlBar.showSubtitles = showSubtitles;
-    videoStreamList.forEach((stream) => 
-      showSubtitlesButton = (showSubtitlesButton || (stream.subtitles != null))
-    );
-    videoControlBar.showSubtitlesButton = showSubtitlesButton;
-    
-  }
+    // Workaround because <content> cant give thumbnails to controlbar
+    ElementList<VideoThumbnail> list = this.querySelectorAll("video-thumbnail");
+    videoControlBar.initVideoThumbnailList(list);
+    //
+}
+  
+  // bindings
+void initBindings(){
+  //PlayPause
+  videoStreamList.forEach((stream) => 
+    stream.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'))
+  );
+  videoControlBar.bind('isPlaying', new PathObserver(videoStreamList[0], 'isPlaying'));
+  videoControlBar.isPlaying = autoplay;
+
+  //Progress
+  videoStreamList.forEach((stream) => 
+      videoControlBar.bind('progress', new PathObserver(stream, 'progress'))
+  );
+  videoControlBar.bind('buffered', new PathObserver(videoStreamList[0], 'buffered'));
+  videoControlBar.progress = progress;
+  
+  videoControlBar.duration = duration;
+  videoControlBar.bind('duration', new PathObserver(videoStreamList[0], 'duration'));
+  
+  //Quality
+  videoStreamList.forEach((stream) => 
+    stream.bind('isHD', new PathObserver(videoControlBar, 'isHD'))
+  );
+  videoControlBar.isHD = (quality=="hd");
+  
+  //Speed
+  videoStreamList.forEach((stream) => 
+    stream.bind('speed', new PathObserver(videoControlBar, 'speed'))
+  );
+  videoControlBar.speed = speed;
+  
+  //Volume
+  videoStreamList.forEach((stream) => 
+    stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
+  );
+  videoControlBar.volume = volume; 
+  
+  //Subtitles
+  videoStreamList.forEach((stream) => 
+    stream.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'))
+  );
+  videoControlBar.showSubtitles = showSubtitles;
+  videoStreamList.forEach((stream) => 
+    showSubtitlesButton = (showSubtitlesButton || (stream.subtitles != null))
+  );
+  videoControlBar.showSubtitlesButton = showSubtitlesButton;
+}
   
   /* dragging stuff */
   

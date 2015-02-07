@@ -4,6 +4,7 @@
 
 <link rel="import" href="video-stream.html">
 <link rel="import" href="video-controlbar.html">
+<link rel="import" href="video-thumbnail.html">
 
 <polymer-element name="video-player"
   vertical layout>
@@ -40,9 +41,11 @@
       }
     </style>
     <div id="videoArea" on-click="{{videoControlBar.togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
-      <content></content>
+      <content select=":not(video-thumbnail)"></content>
     </div>
-    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}"></video-controlbar>
+    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}">
+    <content select=":not(video-stream)"></content>    
+    </video-controlbar>
    </template>
   <script type="application/dart" src="video-player.dart"></script>
 </polymer-element>

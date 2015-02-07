@@ -2,6 +2,8 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/core_elements/av_icons.html">
 <link rel="import" href="slider-bar.html">
+<link rel="import" href="video-controlbar.html">
+
 
 <polymer-element name="video-controlbar"
   horizontal layout>
@@ -41,11 +43,23 @@
       .control[on-click]{
         cursor: pointer;
       }
+      .thumbnail-box{
+        position: relative;
+        bottom:2px;
+      }
+      video-thumbnail /deep/ :last-of-type {
+        margin-right: 0px;
+      }
+      
       #progressCounter{
         padding-left: 10px;
       }
       #progressBar{
         margin-top: 3px;
+      }
+      #progressBarWithThumbnails{
+        position: relative;
+        top: 1px;
       }
       #volumeBar{
         width: 75px;
@@ -55,11 +69,17 @@
         width:15px;
         text-align:center;
       }
+      
     </style>
     
     <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="av:play-arrow"></core-icon>
     <div class="control" id="progress" horizontal layout flex>
-      <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}" max="{{duration}}" flex></slider-bar>
+      <div flex>
+        <div class="thumbnail-box" horizontal layout>
+          <content></content>
+        </div>
+        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}" max="{{duration}}" flex></slider-bar>
+      </div>
       <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
     <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
