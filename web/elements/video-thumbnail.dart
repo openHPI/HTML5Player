@@ -11,7 +11,7 @@ class VideoThumbnail extends PolymerElement{
   @published String starttime;
   
   //referenced elements
-  ImageElement img;
+  DivElement thumb;
   
   @observable
   VideoThumbnail.created() : super.created() { }
@@ -19,7 +19,7 @@ class VideoThumbnail extends PolymerElement{
   @override
   void attached() {
     super.attached();
-    img = this.shadowRoot.querySelector('img');
+    thumb = this.shadowRoot.querySelector('.thumb');
     this.onMouseOver.listen(setThumbnailVisible);
     this.onMouseLeave.listen(setThumbnailInvisible);
   }
@@ -33,11 +33,11 @@ class VideoThumbnail extends PolymerElement{
   }
   
   void setThumbnailVisible(Event e){
-    img.style.visibility = "visible";
+    thumb.style.visibility = "visible";
   }
 
   void setThumbnailInvisible(Event e){
-    img.style.visibility = "hidden";
+    thumb.style.visibility = "hidden";
   }
   
 }

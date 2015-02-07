@@ -17,16 +17,48 @@
         background-color: rgb(255, 255, 255);
       }
       img{
-        visibility: hidden;
         height: 150px;
         width: 200px;
+      }
+      .thumb {
+        visibility: hidden;
         position: absolute;
-        bottom: 20px;
+        bottom: 22px;
+        left: -10px;
         z-index: 6000;
+        border: 3px solid rgb(222, 98, 18);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+      .thumb:after, .thumb:before {
+        top: 100%;
+        left: 7px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      
+      .thumb:after {
+        border-color: rgba(0, 0, 0, 0);
+        border-top-color: #;
+        border-width: 10px;
+        margin-left: -10px;
+      }
+      .thumb:before {
+        border-color: rgba(0, 0, 0, 0);
+        border-top-color: rgb(222, 98, 18);
+        border-width: 10px;
+        margin-left: -10px;
       }
     </style>
     
-    <img id="hidden" _src="{{img_src}}">
+    <div class="thumb">
+      <img _src="{{img_src}}">
+    </div>
     
   </template>
   <script type="application/dart" src="video-thumbnail.dart"></script>
