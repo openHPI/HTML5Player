@@ -2,6 +2,10 @@ library videoPlayer;
 import 'package:polymer/polymer.dart';
 import 'package:core_elements/core_icon.dart';
 import 'video-stream.dart';
+//needed for workaround
+import 'video-controlbar.dart';
+import 'video-thumbnail.dart';
+//
 import 'dart:html';
 import 'dart:async';
 
@@ -38,8 +42,14 @@ class VideoPlayer extends PolymerElement {
   @override
   void attached() {
     videoStreamList = this.querySelectorAll("video-stream");
-    
-    this.querySelector("video-stream:last-child").setAttribute("flex", "");
+    // Workaround because <content> cant give thumbnails to controlbar
+    ElementList<VideoThumbnail> list = this.querySelectorAll("video-thumbnail");
+    VideoControlBar bar = this.shadowRoot.querySelector("video-controlbar");
+    bar.initVideoThumbnailList(list);
+    //
+    this.querySelector("video-stream:last-of-type").setAttribute("flex", "");
+    this.querySelector("video-thumbnail:last-of-type").style.marginRight="0px";
+
     document.onFullscreenChange.listen(handleFullscreenChanged);
     progressIndicator = setProgress.floor();
     isPlaying = autoplay;
@@ -63,7 +73,6 @@ class VideoPlayer extends PolymerElement {
   }
   
   void setVideoHasEnded([Event e]){
-    window.console.log("Video has ended !");
     videoHasEnded=true;
   }
   
@@ -73,7 +82,6 @@ class VideoPlayer extends PolymerElement {
   }
   
   void initDrag([MouseEvent e, int scopeVideo]){
-    window.console.log(e);
     startX = e.client.x;
     startWidth = double.parse( videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
     mouseUpListener = document.onMouseUp.listen(stopDrag);

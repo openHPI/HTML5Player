@@ -1,5 +1,6 @@
 library videoControlBar;
 import 'package:polymer/polymer.dart';
+import 'video-thumbnail.dart';
 import 'dart:html';
 
 @CustomTag('video-controlbar')
@@ -20,6 +21,9 @@ class VideoControlBar extends PolymerElement {
   
   int returnVolume = 50;
   
+  //referenced elements
+  ElementList<VideoThumbnail> videoThumbnailList;
+  
   @observable
   VideoControlBar.created() : super.created() { }
   
@@ -28,6 +32,34 @@ class VideoControlBar extends PolymerElement {
     super.attached();
     showSubtitlesChanged();
   }
+  
+  //Thumbnails
+  void initVideoThumbnailList(ElementList<VideoThumbnail> list){
+    videoThumbnailList = list;
+    
+    double lastThumbnailTime = 0.0;
+    double thumbnailTime = 0.0;
+    double width = 0.0;
+    for (int i=0;i<videoThumbnailList.length;i++){
+      if (i+1 < videoThumbnailList.length) {
+        thumbnailTime = videoThumbnailList[i+1].getStartTime();
+        width = 100*(thumbnailTime-lastThumbnailTime)/duration;
+        lastThumbnailTime = videoThumbnailList[i+1].getStartTime();
+      } else if (i+1 == videoThumbnailList.length){
+        width = 100*(duration-lastThumbnailTime)/duration;
+      }
+      if (width < 0.5) width = 0.5;
+      videoThumbnailList[i].setThumbnailWidth(width);
+      videoThumbnailList[i].onClick.listen(handleThumbnailClick);
+    }
+    
+  }
+  
+  void handleThumbnailClick(MouseEvent e){
+    VideoThumbnail thumbnail = e.currentTarget;
+    setProgress = thumbnail.getStartTime();
+  }
+  
   
   //PlayPause
   void togglePlayPause(Event e, var details, Node target){
@@ -47,12 +79,10 @@ class VideoControlBar extends PolymerElement {
   }
   
   void videoHasEndedChanged(){
-    window.console.log("vHEC: "+videoHasEnded.toString());
     if (!isPlaying) updateIcons();
   }
   
   void isPlayingChanged(){
-    window.console.log("iPC: "+videoHasEnded.toString());
     updateIcons();
   }
   
