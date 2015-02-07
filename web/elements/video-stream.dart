@@ -2,6 +2,7 @@ library videoStream;
 import 'package:polymer/polymer.dart';
 import 'dart:math';
 import 'dart:html';
+import 'dart:async';
 
 @CustomTag('video-stream')
 class VideoStream extends PolymerElement {
@@ -12,6 +13,14 @@ class VideoStream extends PolymerElement {
   @published String poster;
   @published String ratio;
   @published String subtitles;
+  
+  @published bool isPlaying;
+  @published int progress = 0;
+  @published int buffered;
+  @published int duration;
+  @published bool isHD;
+  @published double speed;
+  @published int volume;
   
   bool notStarted = true;
   
@@ -24,35 +33,56 @@ class VideoStream extends PolymerElement {
   @override
   void attached() {
     video = this.shadowRoot.querySelector("video");
+    
+    video.on['durationchange'].listen((event)=>
+      duration = video.duration.floor()
+    );
+    
+    new Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      if(video.readyState>=1){
+        isPlaying = !video.paused;
+        progress = video.currentTime.floor();
+        buffered = video.buffered.end(0).floor();
+      }
+    });
+  }
+  
+  //PlayPause
+  void isPlayingChanged(){
+    if(isPlaying){
+      video.play();
+      notStarted = false;
+    }
+    else{
+      video.pause();
+    }
   }
 
-  bool isPlaying(){
-    return !video.paused;
+  //Progress
+  void progressChanged(oldValue, newValue){
+    if((oldValue - newValue).abs() >= 3){
+      video.currentTime = newValue;
+    }
   }
   
-  void play(){
-    video.play();
-    notStarted = false;
+  //Quality
+  void isHDChanged(){
+    if(isHD){
+      setHD();
+    }
+    else{
+      setSD();
+    }
   }
   
-  void pause(){
-    video.pause();
-  }
-  
-  void setVolume(int volume){
-    video.volume = volume/100;
-  }
-  
-  void setProgress(double currentTime){
-    video.currentTime = currentTime;
-  }
-  
-  double getProgress(){
-    return video.currentTime;
-  }
-  
-  void setSpeed(double speed){
+  //Speed
+  void speedChanged(){
     video.playbackRate = speed;
+  }
+  
+  //Volume
+  void volumeChanged(){
+    video.volume = volume/100;
   }
   
   void setHD(){

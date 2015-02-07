@@ -6,7 +6,7 @@
 <link rel="import" href="video-controlbar.html">
 <link rel="import" href="video-thumbnail.html">
 
-<polymer-element name="video-player" attributes="autoplay setProgress duration quality speed volume showSubtitles" vertical layout>
+<polymer-element name="video-player" attributes="autoplay progress duration quality speed volume showSubtitles" vertical layout>
   <template>
     <style>
       :host{
@@ -39,13 +39,12 @@
         visibility: visible;
       }
     </style>
-    <div id="videoArea" on-click="{{togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
+    <div id="videoArea" on-click="{{videoControlBar.togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
       <content select=":not(video-thumbnail)"></content>
     </div>
-    <video-controlbar videoHasEnded="{{videoHasEnded}}" isPlaying="{{isPlaying}}" setProgress="{{setProgress}}" progressIndicator="{{progressIndicator}}"
-      duration="{{duration}}" quality="{{quality}}" speed="{{speed}}" volume="{{volume}}" isFullscreen="{{isFullscreen}}" showSubtitles="{{showSubtitles}}">
-      <content select=":not(video-stream)"></content>
+    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}" showSubtitles="{{showSubtitles}}">
+      <content select=":not(video-stream)"></content>    
     </video-controlbar>
-  </template>
+   </template>
   <script type="application/dart" src="video-player.dart"></script>
 </polymer-element>

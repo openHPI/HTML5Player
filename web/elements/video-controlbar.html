@@ -5,7 +5,7 @@
 <link rel="import" href="video-controlbar.html">
 
 
-<polymer-element name="video-controlbar" attributes="videoHasEnded isPlaying setProgress progressIndicator duration quality speed volume showSubtitles" horizontal layout>
+<polymer-element name="video-controlbar" attributes="isPlaying progress buffered duration isHD speed volume showSubtitles" horizontal layout>
   <template>
     <style>
       @font-face{
@@ -56,7 +56,7 @@
       #progressBar{
         margin-top: 3px;
       }
-      #progresBarWithThumbnails{
+      #progressBarWithThumbnails{
         position: relative;
         top: 1px;
       }
@@ -77,16 +77,16 @@
         <div class="thumbnail-box" horizontal layout>
           <content></content>
         </div>
-        <slider-bar id="progresBarWithThumbnails" value="{{progressIndicator}}" max="{{duration}}" setValue="{{setProgress}}" flex></slider-bar>
+        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}" max="{{duration}}" flex></slider-bar>
       </div>
-      <div id="progressCounter">{{progressIndicator | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
+      <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
     <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
     <div class="control" id="qualityButton" on-click="{{toggleQuality}}">HD</div>
     <core-icon class="control" on-click="{{toggleSubtitles}}" id="subtitlesButton" icon="av:closed-caption"></core-icon>
     <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
     <div class="control" id="volume" horizontal layout>
-      <slider-bar id="volumeBar" value="{{volume}}" setValue="{{volume}}" max="100"></slider-bar>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
     </div>
     <core-icon class="control" on-click="{{toggleFullscreen}}" id="fullscreenButton" icon="fullscreen"></core-icon>
     

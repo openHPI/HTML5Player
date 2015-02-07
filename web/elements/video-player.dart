@@ -7,27 +7,23 @@ import 'video-controlbar.dart';
 import 'video-thumbnail.dart';
 //
 import 'dart:html';
-import 'dart:async';
 
 @CustomTag('video-player')
 class VideoPlayer extends PolymerElement {
   
   //published attributes
   @published bool autoplay = false;
-  @published double setProgress = 0.0;
   @published int duration = 1;
   @published double speed = 1.0;
   @published String quality = "sd";
   @published int volume = 80;
   @published bool showSubtitles = false;
+  @published int progress = 0;
   
-  @observable bool videoHasEnded = false;
   @observable bool isPlaying = false;
-  @observable int progressIndicator = 0;
   @observable bool isFullscreen = false;
 
   
-  bool canTogglePlayPause;
   double startX;
   double startWidth;
   var mouseMoveListener;
@@ -35,6 +31,7 @@ class VideoPlayer extends PolymerElement {
   
   //referenced elements
   ElementList<VideoStream> videoStreamList;
+  VideoControlBar videoControlBar;
 
   @observable
   VideoPlayer.created() : super.created() { }
@@ -42,18 +39,15 @@ class VideoPlayer extends PolymerElement {
   @override
   void attached() {
     videoStreamList = this.querySelectorAll("video-stream");
-    // Workaround because <content> cant give thumbnails to controlbar
-    ElementList<VideoThumbnail> list = this.querySelectorAll("video-thumbnail");
-    VideoControlBar bar = this.shadowRoot.querySelector("video-controlbar");
-    bar.initVideoThumbnailList(list);
-    //
+    videoControlBar = $["videoControlBar"];
+    
+    // CSS workarounds
     this.querySelector("video-stream:last-of-type").setAttribute("flex", "");
-    this.querySelector("video-thumbnail:last-of-type").style.marginRight="0px";
+    VideoThumbnail lastThumbnail = this.querySelector("video-thumbnail:last-of-type");
+    if (lastThumbnail != null) lastThumbnail.style.marginRight="0px";
 
     document.onFullscreenChange.listen(handleFullscreenChanged);
-    progressIndicator = setProgress.floor();
     isPlaying = autoplay;
-    videoStreamList[0].onEnded.listen(setVideoHasEnded);
     
     for(int i=0; i<videoStreamList.length-1; i++){
       CoreIcon resizer = new Element.tag('core-icon');
@@ -62,33 +56,66 @@ class VideoPlayer extends PolymerElement {
       resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
       this.insertBefore(resizer, videoStreamList[i].nextNode);
     }
-    
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
     
-    new Timer.periodic(const Duration(milliseconds: 500), (timer) {
-      progressIndicator = videoStreamList[0].getProgress().floor();
-      isPlaying = videoStreamList[0].isPlaying();
-      canTogglePlayPause = true;
-    });
-  }
+    /* manage bindings */
+    initBindings();
+    
+    // Workaround because <content> cant give thumbnails to controlbar
+    ElementList<VideoThumbnail> list = this.querySelectorAll("video-thumbnail");
+    videoControlBar.initVideoThumbnailList(list);
+    //
+}
   
-  void setVideoHasEnded([Event e]){
-    videoHasEnded=true;
-  }
+  // bindings
+void initBindings(){
+  //PlayPause
+  videoStreamList.forEach((stream) => 
+    stream.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'))
+  );
+  videoControlBar.bind('isPlaying', new PathObserver(videoStreamList[0], 'isPlaying'));
+
+  //Progress
+  videoStreamList.forEach((stream) => 
+      videoControlBar.bind('progress', new PathObserver(stream, 'progress'))
+  );
+  videoControlBar.bind('buffered', new PathObserver(videoStreamList[0], 'buffered'));
+  videoControlBar.progress = progress;
   
-  void togglePlayPause(Event e, var details, Node target){
-    if (canTogglePlayPause)
-      isPlaying = !isPlaying;
-  }
+  videoControlBar.duration = duration;
+  videoControlBar.bind('duration', new PathObserver(videoStreamList[0], 'duration'));
+  
+  //Quality
+  videoStreamList.forEach((stream) => 
+    stream.bind('isHD', new PathObserver(videoControlBar, 'isHD'))
+  );
+  videoControlBar.isHD = (quality=="hd");
+  
+  //Speed
+  videoStreamList.forEach((stream) => 
+    stream.bind('speed', new PathObserver(videoControlBar, 'speed'))
+  );
+  videoControlBar.speed = speed;
+  
+  //Volume
+  videoStreamList.forEach((stream) => 
+    stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
+  );
+  videoControlBar.volume = volume; 
+}
+  
+  
+  /* dragging stuff */
   
   void initDrag([MouseEvent e, int scopeVideo]){
     startX = e.client.x;
     startWidth = double.parse( videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
-    mouseUpListener = document.onMouseUp.listen(stopDrag);
-    mouseMoveListener = document.onMouseMove.listen(doDrag);
+    mouseUpListener = $['videoArea'].onMouseUp.listen(stopDrag);
+    mouseMoveListener = $['videoArea'].onMouseMove.listen(doDrag);
   }
   
   void doDrag([MouseEvent e]){
+    
     double controlbarHeight = 48.0;
     
     if (double.parse(videoStreamList[0].style.width.replaceAll('px', '')) < (startWidth + e.client.x - startX)){
@@ -114,9 +141,6 @@ class VideoPlayer extends PolymerElement {
   void stopDrag([MouseEvent e]){
     mouseMoveListener.cancel();
     mouseUpListener.cancel();
-    
-    // dragging shouldnt trigger a togglePlayPause
-    canTogglePlayPause = false;
   }
   
   //PlayPause
@@ -129,61 +153,18 @@ class VideoPlayer extends PolymerElement {
   }
   
   void play([Event e]){
-    videoStreamList.forEach(
-        (stream) => stream.play()
-    );
     isPlaying = true;
   }
   
   void pause([Event e]){
-    videoStreamList.forEach(
-        (stream) => stream.pause()
-    );
     isPlaying = false;
   }
   
   void replay(){
     videoStreamList.forEach(
-        (stream) => stream.play()
+        (stream) => stream.isPlaying = true
     );
     isPlaying = true;
-  }
-  
-  //Progress
-  void setProgressChanged(){
-    videoStreamList.forEach(
-      (stream) => stream.setProgress(setProgress)
-    );
-    window.console.log("setProgressChanged !");
-    videoHasEnded=false;
-  }
-  
-  //Speed  
-  void speedChanged() {
-    videoStreamList.forEach(
-      (stream) => stream.setSpeed(speed)
-    );
-  }
-  
-  //Volume
-  void volumeChanged(){
-    videoStreamList.forEach(
-      (stream) => stream.setVolume(volume)
-    );
-  }
-  
-  // Quality
-  void qualityChanged(){
-    if(quality == "sd"){
-      videoStreamList.forEach(
-        (stream) => stream.setSD()
-      );
-    }
-    else {
-      videoStreamList.forEach(
-        (stream) => stream.setHD()
-      );
-    }
   }
   
   // Fullscreen

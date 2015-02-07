@@ -2,7 +2,7 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_progress.html">
 
-<polymer-element name="slider-bar" attributes="max value">
+<polymer-element name="slider-bar">
   <template>
     <style>
       :host{
@@ -26,7 +26,7 @@
       }
     </style>
     
-    <paper-progress on-click="{{clicked}}" value="{{value}}" secondaryProgress="0" max="{{max}}"></paper-progress>
+    <paper-progress on-click="{{clicked}}" value="{{value}}" secondaryProgress="{{secondValue}}" max="{{max}}"></paper-progress>
     
   </template>
   <script type="application/dart" src="slider-bar.dart"></script>
