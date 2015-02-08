@@ -18,7 +18,8 @@ class VideoPlayer extends PolymerElement {
   @PublishedProperty(reflect: true) int volume = 80;
   @PublishedProperty(reflect: true) bool showSubtitles = false;
   
-  @observable bool isPlaying = false;
+  @published String playIcon;
+  @published bool isPlaying = false;
   @observable bool isFullscreen = false;
 
   
@@ -70,11 +71,15 @@ class VideoPlayer extends PolymerElement {
   
   // bindings
 void initBindings(){
+  //PlayIcon
+  this.bind('playIcon', new PathObserver(videoControlBar, 'playIcon'));
+  
   //PlayPause
   videoStreamList.forEach((stream) => 
     stream.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'))
   );
   videoControlBar.bind('isPlaying', new PathObserver(videoStreamList[0], 'isPlaying'));
+  this.bind('isPlaying', new PathObserver(videoControlBar, 'isPlaying'));
   videoControlBar.isPlaying = autoplay;
 
   //Progress
@@ -105,15 +110,16 @@ void initBindings(){
   videoStreamList.forEach((stream) => 
     stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
   );
-  this.bind('volume', new PathObserver(videoControlBar, 'volume'));
   videoControlBar.volume = volume; 
+  this.bind('volume', new PathObserver(videoControlBar, 'volume'));
   
   //Subtitles
   videoStreamList.forEach((stream) => 
     stream.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'))
   );
-  this.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'));
   videoControlBar.showSubtitles = showSubtitles;
+  this.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'));
+  
   videoStreamList.forEach((stream) => 
     showSubtitlesButton = (showSubtitlesButton || (stream.subtitles != null))
   );
@@ -179,7 +185,7 @@ void initBindings(){
   void play([Event e]){
     isPlaying = true;
   }
-  
+
   void pause([Event e]){
     isPlaying = false;
   }

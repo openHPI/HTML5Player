@@ -43,14 +43,43 @@
       }
       :host(:hover) ::content #resizer{
         visibility: visible;
+      }      
+      #video-area{
+        position: relative;
       }
+      #overlay{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+        z-index: 8000;
+      }
+      #overlayButton{
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        margin: -12px;
+        color: rgb(222, 98, 18);
+        width: 48px;
+        height: 48px;
+        background-color: rgb(66, 66, 66);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+      
     </style>
     <div id="resizer"><core-icon icon="polymer"></core-icon></div>
     <div id="videoArea" on-mouseup="{{togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
       <content select=":not(video-thumbnail)"></content>
+      <div id="overlay" hidden?="{{isPlaying}}">
+        <core-icon id="overlayButton" icon="{{playIcon}}"></core-icon>
+      </div>
     </div>
     <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}">
-    <content select=":not(video-stream)"></content>    
+    <content select=":not(video-stream)"></content>
     </video-controlbar>
    </template>
   <script type="application/dart" src="video-player.dart"></script>

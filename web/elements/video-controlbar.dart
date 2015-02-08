@@ -19,6 +19,8 @@ class VideoControlBar extends PolymerElement {
   @published bool showSubtitlesButton;
   @published bool isFullscreen;
   
+  @published String playIcon = "av:play-arrow";
+  
   
   int returnVolume = 50;
   
@@ -73,12 +75,12 @@ class VideoControlBar extends PolymerElement {
   
   void updateIcons(){
     if(isPlaying){
-      $['playPauseButton'].attributes['icon'] = "av:pause";
+      playIcon = "av:pause";
     }
     else{
-      $['playPauseButton'].attributes['icon'] = "av:play-arrow";
+      playIcon = "av:play-arrow";
       if(duration - progress < 1){
-        $['playPauseButton'].attributes['icon'] = "av:replay";
+        playIcon = "av:replay";
       }
     }
   }
@@ -173,7 +175,6 @@ void isPlayingChanged(){
     }else{
       $['subtitlesButton'].style.color = "rgba(255, 255, 255, 0.3)";
     }
-    
   }
   
   String secondsToMinutes(int number){

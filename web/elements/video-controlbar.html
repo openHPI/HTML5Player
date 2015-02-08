@@ -25,6 +25,7 @@
         font-family: NeoSansStdRegular, sans-serif;
         font-weight: bold;
         border-top: 2px solid white;
+        z-index: 9000;
       }
       .control{
         display: block;
@@ -72,7 +73,7 @@
       
     </style>
     
-    <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="av:play-arrow"></core-icon>
+    <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="{{playIcon}}"></core-icon>
     <div class="control" id="progress" horizontal layout flex>
       <div flex>
         <div class="thumbnail-box" horizontal layout>
