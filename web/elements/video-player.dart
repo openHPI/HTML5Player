@@ -1,12 +1,10 @@
 library videoPlayer;
 import 'package:polymer/polymer.dart';
-import 'package:core_elements/core_icon.dart';
+import 'dart:html';
 import 'video-stream.dart';
 //needed for workaround
 import 'video-controlbar.dart';
 import 'video-thumbnail.dart';
-//
-import 'dart:html';
 
 @CustomTag('video-player')
 class VideoPlayer extends PolymerElement {
@@ -29,6 +27,7 @@ class VideoPlayer extends PolymerElement {
   var mouseMoveListener;
   var mouseUpListener;
   bool showSubtitlesButton = false;
+  bool isDragging = false;
   
   //referenced elements
   ElementList<VideoStream> videoStreamList;
@@ -53,11 +52,9 @@ class VideoPlayer extends PolymerElement {
     videoStreamList.last.setAttribute("flex", "");
     
     for(int i=0; i<videoStreamList.length-1; i++){
-      CoreIcon resizer = new Element.tag('core-icon');
-      resizer.id = "resizer";
-      resizer.icon = "polymer";
-      resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
+      DivElement resizer = $['resizer'];
       this.insertBefore(resizer, videoStreamList[i].nextNode);
+      resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
     }
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
     
@@ -122,6 +119,8 @@ void initBindings(){
   /* dragging stuff */
   
   void initDrag([MouseEvent e, int scopeVideo]){
+    isDragging = true;
+    if(mouseMoveListener != null) stopDrag();
     startX = e.client.x;
     startWidth = double.parse( videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
     mouseUpListener = $['videoArea'].onMouseUp.listen(stopDrag);
@@ -153,11 +152,18 @@ void initBindings(){
   }
   
   void stopDrag([MouseEvent e]){
+    isDragging = false;
     mouseMoveListener.cancel();
+    mouseMoveListener = null;
     mouseUpListener.cancel();
+    mouseUpListener = null;
   }
   
   //PlayPause
+  togglePlayPause(Event e, var details, Node target){
+    if(!isDragging) videoControlBar.togglePlayPause(e, details, target);
+  }
+  
   void isPlayingChanged([Event e]){
     if(isPlaying){
       play();

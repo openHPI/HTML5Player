@@ -26,21 +26,27 @@
       :host ::content #resizer{
         position: absolute;
         top: 30%;
-        margin: -12px;
+        margin: -48px;
+        padding: 36px;
         width: 24px;
         height: 24px;
         color: #fff;
-        background-color: rgb(66, 66, 66);
-        border-radius: 50%;
-        cursor: pointer;
         z-index: 15;
         visibility: hidden;
+      }
+      :host ::content #resizer > core-icon{
+        background-color: rgb(66, 66, 66);
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        cursor: pointer;
       }
       :host(:hover) ::content #resizer{
         visibility: visible;
       }
     </style>
-    <div id="videoArea" on-click="{{videoControlBar.togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
+    <div id="resizer"><core-icon icon="polymer"></core-icon></div>
+    <div id="videoArea" on-mouseup="{{togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
       <content select=":not(video-thumbnail)"></content>
     </div>
     <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}">

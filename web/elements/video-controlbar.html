@@ -78,7 +78,8 @@
         <div class="thumbnail-box" horizontal layout>
           <content></content>
         </div>
-        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}" max="{{duration}}" flex></slider-bar>
+        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}"
+          max="{{duration}}" bubbleText="{{progress | secondsToMinutes}}" flex></slider-bar>
       </div>
       <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
     </div>
@@ -87,7 +88,7 @@
     <core-icon hidden?="{{!showSubtitlesButton}}" class="control" on-click="{{toggleSubtitles}}" id="subtitlesButton" icon="av:closed-caption"></core-icon>
     <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
     <div class="control" id="volume" horizontal layout>
-      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100" bubbleText="{{volume}}"></slider-bar>
     </div>
     <core-icon class="control" on-click="{{toggleFullscreen}}" id="fullscreenButton" icon="fullscreen"></core-icon>
     

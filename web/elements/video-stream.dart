@@ -34,7 +34,7 @@ class VideoStream extends PolymerElement {
   @override
   void attached() {
     video = this.shadowRoot.querySelector("video");
-    
+
     video.on['durationchange'].listen((event)=>
       duration = video.duration.floor()
     );
