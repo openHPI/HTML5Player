@@ -58,7 +58,9 @@ class VideoPlayer extends PolymerElement {
       resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
     }
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
-    
+    if(videoStreamList.length==1){
+      $['resizer'].style.display = "none";
+    }
     /* manage bindings */
 
     initBindings();
