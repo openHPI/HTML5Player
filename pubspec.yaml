@@ -1,5 +1,9 @@
 name: video_player
-description: A sample Polymer application
+authors:
+- Hagen Echzell
+- Georg Berecz
+- Arne Boockmeyer
+description: A dualStream-Videoplayer for openHPI
 dependencies:
   core_elements: any
   custom_element_apigen: any
@@ -12,3 +16,6 @@ transformers:
     - web/dualStreamWithSubtitlesExample.html
     - web/dualStreamWithThumbnailsExample.html
     - web/singleStreamExample.html
+    js: true
+- $dart2js:
+    minify: false
