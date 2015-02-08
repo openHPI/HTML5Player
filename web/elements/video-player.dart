@@ -51,16 +51,14 @@ class VideoPlayer extends PolymerElement {
     
     /* initial resizing and resizer */
     videoStreamList.last.setAttribute("flex", "");
-    
+
+    if(videoStreamList.length<2) $['resizer'].style.display = "none";
     for(int i=0; i<videoStreamList.length-1; i++){
       DivElement resizer = $['resizer'];
       this.insertBefore(resizer, videoStreamList[i].nextNode);
       resizer.onMouseDown.listen((MouseEvent e) => initDrag(e, i));
     }
     videoStreamList.forEach((stream) => stream.resize(videoStreamList.length));
-    if(videoStreamList.length==1){
-      $['resizer'].style.display = "none";
-    }
     /* manage bindings */
 
     initBindings();
