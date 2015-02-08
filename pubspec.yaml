@@ -10,4 +10,5 @@ transformers:
     entry_points:
     - web/dualStreamExample.html
     - web/dualStreamWithSubtitlesExample.html
+    - web/dualStreamWithThumbnailsExample.html
     - web/singleStreamExample.html
