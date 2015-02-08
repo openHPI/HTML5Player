@@ -11,12 +11,12 @@ class VideoPlayer extends PolymerElement {
   
   //published attributes
   @published bool autoplay = false;
-  @published int progress = 0;
+  @PublishedProperty(reflect: true) int progress = 0;
   @published int duration = 1;
-  @published double speed = 1.0;
+  @PublishedProperty(reflect: true) double speed = 1.0;
   @published String quality = "sd";
-  @published int volume = 80;
-  @published bool showSubtitles = false;
+  @PublishedProperty(reflect: true) int volume = 80;
+  @PublishedProperty(reflect: true) bool showSubtitles = false;
   
   @observable bool isPlaying = false;
   @observable bool isFullscreen = false;
@@ -81,6 +81,7 @@ void initBindings(){
   videoStreamList.forEach((stream) => 
       videoControlBar.bind('progress', new PathObserver(stream, 'progress'))
   );
+  this.bind('progress', new PathObserver(videoControlBar, 'progress'));
   videoControlBar.bind('buffered', new PathObserver(videoStreamList[0], 'buffered'));
   videoControlBar.progress = progress;
   
@@ -97,18 +98,21 @@ void initBindings(){
   videoStreamList.forEach((stream) => 
     stream.bind('speed', new PathObserver(videoControlBar, 'speed'))
   );
+  this.bind('speed', new PathObserver(videoControlBar, 'speed'));
   videoControlBar.speed = speed;
   
   //Volume
   videoStreamList.forEach((stream) => 
     stream.bind('volume', new PathObserver(videoControlBar, 'volume'))
   );
+  this.bind('volume', new PathObserver(videoControlBar, 'volume'));
   videoControlBar.volume = volume; 
   
   //Subtitles
   videoStreamList.forEach((stream) => 
     stream.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'))
   );
+  this.bind('showSubtitles', new PathObserver(videoControlBar, 'showSubtitles'));
   videoControlBar.showSubtitles = showSubtitles;
   videoStreamList.forEach((stream) => 
     showSubtitlesButton = (showSubtitlesButton || (stream.subtitles != null))
