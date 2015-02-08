@@ -1,4 +1,4 @@
 # HTML5Player
 
-See the Doku on:
+See the documentation on:
 http://arneboockmeyer.github.io/
