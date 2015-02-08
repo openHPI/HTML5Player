@@ -1,0 +1,86 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_icons.html">
+
+<link rel="import" href="video-stream.html">
+<link rel="import" href="video-controlbar.html">
+<link rel="import" href="video-thumbnail.html">
+
+<polymer-element name="video-player"
+  vertical layout>
+  <template>
+    <style>
+      :host{
+        display: block;
+        position: relative;
+        width: 100%;
+      }
+      
+      /* muss leider so gemacht werden */
+      :host(:-webkit-full-screen){ width: 100% }
+      :host(:-moz-full-screen){ width: 100% }
+      :host(:-ms-full-screen){ width: 100% }
+      :host(:-o-full-screen){ width: 100% }
+      :host(:full-screen){ width: 100% }
+      
+      :host ::content #resizer{
+        position: absolute;
+        top: 30%;
+        margin: -48px;
+        padding: 36px;
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        z-index: 15;
+        visibility: hidden;
+      }
+      :host ::content #resizer > core-icon{
+        background-color: rgb(66, 66, 66);
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      :host(:hover) ::content #resizer{
+        visibility: visible;
+      }      
+      #video-area{
+        position: relative;
+      }
+      #overlay{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+        z-index: 8000;
+      }
+      #overlayButton{
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        margin: -12px;
+        color: rgb(222, 98, 18);
+        width: 48px;
+        height: 48px;
+        background-color: rgb(66, 66, 66);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+      
+    </style>
+    <div id="resizer"><core-icon icon="polymer"></core-icon></div>
+    <div id="videoArea" on-mouseup="{{togglePlayPause}}" on-dblclick="{{toggleFullscreen}}" horizontal layout start>
+      <content select=":not(video-thumbnail)"></content>
+      <div id="overlay" hidden?="{{isPlaying}}">
+        <core-icon id="overlayButton" icon="{{playIcon}}"></core-icon>
+      </div>
+    </div>
+    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}">
+    <content select=":not(video-stream)"></content>
+    </video-controlbar>
+   </template>
+  <script type="application/dart" src="video-player.dart"></script>
+</polymer-element>

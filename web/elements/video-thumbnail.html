@@ -1,0 +1,65 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_progress.html">
+
+<polymer-element name="video-thumbnail" attributes="img_src starttime">
+  <template>
+    <style>
+      :host{
+        position: relative;
+        background-color: rgb(90, 96, 101);
+        margin-right: 2px;
+        height: 12px; 
+        width: 100%;
+        display: block;
+      }
+      :host(:hover){
+        background-color: rgb(255, 255, 255);
+      }
+      img{
+        height: 150px;
+        width: 200px;
+      }
+      .thumb {
+        visibility: hidden;
+        position: absolute;
+        bottom: 22px;
+        left: -10px;
+        z-index: 6000;
+        border: 3px solid rgb(222, 98, 18);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+      .thumb:after, .thumb:before {
+        top: 100%;
+        left: 7px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      
+      .thumb:after {
+        border-color: rgba(0, 0, 0, 0);
+        border-top-color: #;
+        border-width: 10px;
+        margin-left: -10px;
+      }
+      .thumb:before {
+        border-color: rgba(0, 0, 0, 0);
+        border-top-color: rgb(222, 98, 18);
+        border-width: 10px;
+        margin-left: -10px;
+      }
+    </style>
+    
+    <div class="thumb">
+      <img _src="{{img_src}}">
+    </div>
+    
+  </template>
+  <script type="application/dart" src="video-thumbnail.dart"></script>
+</polymer-element>

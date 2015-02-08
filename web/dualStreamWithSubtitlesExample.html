@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Stream with Subtitles</title>
+
+    <!-- import the video-player -->
+    <link rel="import" href="elements/video-player.html">
+    
+    <link rel="stylesheet" href="video_player.css">
+  </head>
+  <body>
+    <h1>Dual Stream with Subtitles</h1>
+      <video-player id="player" duration="1077" quality="hd" unresolved showSubtitles>
+        <video-stream
+          poster="https://i.vimeocdn.com/video/487220623_640.jpg"
+          sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1"
+          subtitles="subtitles_clean.vtt">
+        </video-stream>
+        <video-stream
+          poster="https://i.vimeocdn.com/video/487308935_960.jpg"
+          sd_src="https://player.vimeo.com/external/104693395.sd.mp4?s=06ac8490cbac4ce54ea154fbcc6e930c&amp;download=1"
+          hd_src="https://player.vimeo.com/external/104693395.hd.mp4?s=58b93a8179c01c66fb3e33adf5b3e064&amp;download=1"
+          ratio="4:3">
+        </video-stream>        
+      </video-player>
+      
+    <!-- bootstrap polymer -->
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+name: video_player
+description: A sample Polymer application
+dependencies:
+  core_elements: any
+  custom_element_apigen: any
+  paper_elements: any
+  polymer: any
+transformers:
+- polymer:
+    entry_points:
+    - web/dualStreamExample.html
+    - web/dualStreamWithSubtitlesExample.html
+    - web/dualStreamWithThumbnailsExample.html
+    - web/singleStreamExample.html

@@ -1,8 +1,8 @@
-packages
 .DS_Store
-**/*.dart.js*
-.idea
-pubspec.lock
 .buildlog
-out/
-.pub/
+.pub/**
+packages/
+build/
+web/packages
+web/elements/packages
+pubspec.lock

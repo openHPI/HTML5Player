@@ -1,0 +1,98 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/av_icons.html">
+<link rel="import" href="slider-bar.html">
+<link rel="import" href="video-controlbar.html">
+
+
+<polymer-element name="video-controlbar"
+  horizontal layout>
+  <template>
+    <style>
+      @font-face{
+        font-family:"NeoSansStdRegular";
+        url(NeoSansStdRegular.woff) format("woff"),
+        url(NeoSansStdRegular.ttf) format("truetype"),
+        url(NeoSansStdRegular.svg#NeoSansStdRegular) format("svg");
+        font-weight:400;
+        font-style:normal;
+        font-stretch:normal
+      }
+      :host{
+        display: block;
+        background-color: rgb(66, 66, 66);
+        color: white;
+        font-family: NeoSansStdRegular, sans-serif;
+        font-weight: bold;
+        border-top: 2px solid white;
+        z-index: 9000;
+      }
+      .control{
+        display: block;
+        line-height: 24px;
+        padding: 10px;
+        padding-top:12px;
+        font-size: 12px;
+        border-right: 2px solid white;
+      }
+      .control:last-child, #volumeButton{
+        border-right-style: none;
+      }
+      .control:last-child, #volume{
+        padding-left: 8px;
+      }
+      .control[on-click]{
+        cursor: pointer;
+      }
+      .thumbnail-box{
+        position: relative;
+        bottom:2px;
+      }
+      video-thumbnail /deep/ :last-of-type {
+        margin-right: 0px;
+      }
+      
+      #progressCounter{
+        padding-left: 10px;
+      }
+      #progressBar{
+        margin-top: 3px;
+      }
+      #progressBarWithThumbnails{
+        position: relative;
+        top: 1px;
+      }
+      #volumeBar{
+        width: 75px;
+        margin-top: 3px;
+      }
+      #qualityButton{
+        width:15px;
+        text-align:center;
+      }
+      
+    </style>
+    
+    <core-icon class="control" on-click="{{togglePlayPause}}" id="playPauseButton" icon="{{playIcon}}"></core-icon>
+    <div class="control" id="progress" horizontal layout flex>
+      <div flex>
+        <div class="thumbnail-box" horizontal layout>
+          <content></content>
+        </div>
+        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}"
+          max="{{duration}}" bubbleText="{{progress | secondsToMinutes}}" flex></slider-bar>
+      </div>
+      <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
+    </div>
+    <div class="control" on-click="{{toggleSpeed}}" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
+    <div class="control" id="qualityButton" on-click="{{toggleQuality}}">HD</div>
+    <core-icon hidden?="{{!showSubtitlesButton}}" class="control" on-click="{{toggleSubtitles}}" id="subtitlesButton" icon="av:closed-caption"></core-icon>
+    <core-icon class="control" on-click="{{toggleMute}}" id="volumeButton" icon="av:volume-up"></core-icon>
+    <div class="control" id="volume" horizontal layout>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100" bubbleText="{{volume}}"></slider-bar>
+    </div>
+    <core-icon class="control" on-click="{{toggleFullscreen}}" id="fullscreenButton" icon="fullscreen"></core-icon>
+    
+  </template>
+  <script type="application/dart" src="video-controlbar.dart"></script>
+</polymer-element>
