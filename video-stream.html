@@ -1,0 +1,184 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="video-stream">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        width: 200px;
+        z-index: 10;
+        @apply(--layout-vertical);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      ::cue {
+        background-color:#000;
+        color:#FFF;
+      }
+    </style>
+
+    <video poster$="{{poster}}">
+      <source src$="{{hd_src}}" type="video/mp4" />
+      <track kind="subtitles" src$="{{subtitles}}" default>
+    </video>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'video-stream',
+
+      properties: {
+        sd_src: String,
+        hd_src: String,
+        poster: String,
+        ratio: String,
+        subtitles: String,
+        isPlaying: Boolean,
+        progress: {
+          type: Number,
+          value: 0
+        },
+        buffered: Number,
+        duration: Number,
+        isHD: Boolean,
+        speed: Number, // double
+        volume: Number,
+        showSubtitles: Boolean
+      },
+
+      notStarted: true,
+
+      video: null,
+
+
+      attached: function() {
+        this.video = this.$$("video");
+
+        var _this = this;
+        this.video.addEventListener('durationchange', function(event) {
+          _this.duration = Math.floor(_this.video.duration);
+        });
+
+        // TODO: Fix this
+        // new Timer.periodic(const Duration(milliseconds: 500), (timer) {
+        //   if (video.readyState >= 1) {
+        //     isPlaying = !video.paused;
+        //     progress = video.currentTime.floor();
+        //     buffered = video.buffered.end(0).floor();
+        //   }
+        // });
+      },
+
+      isPlayingChanged: function() {
+        if (this.isPlaying) {
+          this.video.play();
+          this.notStarted = false;
+        } else {
+          this.video.pause();
+        }
+      },
+
+      progressChanged: function(newValue, oldValue) {
+        if (Math.abs(oldValue - newValue) >= 3) {
+          this.video.currentTime = newValue;
+        }
+      },
+
+      isHDChanged: function() {
+        if (this.isHD) {
+          this.setHD();
+        } else {
+          this.setSD();
+        }
+      },
+
+      speedChanged: function() {
+        this.video.playbackRate = this.speed;
+      },
+
+      volumeChanged: function() {
+        this.video.volume = this.volume / 100;
+      },
+
+      setHD: function() {
+        if (this.hd_src != null) {
+          var currentTime = this.video.currentTime;
+          this.video.src = this.hd_src;
+          if (!this.notStarted) {
+            this.video.load();
+            this.video.currentTime = currentTime;
+            this.video.play();
+          }
+        } else {
+          this.setSD();
+        }
+      },
+
+      setSD: function() {
+        if (this.sd_src != null) {
+          var currentTime = this.video.currentTime;
+          this.video.src = this.sd_src;
+          if (!this.notStarted) {
+            this.video.load();
+            this.video.currentTime = currentTime;
+            this.video.play();
+          }
+        } else {
+          this.setHD();
+        }
+      },
+
+      showSubtitlesChanged: function() {
+        if (this.showSubtitles) {
+          this.video.textTracks.first.mode = "showing";
+        } else {
+          this.video.textTracks.first.mode = "disabled";
+        }
+      },
+
+      resize: function(videoCount) {
+        videoCount--;
+        var controlbarHeight = 48.0;
+        var minVideoWidth = 100.0;
+
+        console.log('par', this.parent, window.getComputedStyle(this).width);
+        var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
+
+        var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
+        newWidth = Math.min( videoCount*parentWidth - minVideoWidth , Math.max(minVideoWidth, newWidth) );
+
+        var newHeight = newWidth * this.ratioAsDouble(this.ratio);
+        if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
+          this.style.width = newWidth.toString() + "px";
+          this.style.height = newHeight.toString() + "px";
+        }
+      },
+
+      ratioAsDouble: function(ratio) {
+        if (ratio == "4:3") {
+          return 3/4;
+        } else if (ratio == "16:9") {
+          return 9/16;
+        } else {
+          // default ratio = 16:9
+          return 9/16;
+        }
+      }
+
+    })
+
+  </script>
+
+</dom-module>

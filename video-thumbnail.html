@@ -1,15 +1,16 @@
-<!-- import polymer-element's definition -->
-<link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/paper_elements/paper_progress.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
 
-<polymer-element name="video-thumbnail" attributes="img_src starttime">
+<dom-module id="video-thumbnail">
+
   <template>
+
     <style>
       :host{
         position: relative;
         background-color: rgb(90, 96, 101);
         margin-right: 2px;
-        height: 12px; 
+        height: 12px;
         width: 100%;
         display: block;
       }
@@ -41,7 +42,7 @@
         position: absolute;
         pointer-events: none;
       }
-      
+
       .thumb:after {
         border-color: rgba(0, 0, 0, 0);
         border-top-color: #;
@@ -55,11 +56,42 @@
         margin-left: -10px;
       }
     </style>
-    
-    <div class="thumb">
-      <img _src="{{img_src}}">
+
+    <div class="thumb" on-mouseover="setThumbnailVisible" on-mouseleave="setThumbnailInvisible">
+      <img src$="[[src]]">
     </div>
-    
+
   </template>
-  <script type="application/dart" src="video-thumbnail.dart"></script>
-</polymer-element>
+
+  <script>
+
+    Polymer({
+
+      is: 'video-thumbnail',
+
+      properties: {
+        src: String,
+        starttime: {
+          type: String,
+          reflectToAttribute: true
+        }
+      },
+
+      setThumbnailWidth: function(width) {
+        this.style.width = width + '%';
+      },
+
+      // TODO: Do that with CSS :hover
+      setThumbnailVisible: function(e) {
+        thumb.style.visibility = "visible";
+      },
+
+      setThumbnailInvisible: function(e) {
+        thumb.style.visibility = "hidden";
+      }
+
+    })
+
+  </script>
+
+</dom-module>

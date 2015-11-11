@@ -1,0 +1,297 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/av-icons.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="slider-bar.html">
+<link rel="import" href="video-controlbar.html">
+
+
+<dom-module id="video-controlbar">
+  <template>
+    <style>
+      @font-face{
+        font-family:"NeoSansStdRegular";
+        url(NeoSansStdRegular.woff) format("woff"),
+        url(NeoSansStdRegular.ttf) format("truetype"),
+        url(NeoSansStdRegular.svg#NeoSansStdRegular) format("svg");
+        font-weight:400;
+        font-style:normal;
+        font-stretch:normal
+      }
+      :host{
+        display: block;
+        background-color: rgb(66, 66, 66);
+        color: white;
+        font-family: NeoSansStdRegular, sans-serif;
+        font-weight: bold;
+        border-top: 2px solid white;
+        z-index: 9000;
+        @apply(--layout-horizontal);
+      }
+      .control{
+        display: block;
+        line-height: 24px;
+        padding: 10px;
+        padding-top:12px;
+        font-size: 12px;
+        border-right: 2px solid white;
+      }
+      .control:last-child, #volumeButton{
+        border-right-style: none;
+      }
+      .control:last-child, #volume{
+        padding-left: 8px;
+      }
+      .control[on-click]{
+        cursor: pointer;
+      }
+      .thumbnail-box{
+        position: relative;
+        bottom:2px;
+      }
+      video-thumbnail /deep/ :last-of-type {
+        margin-right: 0px;
+      }
+
+      #progressCounter{
+        padding-left: 10px;
+      }
+      #progressBar{
+        margin-top: 3px;
+      }
+      #progressBarWithThumbnails{
+        position: relative;
+        top: 1px;
+      }
+      #volumeBar{
+        width: 75px;
+        margin-top: 3px;
+      }
+      #qualityButton{
+        width:15px;
+        text-align:center;
+      }
+
+    </style>
+
+    <iron-icon class="control" on-click="togglePlayPause" id="playPauseButton" icon="{{playIcon}}"></iron-icon>
+    <div class="control" id="progress" horizontal layout flex>
+      <div flex>
+        <div class="thumbnail-box" horizontal layout>
+          <content></content>
+        </div>
+        <slider-bar id="progressBar" value="{{progress}}" secondValue="{{buffered}}"
+          max="{{duration}}" bubbleText="{{progress | secondsToMinutes}}" flex></slider-bar>
+      </div>
+      <div id="progressCounter">{{progress | secondsToMinutes}} / {{duration | secondsToMinutes}}</div>
+    </div>
+    <div class="control" on-click="toggleSpeed" id="speedButton">{{speed | doubleToSpeedRepresentation}}</div>
+    <div class="control" id="qualityButton" on-click="toggleQuality">HD</div>
+    <iron-icon hidden?="{{!showSubtitlesButton}}" class="control" on-click="toggleSubtitles" id="subtitlesButton" icon="av:closed-caption"></iron-icon>
+    <iron-icon class="control" on-click="toggleMute" id="volumeButton" icon="av:volume-up"></iron-icon>
+    <div class="control" id="volume" horizontal layout>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
+    </div>
+    <iron-icon class="control" on-click="toggleFullscreen" id="fullscreenButton" icon="fullscreen"></iron-icon>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      properties: {
+        isPlaying: {
+          type: Boolean,
+          value: false,
+          observer: 'updateIcons'
+        },
+        progress: {
+          type: Number,
+          observer: 'updateIcons'
+        },
+        buffered: Number,
+        duration: Number,
+        isHD: {
+          type: Boolean,
+          observer: 'isHDChanged'
+        },
+        speed: Number, // double
+        volume: {
+          type: Number,
+          observer: 'volumeChanged'
+        },
+        showSubtitles: {
+          type: Boolean,
+          observer: 'showSubtitlesChanged'
+        },
+        showSubtitlesButton: Boolean,
+        isFullscreen: {
+          type: Boolean,
+          observer: 'isFullscreenChanged'
+        },
+        playIcon: {
+          type: String,
+          value: 'av:play-arrow'
+        }
+      },
+
+
+      returnVolume: 50,
+
+      videoThumbnailList: [],
+
+      attached: function() {
+        this.showSubtitlesChanged();
+      },
+
+      // Called from video-player element
+      initVideoThumbnailList: function(list) {
+        videoThumbnailList = list;
+
+        //set ThumbnailWidth and add Eventlistener
+        var lastThumbnailTime = 0.0;
+        var thumbnailTime = 0.0;
+        var width = 0.0;
+        for (var i = 0; i < videoThumbnailList.length; i++) {
+          if (i + 1 < videoThumbnailList.length) {
+            thumbnailTime = videoThumbnailList[i+1].getStartTime(); // TODO: Replace getStartTime() with reading attribute
+            width = 100 * (thumbnailTime - lastThumbnailTime) / duration;
+            lastThumbnailTime = videoThumbnailList[i + 1].getStartTime();
+          } else if (i + 1 == videoThumbnailList.length) {
+            width = 100 * (duration - lastThumbnailTime) / duration;
+          }
+          if (width < 0.5) {
+            width = 0.5;
+          }
+          videoThumbnailList[i].setThumbnailWidth(width);
+          videoThumbnailList[i].onClick.listen(handleThumbnailClick);
+        }
+
+        if (videoThumbnailList.length > 0) {
+          this.shadowRoot.querySelector("#progressBar").setAttribute("id", "progressBarWithThumbnails");
+        }
+      },
+
+
+      /**
+       * Observers
+       */
+
+      updateIcons: function() {
+        if (this.isPlaying) {
+          this.playIcon = "av:pause";
+        } else if (this.duration - this.progress < 1) {
+          this.playIcon = "av:replay";
+        } else {
+          this.playIcon = "av:play-arrow";
+        }
+      },
+
+      volumeChanged: function() {
+        if (this.volume == 0) {
+          this.$$('#volumeButton').attributes['icon'] = "av:volume-off";
+        } else if (this.volume > 0 && this.volume <= 30) {
+          this.$$('#volumeButton').attributes['icon'] = "av:volume-mute";
+        } else if (this.volume > 30 && this.volume <= 70) {
+          this.$$('#volumeButton').attributes['icon'] = "av:volume-down";
+        } else if (this.volume > 70 && this.volume <= 100) {
+          this.$$('#volumeButton').attributes['icon'] = "av:volume-up";
+        }
+      },
+
+      isHDChanged: function() {
+        if (this.isHD) {
+          this.$$('#qualityButton').text = "HD";
+        } else{
+          this.$$('#qualityButton').text = "SD";
+        }
+      },
+
+      isFullscreenChanged: function() {
+        if (this.isFullscreen) {
+          this.$$('#fullscreenButton').attributes['icon'] = "fullscreen-exit";
+        } else {
+          this.$$('#fullscreenButton').attributes['icon'] = "fullscreen";
+        }
+      },
+
+      showSubtitlesChanged: function() {
+        if (this.showSubtitles) {
+          this.$$('#subtitlesButton').style.color = "rgba(255, 255, 255, 1.0)";
+        } else {
+          this.$$('#subtitlesButton').style.color = "rgba(255, 255, 255, 0.3)";
+        }
+      },
+
+
+      /**
+       * Event handlers
+       */
+
+      handleThumbnailClick: function(e) {
+        var thumbnail = e.currentTarget;
+        this.progress = thumbnail.getStartTime().floor();
+      },
+
+      togglePlayPause: function() {
+        this.isPlaying = !this.isPlaying;
+      },
+
+      toggleSpeed: function() {
+        if (this.speed == 1.0) {
+          this.speed = 1.3;
+        } else if (this.speed == 1.3) {
+          this.speed = 1.7;
+        } else if (this.speed == 1.7) {
+          this.speed = 0.7;
+        } else {
+          this.speed = 1.0;
+        }
+      },
+
+      toggleMute: function() {
+        if (this.volume > 0) {
+          this.returnVolume = this.volume;
+          this.volume = 0;
+        } else {
+          this.volume = this.returnVolume;
+        }
+      },
+
+      toggleQuality: function() {
+        this.isHD = !this.isHD;
+      },
+
+      toggleFullscreen: function() {
+        this.isFullscreen = !this.isFullscreen;
+      },
+
+      toggleSubtitles: function() {
+        this.showSubtitles = !this.showSubtitles;
+      },
+
+
+      /**
+       * Filters
+       */
+
+      secondsToMinutes: function(number) {
+        var minutes = number / 60;
+        var seconds = number % 60;
+
+        var placeholder = seconds < 10 ? '0' : '';
+
+        return minutes + ':' + placeholder + seconds;
+      },
+
+      doubleToSpeedRepresentation: function(speed) {
+        return speed.toStringAsFixed(1) + 'x';
+      }
+
+    })
+
+  </script>
+
+</dom-module>
