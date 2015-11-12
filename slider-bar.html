@@ -81,42 +81,44 @@
         bubbleText: String
       },
 
-      //referenced elements
-      paperProgress: null,
-
-      mouseMoveListener: null,
       mouseUpListener: null,
+      mouseMoveListener: null,
 
       attached: function() {
-        this.paperProgress = this.$$('paper-progress');
+        this.mouseUpListener = this.stopDrag.bind(this);
+        this.mouseMoveListener = this.doDrag.bind(this);
       },
 
       initDrag: function(e) {
-        value = (paperProgress.max * (e.offsetX / this.getPaperProgressWidth())).floor();
-        if(mouseMoveListener != null) stopDrag();
-        mouseUpListener = window.onMouseUp.listen(stopDrag);
-        mouseMoveListener = this.$$('#paperProgress').onMouseMove.listen(doDrag);
+        var value = Math.floor(this.$.paperProgress.max * (e.offsetX / this.getPaperProgressWidth()));
+        if (this.mouseMoveListener != null) {
+          this.stopDrag();
+        }
+
+        console.log('attach');
+        window.addEventListener('mouseup', this.mouseUpListener, true);
+        this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
       },
 
-      doDrag: function(e) { // TODO: Is argument array?
-        value = (paperProgress.max * (e.offsetX / this.getPaperProgressWidth())).floor();
-        if (bubbleText != null) {
-          this.$$('#valueBubble').style.left = e.offsetX.toString()+"px";
-          this.$$('#valueBubble').visibility = "visible";
+      doDrag: function(e) {
+        var value = Math.floor(this.$.paperProgress.max * (e.offsetX / this.getPaperProgressWidth()));
+        if (this.bubbleText != null) {
+          this.$.valueBubble.style.left = e.offsetX.toString() + "px";
+          this.$.valueBubble.style.visibility = "visible";
         }
         //this.$$('#bubbleText').text = value;
       },
 
       stopDrag: function() {
-        this.$$('#valueBubble').style.visibility = "hidden";
-        mouseMoveListener.cancel();
-        mouseMoveListener = null;
-        mouseUpListener.cancel();
-        mouseUpListener = null;
+        this.$.valueBubble.style.visibility = "hidden";
+
+        console.log('detach');
+        window.removeEventListener('mouseup', this.mouseUpListener, true);
+        this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
       },
 
       getPaperProgressWidth: function() {
-        return double.parse(paperProgress.getComputedStyle().width.replaceFirst('px', ''));
+        return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
       }
 
     })

@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../observe-js/observe-js.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/av-icons.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="video-stream.html">
@@ -36,7 +38,7 @@
         z-index: 15;
         visibility: hidden;
       }
-      :host ::content #resizer > core-icon{
+      :host ::content #resizer > iron-icon{
         background-color: rgb(66, 66, 66);
         width: 100%;
         height: 100%;
@@ -72,15 +74,24 @@
         border-radius: 4px;
       }
 
+      #videoArea{
+        @apply(--layout-horizontal);
+        @apply(--layout-start);
+      }
+
+      video-stream:last-of-type{
+        @apply(--layout-flex);
+      }
+
     </style>
     <div id="resizer"><iron-icon icon="icons:polymer"></iron-icon></div>
-    <div id="videoArea" on-mouseup="togglePlayPause" on-dblclick="toggleFullscreen" horizontal layout start>
+    <div id="videoArea" on-mouseup="togglePlayPause" on-dblclick="toggleFullscreen">
       <content select="video-stream" id="streams"></content>
       <div id="overlay" hidden$="{{isPlaying}}">
         <iron-icon id="overlayButton" icon="{{playIcon}}"></iron-icon>
       </div>
     </div>
-    <video-controlbar id="videoControlBar" isFullscreen="{{isFullscreen}}" playIcon="{{playIcon}}" isPlaying="{{isPlaying}}" speed="{{speed}}" volume="{{volume}}" progress="{{progress}}" showSubtitles="{{showSubtitles}}">
+    <video-controlbar id="videoControlBar" is-fullscreen="{{isFullscreen}}" playIcon="{{playIcon}}" is-playing="{{isPlaying}}" speed="{{speed}}" volume="{{volume}}" duration="{{stream.duration}}" buffering="{{stream.buffering}}" progress="{{progress}}" showSubtitles="{{showSubtitles}}">
       <content select=":not(video-stream)"></content>
     </video-controlbar>
   </template>
@@ -96,44 +107,56 @@
           type: Boolean,
           value: false
         },
-        progress: {
-          type: Number,
-          value: 0,
-          reflectToAttribute: true
-        },
         duration: {
           type: Number,
           value: 1
+        },
+        quality: {
+          type: String,
+          value: 'sd'
+        },
+        playIcon: String,
+        isHD: {
+          type: Boolean,
+          value: false
         },
         speed: {
           type: Number,
           value: 1.0,
           reflectToAttribute: true
         },
-        quality: {
-          type: String,
-          value: 'sd'
-        },
         volume: {
           type: Number,
           value: 80,
           reflectToAttribute: true
+        },
+        progress: {
+          type: Number,
+          value: 0,
+          reflectToAttribute: true
+        },
+        isPlaying: {
+          type: Boolean,
+          value: false
         },
         showSubtitles: {
           type: Boolean,
           value: false,
           reflectToAttribute: true
         },
-        playIcon: String,
-        isPlaying: {
-          type: Boolean,
-          value: false
-        },
         isFullscreen: {
           type: Boolean,
-          value: false
+          value: false,
+          observer: 'isFullscreenChanged'
         }
       },
+
+      // These properties shall be mirrored to the video streams
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'showSubtitles'],
+
+      observers: [
+        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, showSubtitles)'
+      ],
 
 
       startX: 0.0,
@@ -144,6 +167,7 @@
       isDragging: false,
 
       videoStreamList: [],
+      stream: null,
 
 
       attached: function() {
@@ -157,7 +181,11 @@
           lastThumbnail.style.marginRight = "0px";
         }
 
-        document.onFullscreenChange = this.handleFullscreenChanged;
+        var handler = this.handleFullscreenChanged.bind(this);
+        document.addEventListener("fullscreenchange", handler);
+        document.addEventListener("webkitfullscreenchange", handler);
+        document.addEventListener("mozfullscreenchange", handler);
+        document.addEventListener("MSFullscreenChange", handler);
 
         // initial resizing and resizer
         this.videoStreamList.slice(-1)[0].setAttribute("flex", "");
@@ -168,9 +196,8 @@
 
         var _this = this;
         for (var i = 0; i < this.videoStreamList.length - 1; i++) {
-          var resizer = this.$.resizer;
-          this.insertBefore(resizer, this.videoStreamList[i].nextNode);
-          resizer.addEventListener('mousedown', function(e) {
+          this.insertBefore(this.$.resizer, this.videoStreamList[i].nextNode);
+          this.$.resizer.addEventListener('mousedown', function(e) {
             _this.initDrag(e, i);
           });
         }
@@ -179,50 +206,46 @@
           stream.resize(_this.videoStreamList.length);
         });
 
+        var _this = this;
+        this.async(function() {
+          _this.stream = this.videoStreamList[0];
+        });
+
         // manage bindings
         this.initBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
         var list = this.querySelectorAll("video-thumbnail");
-        this.$.videoControlBar.initVideoThumbnailList(list);
+        this.$.videoControlBar.initThumbnails(list);
+      },
+
+      mirroredPropChanged: function() {
+        var _this = this;
+        this.videoStreamList.forEach(function(stream) {
+          _this.MIRROR.forEach(function(prop) {
+            stream.set(prop, _this.$.videoControlBar[prop]);
+          });
+        });
       },
 
       initBindings: function() {
+        this.isPlaying = this.autoplay;
+        this.$.videoControlBar.duration = this.duration;
+        this.$.videoControlBar.isHD = this.quality === "hd";
+        this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
+
         var _this = this;
 
-        // PlayPause
-        this.videoControlBar.bind('isPlaying', new PathObserver(this.videoStreamList[0], 'isPlaying'));
 
-        this.isPlaying = this.autoplay;
-
-        // Progress
-        this.videoControlBar.bind('buffered', new PathObserver(this.videoStreamList[0], 'buffered'));
-
-        this.videoControlBar.duration = this.duration;
-        this.videoControlBar.bind('duration', new PathObserver(this.videoStreamList[0], 'duration'));
-
-        var bindToStream = function(path) {
-          return function(stream) {
-            stream.bind(path, new PathObserver(_this.videoControlBar, path));
-          };
-        };
-
-        this.videoStreamList.forEach(bindToStream('isHD'));
-        this.videoStreamList.forEach(bindToStream('speed'));
-        this.videoStreamList.forEach(bindToStream('volume'));
-        this.videoStreamList.forEach(bindToStream('progress'));
-        this.videoStreamList.forEach(bindToStream('isPlaying'));
-        this.videoStreamList.forEach(bindToStream('showSubtitles'));
-
-        this.videoControlBar.isHD = this.quality === "hd";
-
-        this.videoStreamList.forEach(function(stream) {
-          _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
-        });
-        this.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
+        // this.videoStreamList.forEach(function(stream) {
+        //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
+        // });
       },
 
-      /* dragging stuff */
+
+      /**
+       * Dragging stuff
+       */
 
       initDrag: function(e, scopeVideo) {
         this.isDragging = true;
@@ -238,21 +261,20 @@
       },
 
       doDrag: function(e) {
-
         var controlbarHeight = 48.0;
 
         if (parseFloat(videoStreamList[0].style.width.replaceAll('px', '')) < (startWidth + e.client.x - startX)){
           if ((parseFloat(videoStreamList[0].style.height.replaceAll('px', '')) <= (parseFloat(videoStreamList[1].style.height.replaceAll('px', '')))) &&
-                  (document.documentElement.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
-                  (document.documentElement.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
+                  (this.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
+                  (this.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
                 videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
           }
           this.videoStreamList[0].resize(videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(videoStreamList.length);
         } else if (parseFloat(videoStreamList[0].style.width.replaceAll('px', '')) > (startWidth + e.client.x - startX)) {
           if ((parseFloat(videoStreamList[0].style.height.replaceAll('px', '')) >= (parseFloat(videoStreamList[1].style.height.replaceAll('px', '')))) &&
-                  (document.documentElement.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
-                  (document.documentElement.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
+                  (this.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
+                  (this.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
                 this.videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
           }
           this.videoStreamList.slice(-1)[0].resize(videoStreamList.length);
@@ -271,14 +293,6 @@
       togglePlayPause: function(e, details, target) {
         if (!this.isDragging) {
           this.$.videoControlBar.togglePlayPause(e, details, target);
-        }
-      },
-
-      isPlayingChanged: function() {
-        if (this.isPlaying) {
-          this.play();
-        } else {
-          this.pause();
         }
       },
 
@@ -304,21 +318,38 @@
       },
 
       isFullscreenChanged: function() {
+        console.log('isFullscreenChanged', arguments);
         if (this.isFullscreen) {
-          this.requestFullscreen();
+          if (this.requestFullscreen) {
+            this.requestFullscreen();
+          } else if (this.msRequestFullscreen) {
+            this.msRequestFullscreen();
+          } else if (this.mozRequestFullScreen) {
+            this.mozRequestFullScreen();
+          } else if (this.webkitRequestFullscreen) {
+            this.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          }
         } else {
-          document.exitFullscreen();
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
         }
       },
 
       handleFullscreenChanged: function(e) {
         // updates the video size
-        this.isFullscreen = document.fullscreenElement == null;
+        this.isFullscreen = !!(document.fullScreen || document.msFullScreenElement || document.mozFullScreen || document.webkitIsFullScreen);
 
-        videoStreamList[0].style.width = (parseFloat( this.getComputedStyle().width.replaceAll('px', '')) / 2).toString() + "px";
+        this.videoStreamList[0].style.width = (parseFloat( window.getComputedStyle(this).width.replace('px', '')) / 2).toString() + "px";
 
         var _this = this;
-        videoStreamList.forEach(function(stream) {
+        this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
         });
       }

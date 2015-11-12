@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<!-- <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html"> -->
 
 <dom-module id="video-stream">
 
@@ -26,7 +26,7 @@
       }
     </style>
 
-    <video poster$="{{poster}}">
+    <video poster$="{{poster}}" id="myVideo">
       <source src$="{{hd_src}}" type="video/mp4" />
       <track kind="subtitles" src$="{{subtitles}}" default>
     </video>
@@ -45,58 +45,85 @@
         poster: String,
         ratio: String,
         subtitles: String,
-        isPlaying: Boolean,
+        isPlaying: {
+          type: Boolean,
+          observer: 'isPlayingChanged'
+        },
         progress: {
           type: Number,
-          value: 0
+          value: 0,
+          observer: 'progressChanged',
         },
         buffered: Number,
         duration: Number,
-        isHD: Boolean,
-        speed: Number, // double
-        volume: Number,
-        showSubtitles: Boolean
+        isHD: {
+          type: Boolean,
+          observer: 'isHDChanged'
+        },
+        speed: {
+          type: Number, // TODO: double
+          observer: 'speedChanged'
+        },
+        volume: {
+          type: Number,
+          observer: 'volumeChanged'
+        },
+        showSubtitles: {
+          type: Boolean,
+          observer: 'showSubtitlesChanged'
+        }
       },
 
       notStarted: true,
 
-      video: null,
+      timer: null,
 
 
       attached: function() {
-        this.video = this.$$("video");
+        this.$.myVideo.addEventListener('durationchange', function(event) {
+          this.duration = Math.floor(this.$.myVideo.duration);
+        }.bind(this));
 
-        var _this = this;
-        this.video.addEventListener('durationchange', function(event) {
-          _this.duration = Math.floor(_this.video.duration);
-        });
-
-        // TODO: Fix this
-        // new Timer.periodic(const Duration(milliseconds: 500), (timer) {
-        //   if (video.readyState >= 1) {
-        //     isPlaying = !video.paused;
-        //     progress = video.currentTime.floor();
-        //     buffered = video.buffered.end(0).floor();
-        //   }
-        // });
+        this.timer = window.setInterval(function() {
+          if (this.$.myVideo.readyState >= 1) {
+            this.isPlaying = !this.$.myVideo.paused;
+            this.progress = Math.floor(this.$.myVideo.currentTime);
+            this.buffered = Math.floor(this.$.myVideo.buffered); // TODO: buffered.end(0)
+          }
+        }.bind(this), 500);
       },
 
+      detached: function() {
+        window.clearInterval(this.timer);
+        this.timer = null;
+      },
+
+
+      /**
+       * Observers
+       */
+
       isPlayingChanged: function() {
+        console.log('stream isPlayingChanged', arguments);
         if (this.isPlaying) {
-          this.video.play();
+          console.log('video play', this.$);
+          this.$.myVideo.play();
           this.notStarted = false;
         } else {
-          this.video.pause();
+          console.log('video pause');
+          this.$.myVideo.pause();
         }
       },
 
       progressChanged: function(newValue, oldValue) {
+        console.log('stream progressChanged', arguments);
         if (Math.abs(oldValue - newValue) >= 3) {
-          this.video.currentTime = newValue;
+          this.$.myVideo.currentTime = newValue;
         }
       },
 
       isHDChanged: function() {
+        console.log('stream isHDChanged', arguments);
         if (this.isHD) {
           this.setHD();
         } else {
@@ -105,21 +132,36 @@
       },
 
       speedChanged: function() {
-        this.video.playbackRate = this.speed;
+        console.log('stream speedChanged', arguments);
+        this.$.myVideo.playbackRate = this.speed;
       },
 
       volumeChanged: function() {
-        this.video.volume = this.volume / 100;
+        console.log('stream volumeChanged', arguments);
+        this.$.myVideo.volume = this.volume / 100;
       },
+
+      showSubtitlesChanged: function() {
+        console.log('stream showSubtitlesChanged', arguments);
+        if (this.showSubtitles) {
+          this.$.myVideo.textTracks.first.mode = "showing";
+        } else {
+          this.$.myVideo.textTracks.first.mode = "disabled";
+        }
+      },
+
+      /**
+       * Utility functions
+       */
 
       setHD: function() {
         if (this.hd_src != null) {
-          var currentTime = this.video.currentTime;
-          this.video.src = this.hd_src;
+          var currentTime = this.$.myVideo.currentTime;
+          this.$.myVideo.src = this.hd_src;
           if (!this.notStarted) {
-            this.video.load();
-            this.video.currentTime = currentTime;
-            this.video.play();
+            this.$.myVideo.load();
+            this.$.myVideo.currentTime = currentTime;
+            this.$.myVideo.play();
           }
         } else {
           this.setSD();
@@ -128,23 +170,15 @@
 
       setSD: function() {
         if (this.sd_src != null) {
-          var currentTime = this.video.currentTime;
-          this.video.src = this.sd_src;
+          var currentTime = this.$.myVideo.currentTime;
+          this.$.myVideo.src = this.sd_src;
           if (!this.notStarted) {
-            this.video.load();
-            this.video.currentTime = currentTime;
-            this.video.play();
+            this.$.myVideo.load();
+            this.$.myVideo.currentTime = currentTime;
+            this.$.myVideo.play();
           }
         } else {
           this.setHD();
-        }
-      },
-
-      showSubtitlesChanged: function() {
-        if (this.showSubtitles) {
-          this.video.textTracks.first.mode = "showing";
-        } else {
-          this.video.textTracks.first.mode = "disabled";
         }
       },
 
@@ -153,7 +187,6 @@
         var controlbarHeight = 48.0;
         var minVideoWidth = 100.0;
 
-        console.log('par', this.parent, window.getComputedStyle(this).width);
         var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
 
         var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );

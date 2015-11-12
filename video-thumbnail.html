@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-progress/paper-progress.html">
 
 <dom-module id="video-thumbnail">
 
@@ -43,6 +42,10 @@
         pointer-events: none;
       }
 
+      .thumb:hover {
+        visibility: visible;
+      }
+
       .thumb:after {
         border-color: rgba(0, 0, 0, 0);
         border-top-color: #;
@@ -57,7 +60,7 @@
       }
     </style>
 
-    <div class="thumb" on-mouseover="setThumbnailVisible" on-mouseleave="setThumbnailInvisible">
+    <div class="thumb">
       <img src$="[[src]]">
     </div>
 
@@ -77,17 +80,8 @@
         }
       },
 
-      setThumbnailWidth: function(width) {
+      setWidth: function(width) {
         this.style.width = width + '%';
-      },
-
-      // TODO: Do that with CSS :hover
-      setThumbnailVisible: function(e) {
-        thumb.style.visibility = "visible";
-      },
-
-      setThumbnailInvisible: function(e) {
-        thumb.style.visibility = "hidden";
       }
 
     })
