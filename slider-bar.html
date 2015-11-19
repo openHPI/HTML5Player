@@ -56,7 +56,7 @@
     </style>
 
     <div id="valueBubble"><div id="bubbleText">{{bubbleText}}</div><div id="bubbleArrow"></div></div>
-    <paper-progress id="paperProgress" on-mousedown="initDrag"  value="{{value}}" secondaryProgress="{{secondValue}}" max="{{max}}"></paper-progress>
+    <paper-progress id="paperProgress" on-track="trackDragging" value="{{value}}" secondaryProgress="{{secondValue}}" max="{{max}}"></paper-progress>
 
   </template>
 
@@ -85,36 +85,53 @@
       mouseMoveListener: null,
 
       attached: function() {
-        this.mouseUpListener = this.stopDrag.bind(this);
-        this.mouseMoveListener = this.doDrag.bind(this);
+        //this.mouseUpListener = this.stopDrag.bind(this);
+        //this.mouseMoveListener = this.doDrag.bind(this);
       },
 
-      initDrag: function(e) {
-        var value = Math.floor(this.$.paperProgress.max * (e.offsetX / this.getPaperProgressWidth()));
-        if (this.mouseMoveListener != null) {
-          this.stopDrag();
+      trackDragging: function(e) {
+        switch (e.detail.state) {
+          case 'start':
+            this.startDragging(e.detail);
+            break;
+          case 'track':
+            this.doDragging(e.detail);
+            break;
+          case 'end':
+            this.endDragging(e.detail);
+            break;
         }
 
-        console.log('attach');
-        window.addEventListener('mouseup', this.mouseUpListener, true);
-        this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
+        e.preventDefault();
       },
 
-      doDrag: function(e) {
-        var value = Math.floor(this.$.paperProgress.max * (e.offsetX / this.getPaperProgressWidth()));
+      startDragging: function(detail) {
+        var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
+        // if (this.mouseMoveListener != null) {
+        //   this.stopDrag();
+        // }
+
+        console.log('attach');
+        //window.addEventListener('mouseup', this.mouseUpListener, true);
+        //this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
+      },
+
+      doDragging: function(detail) {
+        var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
+        console.log('dragging', this.bubbleText, this);
         if (this.bubbleText != null) {
-          this.$.valueBubble.style.left = e.offsetX.toString() + "px";
+          this.$.valueBubble.style.left = detail.dx.toString() + "px";
           this.$.valueBubble.style.visibility = "visible";
         }
         //this.$$('#bubbleText').text = value;
       },
 
-      stopDrag: function() {
+      endDragging: function(detail) {
         this.$.valueBubble.style.visibility = "hidden";
 
         console.log('detach');
-        window.removeEventListener('mouseup', this.mouseUpListener, true);
-        this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
+        //window.removeEventListener('mouseup', this.mouseUpListener, true);
+        //this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
       },
 
       getPaperProgressWidth: function() {
