@@ -182,14 +182,8 @@
       },
 
       ratioAsDouble: function(ratio) {
-        if (ratio == "4:3") {
-          return 3/4;
-        } else if (ratio == "16:9") {
-          return 9/16;
-        } else {
-          // default ratio = 16:9
-          return 9/16;
-        }
+        // default ratio = 16:9
+        return ratio == '4:3' ? 3/4 : 9/16;
       }
 
     })
