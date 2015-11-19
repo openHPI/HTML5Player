@@ -12,7 +12,7 @@
 <dom-module id="video-player">
   <template>
     <style>
-      :host{
+      :host {
         display: block;
         position: relative;
         width: 100%;
@@ -20,14 +20,13 @@
         @apply(--layout-vertical);
       }
 
-      /* muss leider so gemacht werden */
-      :host(:-webkit-full-screen){ width: 100% }
-      :host(:-moz-full-screen){ width: 100% }
-      :host(:-ms-full-screen){ width: 100% }
-      :host(:-o-full-screen){ width: 100% }
-      :host(:full-screen){ width: 100% }
+      :host(:-webkit-full-screen) { width: 100% }
+      :host(:-moz-full-screen) { width: 100% }
+      :host(:-ms-full-screen) { width: 100% }
+      :host(:-o-full-screen) { width: 100% }
+      :host(:full-screen) { width: 100% }
 
-      :host ::content #resizer{
+      #resizer {
         position: absolute;
         top: 30%;
         margin: -48px;
@@ -38,20 +37,20 @@
         z-index: 15;
         visibility: hidden;
       }
-      :host ::content #resizer > iron-icon{
+      #resizer > iron-icon {
         background-color: rgb(66, 66, 66);
         width: 100%;
         height: 100%;
         border-radius: 50%;
         cursor: pointer;
       }
-      :host(:hover) ::content #resizer{
+      :host(:hover) #resizer {
         visibility: visible;
       }
-      #video-area{
+      #video-area {
         position: relative;
       }
-      #overlay{
+      #overlay {
         position: absolute;
         top: 0px;
         left: 0px;
@@ -60,7 +59,7 @@
         background-color: rgba(0,0,0,0.3);
         z-index: 8000;
       }
-      #overlayButton{
+      #overlayButton {
         position: absolute;
         left: 50%;
         top: 45%;
@@ -73,17 +72,15 @@
         -moz-border-radius: 4px;
         border-radius: 4px;
       }
-
-      #videoArea{
+      #videoArea {
         @apply(--layout-horizontal);
         @apply(--layout-start);
       }
-
       video-stream:last-of-type{
         @apply(--layout-flex);
       }
-
     </style>
+
     <div id="resizer"><iron-icon icon="icons:polymer"></iron-icon></div>
     <div id="videoArea" on-mouseup="togglePlayPause" on-dblclick="toggleFullscreen">
       <content select="video-stream" id="streams"></content>
