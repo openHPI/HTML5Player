@@ -156,7 +156,6 @@
       ],
 
 
-      startX: 0.0,
       startWidth: 0.0,
       mouseMoveListener: null,
       mouseUpListener: null,
@@ -193,20 +192,19 @@
 
         var _this = this;
         for (var i = 0; i < this.videoStreamList.length - 1; i++) {
-          this.insertBefore(this.$.resizer, this.videoStreamList[i].nextNode);
-          this.$.resizer.addEventListener('mousedown', function(e) {
-            _this.initDrag(e, i);
-          });
+          //Polymer.dom(this.root).insertBefore(this.videoStreamList[i], this.$.resizer);
         }
+        //Polymer.dom(this.root).insertBefore(this.$.resizer, this.$.overlay);
+
 
         this.videoStreamList.forEach(function(stream) {
+          console.log("initial resize", stream);
           stream.resize(_this.videoStreamList.length);
         });
 
-        var _this = this;
         this.async(function() {
-          _this.stream = this.videoStreamList[0];
-        });
+          this.stream = this.videoStreamList[0];
+        }.bind(this));
 
         // manage bindings
         this.initBindings();
@@ -244,47 +242,70 @@
        * Dragging stuff
        */
 
-      initDrag: function(e, scopeVideo) {
+      trackResizing: function(e, detail) {
+        switch (detail.state) {
+          case 'start':
+            this.startDragging(detail);
+            break;
+          case 'track':
+            this.doDragging(detail);
+            break;
+          case 'end':
+            this.endDragging(detail);
+            break;
+        }
+
+        e.preventDefault();
+      },
+
+      startDragging: function(detail) {
         this.isDragging = true;
 
-        if (mouseMoveListener != null) {
-          this.stopDrag();
-        }
-
-        this.startX = e.client.x;
-        this.startWidth = parseFloat( this.videoStreamList[scopeVideo].getComputedStyle().width.replaceAll('px', '') );
-        this.mouseUpListener = this.$.videoArea.onMouseUp.listen(this.stopDrag.bind(this));
-        this.mouseMoveListener = this.$.videoArea.onMouseMove.listen(this.doDrag.bind(this));
+        this.startWidth = parseFloat(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''));
       },
 
-      doDrag: function(e) {
-        var controlbarHeight = 48.0;
+      doDragging: function(detail) {
+        var style = function(el) { return el.style; };
+        var computed = window.getComputedStyle;
+        var dimension = function(style, name) { return parseFloat(style[name].replace('px', '')); };
 
-        if (parseFloat(videoStreamList[0].style.width.replaceAll('px', '')) < (startWidth + e.client.x - startX)){
-          if ((parseFloat(videoStreamList[0].style.height.replaceAll('px', '')) <= (parseFloat(videoStreamList[1].style.height.replaceAll('px', '')))) &&
-                  (this.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
-                  (this.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
-                videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
+        var height = function(el) { return dimension(style(el), 'height'); };
+        var computedHeight = function(el) { return dimension(computed(el), 'height'); };
+        var width = function(el) { return dimension(style(el), 'width'); };
+        var computedWidth = function(el) { return dimension(computed(el), 'width'); };
+
+        var controlbarHeight = this.$.videoControlBar.scrollHeight;
+
+        // --------------------------------------------
+        var availableSpace = computedWidth(this.$.videoArea);
+        var numVideos = this.videoStreamList.length;
+        // --------------------------------------------
+
+        if (width(this.videoStreamList[0]) < (this.startWidth + detail.dx)) {
+          // We're making the first video bigger
+          if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
+                  (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                  (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
           }
-          this.videoStreamList[0].resize(videoStreamList.length);
-          this.videoStreamList.slice(-1)[0].resize(videoStreamList.length);
-        } else if (parseFloat(videoStreamList[0].style.width.replaceAll('px', '')) > (startWidth + e.client.x - startX)) {
-          if ((parseFloat(videoStreamList[0].style.height.replaceAll('px', '')) >= (parseFloat(videoStreamList[1].style.height.replaceAll('px', '')))) &&
-                  (this.clientHeight <= parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight ) ||
-                  (this.clientHeight > parseFloat( this.getComputedStyle().height.replaceAll('px', ''))+controlbarHeight )) {
-                this.videoStreamList[0].style.width = (startWidth + e.client.x - startX).toString() + "px";
+          // Resize the first video, and then the second
+          this.videoStreamList[0].resize(this.videoStreamList.length);
+          this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+        } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
+          // We're making the first video smaller
+          if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
+                  (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                  (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
           }
-          this.videoStreamList.slice(-1)[0].resize(videoStreamList.length);
-          this.videoStreamList[0].resize(videoStreamList.length);
+          // Resize the second video, and then the first
+          this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+          this.videoStreamList[0].resize(this.videoStreamList.length);
         }
       },
 
-      stopDrag: function() {
+      endDragging: function(detail) {
         this.isDragging = false;
-        this.mouseMoveListener.cancel();
-        this.mouseMoveListener = null;
-        this.mouseUpListener.cancel();
-        this.mouseUpListener = null;
       },
 
       togglePlayPause: function(e, details, target) {
@@ -345,6 +366,7 @@
 
         this.videoStreamList[0].style.width = (parseFloat( window.getComputedStyle(this).width.replace('px', '')) / 2).toString() + "px";
 
+        console.log('resize after fullscreen change');
         var _this = this;
         this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
