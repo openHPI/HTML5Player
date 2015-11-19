@@ -124,10 +124,10 @@
 
       isHDChanged: function() {
         console.log('stream isHDChanged', arguments);
-        if (this.isHD) {
-          this.setHD();
-        } else {
-          this.setSD();
+        if (this.isHD && this.hd_src != null) {
+          this.useSrc(this.hd_src);
+        } else if (this.sd_src != null) {
+          this.useSrc(this.sd_src);
         }
       },
 
@@ -154,31 +154,13 @@
        * Utility functions
        */
 
-      setHD: function() {
-        if (this.hd_src != null) {
-          var currentTime = this.$.myVideo.currentTime;
-          this.$.myVideo.src = this.hd_src;
-          if (!this.notStarted) {
-            this.$.myVideo.load();
-            this.$.myVideo.currentTime = currentTime;
-            this.$.myVideo.play();
-          }
-        } else {
-          this.setSD();
-        }
-      },
-
-      setSD: function() {
-        if (this.sd_src != null) {
-          var currentTime = this.$.myVideo.currentTime;
-          this.$.myVideo.src = this.sd_src;
-          if (!this.notStarted) {
-            this.$.myVideo.load();
-            this.$.myVideo.currentTime = currentTime;
-            this.$.myVideo.play();
-          }
-        } else {
-          this.setHD();
+      useSrc: function(src) {
+        var currentTime = this.$.myVideo.currentTime;
+        this.$.myVideo.src = src;
+        if (!this.notStarted) {
+          this.$.myVideo.load();
+          this.$.myVideo.currentTime = currentTime;
+          this.$.myVideo.play();
         }
       },
 
