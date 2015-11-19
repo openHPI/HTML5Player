@@ -81,7 +81,7 @@
       }
     </style>
 
-    <div id="resizer"><iron-icon icon="icons:polymer"></iron-icon></div>
+    <div id="resizer" on-track="trackResizing"><iron-icon icon="icons:polymer"></iron-icon></div>
     <div id="videoArea" on-mouseup="togglePlayPause" on-dblclick="toggleFullscreen">
       <content select="video-stream" id="streams"></content>
       <div id="overlay" hidden$="{{isPlaying}}">
