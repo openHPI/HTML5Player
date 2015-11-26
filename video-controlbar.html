@@ -112,12 +112,20 @@
         isPlaying: {
           type: Boolean,
           value: false,
-          notify: true
+          notify: true,
+          observer: 'updateIcon'
         },
-        progress: Number,
+        progress: {
+          type: Number,
+          notify: true,
+          observer: 'updateIcon'
+        },
         buffered: Number,
         duration: Number,
-        isHD: Boolean,
+        isHD: {
+          type: Boolean,
+          notify: true
+        },
         quality: {
           type: String,
           computed: 'computeQuality(isHD)'
@@ -139,7 +147,8 @@
         },
         playIcon: {
           type: String,
-          value: 'av:play-arrow'
+          value: 'av:play-arrow',
+          notify: true
         }
       },
 
@@ -184,6 +193,16 @@
       /**
        * Observers
        */
+
+      updateIcon: function() {
+        if (this.isPlaying) {
+          this.playIcon = "av:pause";
+        } else if (this.duration <= this.progress) {
+          this.playIcon = "av:replay";
+        } else {
+          this.playIcon = "av:play-arrow";
+        }
+      },
 
       volumeChanged: function() {
         var icon = 'av:volume-off';

@@ -134,12 +134,10 @@
           type: Number,
           value: 0,
           reflectToAttribute: true,
-          observer: 'updateIcons'
         },
         isPlaying: {
           type: Boolean,
           value: false,
-          observer: 'updateIcons'
         },
         showSubtitles: {
           type: Boolean,
@@ -343,16 +341,6 @@
       /**
        * Observers
        */
-
-      updateIcons: function() {
-        if (this.isPlaying) {
-          this.playIcon = "av:pause";
-        } else if (this.duration <= this.progress) {
-          this.playIcon = "av:replay";
-        } else {
-          this.playIcon = "av:play-arrow";
-        }
-      },
 
       isFullscreenChanged: function() {
         console.log('isFullscreenChanged', arguments);
