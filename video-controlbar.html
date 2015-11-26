@@ -10,16 +10,16 @@
 <dom-module id="video-controlbar">
   <template>
     <style>
-      @font-face{
-        font-family:"NeoSansStdRegular";
-        url(NeoSansStdRegular.woff) format("woff"),
-        url(NeoSansStdRegular.ttf) format("truetype"),
-        url(NeoSansStdRegular.svg#NeoSansStdRegular) format("svg");
-        font-weight:400;
-        font-style:normal;
-        font-stretch:normal
+      @font-face {
+        font-family: "NeoSansStdRegular";
+        src: url(NeoSansStdRegular.woff) format("woff"),
+             url(NeoSansStdRegular.ttf) format("truetype"),
+             url(NeoSansStdRegular.svg#NeoSansStdRegular) format("svg");
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal
       }
-      :host{
+      :host {
         display: block;
         background-color: rgb(66, 66, 66);
         color: white;
@@ -29,7 +29,7 @@
         z-index: 9000;
         @apply(--layout-horizontal);
       }
-      .control{
+      .control {
         display: block;
         line-height: 24px;
         padding: 10px;
@@ -37,46 +37,45 @@
         font-size: 12px;
         border-right: 2px solid white;
       }
-      .control:last-child, #volumeButton{
+      .control:last-child, #volumeButton {
         border-right-style: none;
       }
-      .control:last-child, #volume{
+      .control:last-child, #volume {
         padding-left: 8px;
       }
-      .control[on-click]{
+      .control {
         cursor: pointer;
       }
-      .thumbnail-box{
+      .thumbnail-box {
         position: relative;
-        bottom:2px;
+        bottom: 2px;
       }
       video-thumbnail /deep/ :last-of-type {
         margin-right: 0px;
       }
 
-      #progressCounter{
+      #progressCounter {
         padding-left: 10px;
       }
-      #progressBar{
-        margin-top: 3px;
+      #progressBar {
+        margin-top: 5px;
       }
-      #progressBarWithThumbnails{
+      #progressBarWithThumbnails {
         position: relative;
         top: 1px;
       }
-      #volumeBar{
+      #volumeBar {
         width: 75px;
-        margin-top: 3px;
+        margin-top: 5px;
       }
-      #qualityButton{
-        width:15px;
-        text-align:center;
+      #qualityButton {
+        width: 15px;
+        text-align: center;
       }
 
       .control, .thumbnail-box {
         @apply(--layout-horizontal);
       }
-
       .flex-control, #progressBar {
         @apply(--layout-flex);
       }
