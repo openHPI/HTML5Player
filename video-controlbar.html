@@ -88,19 +88,24 @@
         <div class="thumbnail-box">
           <content></content>
         </div>
-        <slider-bar id="progressBar" value="{{progress}}" second-value="{{buffered}}"
-          max="{{duration}}" bubble-text="{{ secondsToMinutes(progress) }}"></slider-bar>
+        <slider-bar
+          id="progressBar"
+          max="{{duration}}"
+          value="{{progress}}"
+          second-value="{{buffered}}"
+          bubble-text="{{ secondsToMinutes(progress) }}"
+        ></slider-bar>
       </div>
       <div id="progressCounter">{{ secondsToMinutes(progress) }} / {{ secondsToMinutes(duration) }}</div>
     </div>
-    <div class="control" on-click="toggleSpeed" id="speedButton">{{ formatSpeed(speed) }}</div>
+    <div class="control" id="speedButton" on-click="toggleSpeed">{{ formatSpeed(speed) }}</div>
     <div class="control" id="qualityButton" on-click="toggleQuality">{{quality}}</div>
-    <iron-icon hidden$="{{!showSubtitlesButton}}" class="control" on-click="toggleSubtitles" id="subtitlesButton" icon="av:closed-caption"></iron-icon>
-    <iron-icon class="control" on-click="toggleMute" id="volumeButton" icon="av:volume-up"></iron-icon>
-    <div class="control" id="volume">
+    <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="toggleSubtitles" hidden$="{{!showSubtitlesButton}}"></iron-icon>
+    <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
+    <div id="volume" class="control">
       <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
     </div>
-    <iron-icon class="control" on-click="toggleFullscreen" id="fullscreenButton" icon="fullscreen"></iron-icon>
+    <iron-icon id="fullscreenButton" icon="fullscreen" class="control" on-click="toggleFullscreen"></iron-icon>
 
   </template>
 

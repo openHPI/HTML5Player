@@ -81,14 +81,27 @@
       }
     </style>
 
-    <div id="resizer" on-track="trackResizing"><iron-icon icon="icons:polymer"></iron-icon></div>
+    <div id="resizer" on-track="trackResizing">
+      <iron-icon icon="icons:polymer"></iron-icon>
+    </div>
     <div id="videoArea" on-mouseup="togglePlayPause" on-dblclick="toggleFullscreen">
       <content select="video-stream" id="streams"></content>
       <div id="overlay" hidden$="{{isPlaying}}">
         <iron-icon id="overlayButton" icon="{{playIcon}}"></iron-icon>
       </div>
     </div>
-    <video-controlbar id="videoControlBar" is-fullscreen="{{isFullscreen}}" play-icon="{{playIcon}}" is-playing="{{isPlaying}}" speed="{{speed}}" volume="{{volume}}" duration="{{stream.duration}}" buffering="{{stream.buffering}}" progress="{{progress}}" show-subtitles="{{showSubtitles}}">
+    <video-controlbar
+      id="videoControlBar"
+      is-fullscreen="{{isFullscreen}}"
+      play-icon="{{playIcon}}"
+      is-playing="{{isPlaying}}"
+      speed="{{speed}}"
+      volume="{{volume}}"
+      duration="{{stream.duration}}"
+      buffering="{{stream.buffering}}"
+      progress="{{progress}}"
+      show-subtitles="{{showSubtitles}}"
+    >
       <content select=":not(video-stream)"></content>
     </video-controlbar>
   </template>
