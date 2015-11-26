@@ -234,6 +234,13 @@
 
         var _this = this;
 
+        this.MIRROR.forEach(function(prop) {
+          console.log('register ' + prop + '-changed');
+          _this.videoStreamList[0].addEventListener(prop + '-changed', function(newVal) {
+            _this.set(prop, _this.videoStreamList[0][prop]);
+          });
+        });
+
 
         // this.videoStreamList.forEach(function(stream) {
         //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))

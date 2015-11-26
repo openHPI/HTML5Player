@@ -47,11 +47,13 @@
         subtitles: String,
         isPlaying: {
           type: Boolean,
+          notify: true,
           observer: 'isPlayingChanged'
         },
         progress: {
           type: Number,
           value: 0,
+          notify: true,
           observer: 'progressChanged',
         },
         buffered: Number,
