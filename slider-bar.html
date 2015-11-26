@@ -48,8 +48,17 @@
       }
     </style>
 
-    <div id="valueBubble"><div id="bubbleText">{{bubbleText}}</div><div id="bubbleArrow"></div></div>
-    <paper-progress id="paperProgress" on-track="trackDragging" value="{{value}}" secondary-progress="{{secondValue}}" max="{{max}}"></paper-progress>
+    <div id="valueBubble">
+      <div id="bubbleText">{{bubbleText}}</div>
+      <div id="bubbleArrow"></div>
+    </div>
+    <paper-progress
+      id="paperProgress"
+      max="{{max}}"
+      value="{{value}}"
+      secondary-progress="{{secondValue}}"
+      on-track="trackDragging"
+    ></paper-progress>
 
   </template>
 
