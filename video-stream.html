@@ -144,9 +144,9 @@
       showSubtitlesChanged: function() {
         console.log('stream showSubtitlesChanged', arguments);
         if (this.showSubtitles) {
-          this.$.myVideo.textTracks.first.mode = "showing";
+          this.$.myVideo.textTracks[0].mode = "showing";
         } else {
-          this.$.myVideo.textTracks.first.mode = "disabled";
+          this.$.myVideo.textTracks[0].mode = "disabled";
         }
       },
 
