@@ -113,13 +113,9 @@
         isPlaying: {
           type: Boolean,
           value: false,
-          notify: true,
-          observer: 'updateIcons'
+          notify: true
         },
-        progress: {
-          type: Number,
-          observer: 'updateIcons'
-        },
+        progress: Number,
         buffered: Number,
         duration: Number,
         isHD: {
@@ -188,16 +184,6 @@
       /**
        * Observers
        */
-
-      updateIcons: function() {
-        if (this.isPlaying) {
-          this.playIcon = "av:pause";
-        } else if (this.duration <= this.progress) {
-          this.playIcon = "av:replay";
-        } else {
-          this.playIcon = "av:play-arrow";
-        }
-      },
 
       volumeChanged: function() {
         var icon = 'av:volume-off';
