@@ -95,7 +95,7 @@
       <div id="progressCounter">{{ secondsToMinutes(progress) }} / {{ secondsToMinutes(duration) }}</div>
     </div>
     <div class="control" on-click="toggleSpeed" id="speedButton">{{ formatSpeed(speed) }}</div>
-    <div class="control" id="qualityButton" on-click="toggleQuality">HD</div>
+    <div class="control" id="qualityButton" on-click="toggleQuality">{{quality}}</div>
     <iron-icon hidden$="{{!showSubtitlesButton}}" class="control" on-click="toggleSubtitles" id="subtitlesButton" icon="av:closed-caption"></iron-icon>
     <iron-icon class="control" on-click="toggleMute" id="volumeButton" icon="av:volume-up"></iron-icon>
     <div class="control" id="volume">
@@ -118,9 +118,10 @@
         progress: Number,
         buffered: Number,
         duration: Number,
-        isHD: {
-          type: Boolean,
-          observer: 'isHDChanged'
+        isHD: Boolean,
+        quality: {
+          type: String,
+          computed: 'computeQuality(isHD)'
         },
         speed: Number, // double
         volume: {
@@ -195,10 +196,6 @@
         this.$.volumeButton.attributes['icon'] = icon;
       },
 
-      isHDChanged: function() {
-        this.$.qualityButton.text = this.isHD ? 'HD' : 'SD';
-      },
-
       isFullscreenChanged: function() {
         this.$.fullscreenButton.icon = this.isFullscreen ? 'fullscreen-exit' : 'fullscreen';
       },
@@ -244,6 +241,10 @@
 
       toggleQuality: function() {
         this.isHD = !this.isHD;
+      },
+
+      computeQuality: function(isHD) {
+        return isHD ? 'HD' : 'SD';
       },
 
       toggleFullscreen: function() {
