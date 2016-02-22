@@ -57,7 +57,7 @@
       max="{{max}}"
       value="{{value}}"
       secondary-progress="{{secondValue}}"
-      on-track="trackDragging"
+      
     ></paper-progress>
 
   </template>
@@ -66,7 +66,7 @@
     Polymer({
 
       is: 'slider-bar',
-
+      dopwn: 'regularTap',
       properties: {
         max: {
           type: Number,
@@ -83,15 +83,15 @@
         bubbleText: String
       },
 
-      mouseUpListener: null,
-      mouseMoveListener: null,
 
-      attached: function() {
+
+      //attached: function() {
         //this.mouseUpListener = this.stopDrag.bind(this);
         //this.mouseMoveListener = this.doDrag.bind(this);
-      },
+      //},
 
       trackDragging: function(e) {
+
         switch (e.detail.state) {
           case 'start':
             this.startDragging(e.detail);
@@ -125,7 +125,7 @@
           this.$.valueBubble.style.left = detail.dx.toString() + "px";
           this.$.valueBubble.style.visibility = "visible";
         }
-        this.$$('#bubbleText').text = value;
+        //this.$$('#bubbleText').text = value;
       },
 
       endDragging: function(detail) {
@@ -135,10 +135,13 @@
         //window.removeEventListener('mouseup', this.mouseUpListener, true);
         //this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
       },
-
       getPaperProgressWidth: function() {
         return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
-      }
+      },
+      regularTap: function(e) {
+        console.log(e);
+      },
+
 
     })
   </script>
