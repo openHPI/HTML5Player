@@ -16,6 +16,7 @@
   <body>
     <h1>Dual Stream Example</h1>
     <video-player id="player" duration="1077" quality="hd">
+
       <video-stream
         poster="https://i.vimeocdn.com/video/487220623_640.jpg"
         sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
@@ -26,15 +27,10 @@
         hd_src="https://player.vimeo.com/external/104693395.hd.mp4?s=58b93a8179c01c66fb3e33adf5b3e064&amp;download=1"
         ratio="4:3">
       </video-stream>
+      <slider-bar max="100" value="3" second-value="25" bubble-text="3"></slider-bar>
+
     </video-player>
 
-    <hr>
-
-    <h2>slider-bar</h2>
-
-    <div style="width: 500px; margin: 20px auto; background-color: rgb(66, 66, 66);">
-      <slider-bar max="100" value="3" second-value="25" bubble-text="3"></slider-bar>
-    </div>
 
   </body>
 </html>
