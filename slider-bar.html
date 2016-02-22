@@ -57,7 +57,8 @@
       max="{{max}}"
       value="{{value}}"
       secondary-progress="{{secondValue}}"
-      
+      on-track="trackDragging"
+      on-click="click"
     ></paper-progress>
 
   </template>
@@ -66,7 +67,7 @@
     Polymer({
 
       is: 'slider-bar',
-      dopwn: 'regularTap',
+
       properties: {
         max: {
           type: Number,
@@ -82,13 +83,6 @@
         },
         bubbleText: String
       },
-
-
-
-      //attached: function() {
-        //this.mouseUpListener = this.stopDrag.bind(this);
-        //this.mouseMoveListener = this.doDrag.bind(this);
-      //},
 
       trackDragging: function(e) {
 
@@ -109,14 +103,9 @@
 
       startDragging: function(detail) {
         var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
-        // if (this.mouseMoveListener != null) {
-        //   this.stopDrag();
-        // }
 
         console.log('attach');
-        //window.addEventListener('mouseup', this.mouseUpListener, true);
-        //this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
-      },
+        },
 
       doDragging: function(detail) {
         var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
@@ -132,14 +121,13 @@
         this.$.valueBubble.style.visibility = "hidden";
 
         console.log('detach');
-        //window.removeEventListener('mouseup', this.mouseUpListener, true);
-        //this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
-      },
+        },
       getPaperProgressWidth: function() {
         return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
       },
-      regularTap: function(e) {
-        console.log(e);
+      click: function(e) {
+        var r =   Math.floor(e.layerX / this.getPaperProgressWidth() * this.max);
+        console.log(r);
       },
 
 
