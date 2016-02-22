@@ -125,7 +125,7 @@
           this.$.valueBubble.style.left = detail.dx.toString() + "px";
           this.$.valueBubble.style.visibility = "visible";
         }
-        //this.$$('#bubbleText').text = value;
+        this.$$('#bubbleText').text = value;
       },
 
       endDragging: function(detail) {
