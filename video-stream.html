@@ -1,0 +1,197 @@
+<link rel="import" href="../polymer/polymer.html">
+<!-- <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html"> -->
+
+<dom-module id="video-stream">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        width: 200px;
+        z-index: 10;
+        @apply(--layout-vertical);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      ::cue {
+        background-color:#000;
+        color:#FFF;
+      }
+    </style>
+
+    <video poster$="{{poster}}" id="myVideo">
+      <source src$="{{hd_src}}" type="video/mp4" />
+      <track kind="subtitles" src$="{{subtitles}}" default>
+    </video>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'video-stream',
+
+      properties: {
+        sd_src: String,
+        hd_src: String,
+        poster: String,
+        ratio: String,
+        subtitles: String,
+        isPlaying: {
+          type: Boolean,
+          notify: true,
+          observer: 'isPlayingChanged'
+        },
+        progress: {
+          type: Number,
+          value: 0,
+          notify: true,
+          observer: 'progressChanged',
+        },
+        buffered: Number,
+        duration: Number,
+        isHD: {
+          type: Boolean,
+          observer: 'isHDChanged'
+        },
+        speed: {
+          type: Number, // TODO: double
+          observer: 'speedChanged'
+        },
+        volume: {
+          type: Number,
+          observer: 'volumeChanged'
+        },
+        showSubtitles: {
+          type: Boolean,
+          observer: 'showSubtitlesChanged'
+        }
+      },
+
+      notStarted: true,
+
+      timer: null,
+
+
+      attached: function() {
+        this.$.myVideo.addEventListener('durationchange', function(event) {
+          this.duration = Math.floor(this.$.myVideo.duration);
+        }.bind(this));
+
+        this.timer = window.setInterval(function() {
+          if (this.$.myVideo.readyState >= 1) {
+            this.isPlaying = !this.$.myVideo.paused;
+            this.progress = Math.floor(this.$.myVideo.currentTime);
+            this.buffered = Math.floor(this.$.myVideo.buffered); // TODO: buffered.end(0)
+          }
+        }.bind(this), 500);
+      },
+
+      detached: function() {
+        window.clearInterval(this.timer);
+        this.timer = null;
+      },
+
+
+      /**
+       * Observers
+       */
+
+      isPlayingChanged: function() {
+        console.log('stream isPlayingChanged', arguments);
+        if (this.isPlaying) {
+          console.log('video play', this.$);
+          this.$.myVideo.play();
+          this.notStarted = false;
+        } else {
+          console.log('video pause');
+          this.$.myVideo.pause();
+        }
+      },
+
+      progressChanged: function(newValue, oldValue) {
+        console.log('stream progressChanged', arguments);
+        if (Math.abs(oldValue - newValue) >= 3) {
+          this.$.myVideo.currentTime = newValue;
+        }
+      },
+
+      isHDChanged: function() {
+        console.log('stream isHDChanged', arguments);
+        if (this.isHD && this.hd_src != null) {
+          this.useSrc(this.hd_src);
+        } else if (this.sd_src != null) {
+          this.useSrc(this.sd_src);
+        }
+      },
+
+      speedChanged: function() {
+        console.log('stream speedChanged', arguments);
+        this.$.myVideo.playbackRate = this.speed;
+      },
+
+      volumeChanged: function() {
+        console.log('stream volumeChanged', arguments);
+        this.$.myVideo.volume = this.volume / 100;
+      },
+
+      showSubtitlesChanged: function() {
+        console.log('stream showSubtitlesChanged', arguments);
+        if (this.showSubtitles) {
+          this.$.myVideo.textTracks[0].mode = "showing";
+        } else {
+          this.$.myVideo.textTracks[0].mode = "disabled";
+        }
+      },
+
+      /**
+       * Utility functions
+       */
+
+      useSrc: function(src) {
+        var currentTime = this.$.myVideo.currentTime;
+        this.$.myVideo.src = src;
+        if (!this.notStarted) {
+          this.$.myVideo.load();
+          this.$.myVideo.currentTime = currentTime;
+          this.$.myVideo.play();
+        }
+      },
+
+      resize: function(videoCount) {
+        console.log('resizing stream with count', videoCount);
+        var controlbarHeight = 48.0;
+        var minVideoWidth = 100.0;
+
+        var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
+
+        var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
+        console.log('parent', parentWidth, 'new', newWidth);
+        newWidth = Math.min( --videoCount*parentWidth - minVideoWidth , Math.max(minVideoWidth, newWidth) );
+
+        var newHeight = newWidth * this.ratioAsDouble(this.ratio);
+        console.log('w', newWidth, 'h', newHeight);
+        if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
+          this.style.width = newWidth.toString() + "px";
+          this.style.height = newHeight.toString() + "px";
+        }
+      },
+
+      ratioAsDouble: function(ratio) {
+        // default ratio = 16:9
+        return ratio == '4:3' ? 3/4 : 9/16;
+      }
+
+    })
+
+  </script>
+
+</dom-module>

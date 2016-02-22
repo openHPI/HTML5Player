@@ -1,10 +1,19 @@
-# HTML5Player
+# HTML5 Dual-Stream Video Player
 
-Please note that this is not the production version, but a version based on polymer and Dart coded as part of the web programming seminar at HPI.
+A synchronized dual-stream video player, coded as custom element using Polymer, for use with the openHPI and tele-TASK platforms.
 
-This was coded using polymer 0.8. Feel free to make MR.
+If you want to record dual-streamvideo, please check http://www.tele-task.de/teletask/about/.
 
-If you want to record dual streamvideo check http://www.tele-task.de/teletask/about/
+## Installation
 
-See the full documentation on:
-http://arneboockmeyer.github.io/
+Using [Bower](http://bower.io):
+
+~~~sh
+bower install --save xyz/video-player
+~~~
+
+*(Not yet registered.)*
+
+## Usage
+
+Until proper documentation is written, please consult the examples in the **demo** folder.

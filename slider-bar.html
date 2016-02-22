@@ -1,0 +1,145 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+
+<dom-module id="slider-bar">
+  <template>
+
+    <style>
+      :host {
+        border: 1px solid rgb(90, 96, 101);
+        height: 12px;
+        display: block;
+        position: relative;
+      }
+      paper-progress {
+        display: block;
+        height: 100%;
+        width: 100%;
+        --paper-progress-height: 100%;
+        --paper-progress-active-color: rgb(222, 98, 18);
+        --paper-progress-secondary-color: rgb(86, 86, 86);
+        --paper-progress-container-color: transparent;
+      }
+      #valueBubble {
+        position: absolute;
+        bottom: 15px;
+        left: 0px;
+        z-index: 7000;
+        visibility: hidden;
+      }
+      #bubbleText {
+        box-sizing: border-box;
+        margin-left: -50%;
+        padding: 5px;
+        width: 100%;
+        background-color: #000;
+        border-radius: 2px;
+        color: #fff;
+        line-height: 12px;
+        text-align: center;
+      }
+      #bubbleArrow {
+        width: 0;
+        height: 0;
+        margin-left: -5px;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        border-color: #000 transparent transparent transparent;
+      }
+    </style>
+
+    <div id="valueBubble">
+      <div id="bubbleText">{{bubbleText}}</div>
+      <div id="bubbleArrow"></div>
+    </div>
+    <paper-progress
+      id="paperProgress"
+      max="{{max}}"
+      value="{{value}}"
+      secondary-progress="{{secondValue}}"
+      on-track="trackDragging"
+    ></paper-progress>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'slider-bar',
+
+      properties: {
+        max: {
+          type: Number,
+          value: 1
+        },
+        value: {
+          type: Number,
+          value: 0
+        },
+        secondValue: {
+          type: Number,
+          value: 0
+        },
+        bubbleText: String
+      },
+
+      mouseUpListener: null,
+      mouseMoveListener: null,
+
+      attached: function() {
+        //this.mouseUpListener = this.stopDrag.bind(this);
+        //this.mouseMoveListener = this.doDrag.bind(this);
+      },
+
+      trackDragging: function(e) {
+        switch (e.detail.state) {
+          case 'start':
+            this.startDragging(e.detail);
+            break;
+          case 'track':
+            this.doDragging(e.detail);
+            break;
+          case 'end':
+            this.endDragging(e.detail);
+            break;
+        }
+
+        e.preventDefault();
+      },
+
+      startDragging: function(detail) {
+        var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
+        // if (this.mouseMoveListener != null) {
+        //   this.stopDrag();
+        // }
+
+        console.log('attach');
+        //window.addEventListener('mouseup', this.mouseUpListener, true);
+        //this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
+      },
+
+      doDragging: function(detail) {
+        var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
+        console.log('dragging', this.bubbleText, this);
+        if (this.bubbleText != null) {
+          this.$.valueBubble.style.left = detail.dx.toString() + "px";
+          this.$.valueBubble.style.visibility = "visible";
+        }
+        //this.$$('#bubbleText').text = value;
+      },
+
+      endDragging: function(detail) {
+        this.$.valueBubble.style.visibility = "hidden";
+
+        console.log('detach');
+        //window.removeEventListener('mouseup', this.mouseUpListener, true);
+        //this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
+      },
+
+      getPaperProgressWidth: function() {
+        return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
+      }
+
+    })
+  </script>
+</dom-module>
