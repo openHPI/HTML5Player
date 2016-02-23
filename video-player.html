@@ -403,7 +403,7 @@
       },
 
       progressNavigation: function (e) {
-         this.progress = e.detail.newValueInSeconds ;
+         this.progress = Math.floor(e.detail.newValueInSeconds) ;
       }
 
     })
