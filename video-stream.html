@@ -106,19 +106,19 @@
        */
 
       isPlayingChanged: function() {
-        console.log('stream isPlayingChanged', arguments);
+        //console.log('stream isPlayingChanged', arguments);
         if (this.isPlaying) {
-          console.log('video play', this.$);
+          //console.log('video play', this.$);
           this.$.myVideo.play();
           this.notStarted = false;
         } else {
-          console.log('video pause');
+          //console.log('video pause');
           this.$.myVideo.pause();
         }
       },
 
       progressChanged: function(newValue, oldValue) {
-        console.log('stream progressChanged', arguments);
+        //console.log('stream progressChanged', arguments);
         if (Math.abs(oldValue - newValue) >= 3) {
           this.$.myVideo.currentTime = newValue;
         }

@@ -128,8 +128,7 @@
 
       click: function(e) {
         var v =   Math.floor(e.layerX / this.getPaperProgressWidth() * this.max);
-        console.log(v);
-        this.fire('progressNavigation', {newValue: v});
+        this.fire('progressNavigation', {newValueInSeconds: v});
       },
 
 
