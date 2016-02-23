@@ -220,8 +220,7 @@
         if (this.volume > 0) icon = 'av:volume-mute';
         if (this.volume > 30) icon = 'av:volume-down';
         if (this.volume > 70) icon = 'av:volume-up';
-
-        this.$.volumeButton.attributes['icon'] = icon;
+        this.$.volumeButton.icon = icon;
       },
 
       isFullscreenChanged: function() {
