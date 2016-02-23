@@ -119,15 +119,17 @@
 
       endDragging: function(detail) {
         this.$.valueBubble.style.visibility = "hidden";
-
         console.log('detach');
         },
+
       getPaperProgressWidth: function() {
         return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
       },
+
       click: function(e) {
-        var r =   Math.floor(e.layerX / this.getPaperProgressWidth() * this.max);
-        console.log(r);
+        var v =   Math.floor(e.layerX / this.getPaperProgressWidth() * this.max);
+        console.log(v);
+        this.fire('progressNavigation', {newValue: v});
       },
 
 

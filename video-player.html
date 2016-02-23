@@ -170,6 +170,9 @@
         'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, showSubtitles)'
       ],
 
+      listeners: {
+              'progressNavigation': 'progressNavigation'
+      },
 
       startWidth: 0.0,
       mouseMoveListener: null,
@@ -397,6 +400,10 @@
         this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
         });
+      },
+
+      progressNavigation: function (e) {
+         this.progress = e.detail.newValue ;
       }
 
     })
