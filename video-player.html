@@ -28,7 +28,6 @@
       #resizer {
         position: absolute;
         top: 30%;
-        left: 50%;
 	margin: -48px;
         padding: 36px;
         width: 24px;
@@ -224,7 +223,9 @@
           this.stream = this.videoStreamList[0];
         }.bind(this));
 
-        // manage bindings
+        document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+
+	// manage bindings
         this.initBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
@@ -305,39 +306,36 @@
         var numVideos = this.videoStreamList.length;
         // --------------------------------------------
 
+	document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+
         if (width(this.videoStreamList[0]) < (this.startWidth + detail.dx)) {
           // We're making the first video bigger
-          if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
-                  (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                  (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+          if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1]))&&
+                   (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                   (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )){
                 this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
         	this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px"; 		
 	 }
           // Resize the first video, and then the second
           this.videoStreamList[0].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
-	
-	this.videoStreamList[1].resize(this.videoStreamList.length);
+	  this.videoStreamList[1].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
 
         } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
-          if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
-                  (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                  (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+          if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1]))&&
+                   (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                   (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )){
                 this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
 		this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
           }
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[0].resize(this.videoStreamList.length);
-       	this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+	  this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
-   
-     }
-
-	var d = document.getElementById('resizer');
-	d.style.left = this.videoStreamList[0].style.width;
+        }
       },
 
       endDragging: function(detail) {
