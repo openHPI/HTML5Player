@@ -24,11 +24,12 @@
         background-color:#000;
         color:#FFF;
       }
+
     </style>
 
     <video poster$="{{poster}}" id="myVideo">
       <source src$="{{hd_src}}" type="video/mp4" />
-      <track kind="subtitles" src$="{{subtitles}}" default>
+      <track kind="subtitles" src$="{{subtitles}}" srclang$="{{sublang}}">
     </video>
 
   </template>
@@ -45,6 +46,7 @@
         poster: String,
         ratio: String,
         subtitles: String,
+        sublang: String,
         isPlaying: {
           type: Boolean,
           notify: true,
