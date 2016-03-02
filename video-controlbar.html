@@ -359,7 +359,7 @@
       },
 
       changeSubtitles: function(event) {
-        //debugger;
+        
         var dataSrcLang = event.target.parentElement.getAttribute("data-srclang"); 
         if(dataSrcLang) {
           if (this.currentSubtitlesLanguage===dataSrcLang) {
@@ -370,8 +370,9 @@
           }
           else {
             if (this.currentSubtitlesLanguage) {
+              //debugger;
               var obj = "[data-srclang=" + this.currentSubtitlesLanguage + "]";
-              document.querySelectorAll(obj).style.color = 'rgba(255, 255, 255, 0.3)';
+              (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 0.3)';
             }
             else {
               this.showSubtitles=!this.showSubtitles;
