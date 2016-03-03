@@ -155,11 +155,7 @@
           value: false,
           notify: true
         },
-        showSubtitles: {  //don't remove this property, for some reason the isPlaying stops being observed!
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
-        },
+
         currentSubLang: {
           type: String,
           reflectToAttribute: true,
@@ -174,10 +170,10 @@
       },
 
       // These properties shall be mirrored to the video streams
-      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'showSubtitles'],
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
 
       observers: [
-        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, showSubtitles)'
+        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang)'
       ],
 
 

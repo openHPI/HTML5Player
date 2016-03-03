@@ -164,13 +164,13 @@ debugger;
       currentSubLangChanged: function() {
         console.log('stream currentSubLangChanged', arguments);
 debugger;
-        for (var i = 0; i < myVideo.textTracks.length; i++) {
-          if (myVideo.textTracks[i].language === this.currentSubLang) {
-            myVideo.textTracks[i].mode = 'showing';
+        for (var i = 0; i < this.$.myVideo.textTracks.length; i++) {
+          if (this.$.myVideo.textTracks[i].language === this.currentSubLang) {
+            this.$.myVideo.textTracks[i].mode = 'showing';
             this.setAttribute('data-state', 'active');
           }
           else {
-            myVideo.textTracks[i].mode = 'hidden';
+            this.$.myVideo.textTracks[i].mode = 'hidden';
           }
         }
       },
