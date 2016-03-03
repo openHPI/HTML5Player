@@ -159,14 +159,7 @@
 
     <td class="cc button">
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; padding-left: 2%; padding-right: 2%; bottom: 20%; left: 69%; display: none;">
-        <li class="languageselectionentry" on-click="changeSubtitles" data-src="blob:https%3A//open.sap.com/e55ba452-c4ae-4686-8d41-b8236e2b1b06" data-srclang="en" data-index="0" data-label="English">
-          <span>EN</span>
-        </li>
-        <li class="languageselectionentry" on-click="changeSubtitles" data-src="blob:https%3A//open.sap.com/c77ec805-0ce7-4755-9482-ae33bac60f15" data-srclang="ru" data-index="1" data-label="Russian">
-          <span>RU</span>
-        </li>
-      </ul>
+      <ul class="video-dropdown-menu" style="list-style: none; padding-left: 2%; padding-right: 2%; bottom: 20%; left: 69%; display: none;"></ul>
     </td>
 
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
@@ -219,7 +212,10 @@
           observer: 'isFullscreenChanged'
         },
 
-        currentSubtitlesLanguage: String,
+        currentSubLang: {
+          type: String,
+          reflectToAttribute: true
+        },
 
         showSubtitlesMenu: Boolean,
 
@@ -235,7 +231,7 @@
       thumbnails: [],
 
       attached: function() {
-        this.currentSubtitlesLanguage='';
+        this.currentSubLang='';
         this.showSubtitlesMenu=false;
         this.showSubtitlesChanged();
       },
@@ -359,25 +355,23 @@
       },
 
       changeSubtitles: function(event) {
-        
         var dataSrcLang = event.target.parentElement.getAttribute("data-srclang"); 
         if(dataSrcLang) {
-          if (this.currentSubtitlesLanguage===dataSrcLang) {
-            this.showSubtitles=!this.showSubtitles;
-            this.currentSubtitlesLanguage='';
-            var transparency = this.showSubtitles ? '1.0' : '0.3';
-            event.target.style.color = 'rgba(255, 255, 255, ' + transparency + ')';
+          if (this.parentElement.parentElement.currentSubLang===dataSrcLang) {
+            this.parentElement.parentElement.showSubtitles=!this.parentElement.parentElement.showSubtitles;
+            this.parentElement.parentElement.currentSubLang='';
+            event.target.style.color = 'rgba(255, 255, 255, 0.3)';
           }
           else {
-            if (this.currentSubtitlesLanguage) {
-              var obj = "[data-srclang=" + this.currentSubtitlesLanguage + "]";
+            if (this.parentElement.parentElement.currentSubLang) {
+              var obj = "[data-srclang=" + this.parentElement.parentElement.currentSubLang + "]";
               (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 0.3)';
             }
-            else {
-              this.showSubtitles=!this.showSubtitles;
+            else { //initial
+              this.parentElement.parentElement.showSubtitles=!this.parentElement.parentElement.showSubtitles;
             }
             event.target.style.color = 'rgba(255, 255, 255, 1.0)';
-            this.currentSubtitlesLanguage=dataSrcLang;
+            this.parentElement.parentElement.currentSubLang=dataSrcLang;
           }
         }
       },

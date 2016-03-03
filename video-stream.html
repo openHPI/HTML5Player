@@ -71,9 +71,11 @@
           type: Number,
           observer: 'volumeChanged'
         },
-        showSubtitles: {
-          type: Boolean,
-          observer: 'showSubtitlesChanged'
+
+        currentSubLang: {
+          type: String,
+          reflectToAttribute: true,
+          observer: 'currentSubLangChanged'
         }
       },
 
@@ -95,14 +97,6 @@
             this.buffered = Math.floor(this.$.myVideo.buffered); // TODO: buffered.end(0)
           }
         }.bind(this), 500);
-
-        //debugger;
-
-        if(!this.secondStream) {
-          this.querySelector("video").appendChild(this.getEffectiveChildren()[0]);
-          this.secondStream=true;
-        }
-
       },
 
       detached: function() {
@@ -153,13 +147,26 @@
         this.$.myVideo.volume = this.volume / 100;
       },
 
-      showSubtitlesChanged: function() {
-        console.log('stream showSubtitlesChanged', arguments);
+      currentSubLangChanged: function() {
+        console.log('stream currentSubLangChanged', arguments);
+        debugger;
+        for (var i = 0; i < myVideo.textTracks.length; i++) {
+          if (myVideo.textTracks[i].language === this.currentSubLang) {
+            myVideo.textTracks[i].mode = 'showing';
+            this.setAttribute('data-state', 'active');
+          }
+          else {
+            myVideo.textTracks[i].mode = 'hidden';
+          }
+        }
+
+        /****Old code
         if (this.showSubtitles) {
           this.$.myVideo.textTracks[0].mode = "showing";
         } else {
           this.$.myVideo.textTracks[0].mode = "disabled";
         }
+        */
       },
 
       /**

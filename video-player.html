@@ -102,6 +102,7 @@
       buffering="{{stream.buffering}}"
       progress="{{progress}}"
       show-subtitles="{{showSubtitles}}"
+      current-sub-lang="{{currentSubLang}}"
     >
       <content select=":not(video-stream)"></content>
     </video-controlbar>
@@ -153,11 +154,13 @@
           type: Boolean,
           value: false,
         },
-        showSubtitles: {
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
+
+        currentSubLang: {
+          type: String,
+          reflectToAttribute: true,
+          //notify: true
         },
+
         isFullscreen: {
           type: Boolean,
           value: false,
@@ -213,7 +216,6 @@
         }
         //Polymer.dom(this.root).insertBefore(this.$.resizer, this.$.overlay);
 
-
         this.videoStreamList.forEach(function(stream) {
           console.log("initial resize", stream);
           stream.resize(_this.videoStreamList.length);
@@ -227,6 +229,7 @@
 
         // manage bindings
         this.initBindings();
+        this.subtitlesBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
         var list = this.querySelectorAll("video-thumbnail");
@@ -256,13 +259,34 @@
             _this.set(prop, _this.videoStreamList[0][prop]);
           });
         });
-
+ 
 
         // this.videoStreamList.forEach(function(stream) {
         //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
         // });
       },
 
+      subtitlesBindings: function() {
+
+        //assuming the first video stream has the subs tracks
+        var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
+        for (var i=0; i<trackElements.length; i++) {
+          if (trackElements[i] instanceof HTMLElement) {
+            trackElements[i].setAttribute("hidden", true);
+            this.getEffectiveChildren()[0].$$("video").appendChild(trackElements[i]);
+            var ListItem = document.createElement("li");
+            ListItem.className = "languageselectionentry";
+            ListItem.setAttribute("data-srclang", trackElements[i].getAttribute("srclang"));
+            ListItem.setAttribute("data-index", i);
+            ListItem.setAttribute("data-label", trackElements[i].getAttribute("label"));
+            var lang=document.createElement("span");
+            lang.innerHTML=trackElements[i].getAttribute("srclang").toUpperCase();
+            ListItem.appendChild(lang);
+            this.$$("video-controlbar").$$(".video-dropdown-menu").appendChild(ListItem);
+            ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
+          }
+        }   
+      },
 
       /**
        * Dragging stuff
