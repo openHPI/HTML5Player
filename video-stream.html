@@ -163,7 +163,6 @@ debugger;
 
       currentSubLangChanged: function() {
         console.log('stream currentSubLangChanged', arguments);
-debugger;
         for (var i = 0; i < this.$.myVideo.textTracks.length; i++) {
           if (this.$.myVideo.textTracks[i].language === this.currentSubLang) {
             this.$.myVideo.textTracks[i].mode = 'showing';
