@@ -75,6 +75,7 @@
         currentSubLang: {
           type: String,
           reflectToAttribute: true,
+          notify: true,
           observer: 'currentSubLangChanged'
         }
       },
@@ -111,6 +112,7 @@
 
       isPlayingChanged: function() {
         console.log('stream isPlayingChanged', arguments);
+debugger;
         if (this.isPlaying) {
           console.log('video play', this.$);
           this.$.myVideo.play();
@@ -149,7 +151,7 @@
 
       currentSubLangChanged: function() {
         console.log('stream currentSubLangChanged', arguments);
-        debugger;
+debugger;
         for (var i = 0; i < myVideo.textTracks.length; i++) {
           if (myVideo.textTracks[i].language === this.currentSubLang) {
             myVideo.textTracks[i].mode = 'showing';

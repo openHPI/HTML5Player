@@ -148,17 +148,17 @@
         progress: {
           type: Number,
           value: 0,
-          reflectToAttribute: true,
+          reflectToAttribute: true
         },
         isPlaying: {
           type: Boolean,
           value: false,
+          notify: true
         },
-
         currentSubLang: {
           type: String,
           reflectToAttribute: true,
-          //notify: true
+          notify: true
         },
 
         isFullscreen: {
@@ -267,7 +267,6 @@
       },
 
       subtitlesBindings: function() {
-
         //assuming the first video stream has the subs tracks
         var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
         for (var i=0; i<trackElements.length; i++) {

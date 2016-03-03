@@ -214,6 +214,7 @@
 
         currentSubLang: {
           type: String,
+          notify: true,
           reflectToAttribute: true
         },
 
@@ -371,6 +372,7 @@
               this.parentElement.parentElement.showSubtitles=!this.parentElement.parentElement.showSubtitles;
             }
             event.target.style.color = 'rgba(255, 255, 255, 1.0)';
+
             this.parentElement.parentElement.currentSubLang=dataSrcLang;
           }
         }
