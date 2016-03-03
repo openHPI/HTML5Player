@@ -58,6 +58,7 @@
       value="{{value}}"
       secondary-progress="{{secondValue}}"
       on-track="trackDragging"
+      on-click="click"
     ></paper-progress>
 
   </template>
@@ -80,18 +81,12 @@
           type: Number,
           value: 0
         },
-        bubbleText: String
-      },
-
-      mouseUpListener: null,
-      mouseMoveListener: null,
-
-      attached: function() {
-        //this.mouseUpListener = this.stopDrag.bind(this);
-        //this.mouseMoveListener = this.doDrag.bind(this);
+        bubbleText: String,
+        changeEventname: String
       },
 
       trackDragging: function(e) {
+
         switch (e.detail.state) {
           case 'start':
             this.startDragging(e.detail);
@@ -109,14 +104,9 @@
 
       startDragging: function(detail) {
         var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
-        // if (this.mouseMoveListener != null) {
-        //   this.stopDrag();
-        // }
 
         console.log('attach');
-        //window.addEventListener('mouseup', this.mouseUpListener, true);
-        //this.$.paperProgress.addEventListener('mousemove', this.mouseMoveListener, true);
-      },
+        },
 
       doDragging: function(detail) {
         var value = Math.floor(this.$.paperProgress.max * (detail.dx / this.getPaperProgressWidth()));
@@ -130,15 +120,18 @@
 
       endDragging: function(detail) {
         this.$.valueBubble.style.visibility = "hidden";
-
         console.log('detach');
-        //window.removeEventListener('mouseup', this.mouseUpListener, true);
-        //this.$.paperProgress.removeEventListener('mousemove', this.mouseMoveListener, true);
-      },
+        },
 
       getPaperProgressWidth: function() {
         return parseFloat(window.getComputedStyle(this.$.paperProgress).width.replace('px', ''));
-      }
+      },
+
+      click: function(e) {
+        var v = e.layerX / this.getPaperProgressWidth() * 100;
+        this.fire(this.changeEventname, {newValue: v});
+      },
+
 
     })
   </script>

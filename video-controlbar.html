@@ -95,6 +95,7 @@
         list-style: none;
         list-style-type: none;
         bottom: 100%;
+        width: 30px;
         display: none;
         margin: 0;
         padding: 0;
@@ -150,6 +151,7 @@
           value="{{progress}}"
           second-value="{{buffered}}"
           bubble-text="{{ secondsToMinutes(progress) }}"
+          change-eventname="setProgress"
         ></slider-bar>
       </div>
       <div id="progressCounter">{{ secondsToMinutes(progress) }} / {{ secondsToMinutes(duration) }}</div>
@@ -159,12 +161,12 @@
 
     <td class="cc button">
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; padding-left: 2%; padding-right: 2%; bottom: 42px; left: 69%; display: none;"></ul>
+      <ul class="video-dropdown-menu" style="list-style: none; padding-left: 2%; padding-right: 2%; bottom: 42px; left: 81%; display: none;"></ul>
     </td>
 
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
     <div id="volume" class="control">
-      <slider-bar id="volumeBar" value="{{volume}}" max="100"></slider-bar>
+      <slider-bar id="volumeBar" value="{{volume}}" max="100" change-eventname="setVolume"></slider-bar>
     </div>
     <iron-icon id="fullscreenButton" icon="fullscreen" class="control" on-click="toggleFullscreen"></iron-icon>
 
@@ -181,6 +183,7 @@
           notify: true,
           observer: 'updateIcon'
         },
+
         progress: {
           type: Number,
           notify: true,
@@ -227,6 +230,13 @@
         }
       },
 
+//<<<<<<< HEAD
+//=======
+      listeners: {
+        'setProgress': 'setProgressFromSlider',
+        'setVolume': 'setVolumeFromSlider'
+      },
+// >>>>>>> 7aa8b404aa6da7cc6b23ef7d79c32eb7d03a3e07
       returnVolume: 50,
 
       thumbnails: [],
@@ -286,8 +296,7 @@
         if (this.volume > 0) icon = 'av:volume-mute';
         if (this.volume > 30) icon = 'av:volume-down';
         if (this.volume > 70) icon = 'av:volume-up';
-
-        this.$.volumeButton.attributes['icon'] = icon;
+        this.$.volumeButton.icon = icon;
       },
 
       isFullscreenChanged: function() {
@@ -396,6 +405,15 @@
 
       formatSpeed: function(speed) {
         return speed.toFixed(1) + 'x';
+      },
+
+      setProgressFromSlider: function(e) {
+          this.fire('progressNavigation', {
+            newValueInSeconds: e.detail.newValue * this.duration / 100
+          });
+      },
+      setVolumeFromSlider: function(e) {
+          this.volume = e.detail.newValue;
       }
 
     })

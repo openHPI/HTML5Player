@@ -176,6 +176,9 @@
         'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang)'
       ],
 
+      listeners: {
+        'progressNavigation': 'progressNavigation'
+      },
 
       startWidth: 0.0,
       mouseMoveListener: null,
@@ -329,15 +332,19 @@
         var availableSpace = computedWidth(this.$.videoArea);
         var numVideos = this.videoStreamList.length;
         // --------------------------------------------
+//<<<<<<< HEAD
 
         document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 
+//=======
+// >>>>>>> 7aa8b404aa6da7cc6b23ef7d79c32eb7d03a3e07
         if (width(this.videoStreamList[0]) < (this.startWidth + detail.dx)) {
           // We're making the first video bigger
           if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
                    (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
                    (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
                 this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
+//<<<<<<< HEAD
                 this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px"; 
           }
           // Resize the first video, and then the second
@@ -345,6 +352,16 @@
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//=======
+//        	      this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
+//	        }
+//          // Resize the first video, and then the second
+//          this.videoStreamList[0].resize(this.videoStreamList.length);
+//          this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+//
+//	        this.videoStreamList[1].resize(this.videoStreamList.length);
+          //this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+// >>>>>>> 7aa8b404aa6da7cc6b23ef7d79c32eb7d03a3e07
 
         } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
@@ -352,14 +369,27 @@
                    (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
                    (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
                 this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
+//<<<<<<< HEAD
                 this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
+//=======
+//		            this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
+// >>>>>>> 7aa8b404aa6da7cc6b23ef7d79c32eb7d03a3e07
           }
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[0].resize(this.videoStreamList.length);
+//<<<<<<< HEAD
           this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
         }
+//=======
+       	  //this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//          this.videoStreamList[1].resize(this.videoStreamList.length);
+
+//        }
+        console.log('****' + this.videoStreamList[0].style.width);
+	      this.$.resizer.style.left = this.videoStreamList[0].style.width;
+// >>>>>>> 7aa8b404aa6da7cc6b23ef7d79c32eb7d03a3e07
       },
 
       endDragging: function(detail) {
@@ -433,6 +463,10 @@
         this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
         });
+      },
+
+      progressNavigation: function (e) {
+         this.progress = Math.floor(e.detail.newValueInSeconds) ;
       }
 
     })
