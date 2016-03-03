@@ -155,6 +155,11 @@
           value: false,
           notify: true
         },
+        showSubtitles: {  //don't remove this property, for some reason the isPlaying stops being observed!
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
         currentSubLang: {
           type: String,
           reflectToAttribute: true,

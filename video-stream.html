@@ -112,7 +112,6 @@
 
       isPlayingChanged: function() {
         console.log('stream isPlayingChanged', arguments);
-debugger;
         if (this.isPlaying) {
           console.log('video play', this.$);
           this.$.myVideo.play();
@@ -122,6 +121,19 @@ debugger;
           this.$.myVideo.pause();
         }
       },
+
+      /*is-playing-changed: function() {
+        console.log('stream isPlayingChanged', arguments);
+debugger;
+        if (this.isPlaying) {
+          console.log('video play', this.$);
+          this.$.myVideo.play();
+          this.notStarted = false;
+        } else {
+          console.log('video pause');
+          this.$.myVideo.pause();
+        }
+      },*/
 
       progressChanged: function(newValue, oldValue) {
         console.log('stream progressChanged', arguments);
@@ -161,6 +173,7 @@ debugger;
             myVideo.textTracks[i].mode = 'hidden';
           }
         }
+      },
 
         /****Old code
         if (this.showSubtitles) {
@@ -169,8 +182,21 @@ debugger;
           this.$.myVideo.textTracks[0].mode = "disabled";
         }
         */
-      },
 
+
+      /*current-sub-lang-changed: function() {
+        console.log('stream currentSubLangChanged', arguments);
+debugger;
+        for (var i = 0; i < myVideo.textTracks.length; i++) {
+          if (myVideo.textTracks[i].language === this.currentSubLang) {
+            myVideo.textTracks[i].mode = 'showing';
+            this.setAttribute('data-state', 'active');
+          }
+          else {
+            myVideo.textTracks[i].mode = 'hidden';
+          }
+        }
+      },*/
       /**
        * Utility functions
        */

@@ -356,6 +356,7 @@
       },
 
       changeSubtitles: function(event) {
+        console.log('controlbar changeSubtitles');
         var dataSrcLang = event.target.parentElement.getAttribute("data-srclang"); 
         if(dataSrcLang) {
           if (this.parentElement.parentElement.currentSubLang===dataSrcLang) {
