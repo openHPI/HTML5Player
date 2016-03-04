@@ -451,6 +451,9 @@
         this.videoStreamList[0].style.width = (parseFloat( window.getComputedStyle(this).width.replace('px', '')) / 2).toString() + "px";
 
         console.log('resize after fullscreen change');
+
+        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+
         var _this = this;
         this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
