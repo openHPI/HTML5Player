@@ -124,19 +124,25 @@
         border-bottom-width: 2px;
         border-bottom-style: solid;
         border-bottom-color: white;
+        z-index: 9999;
       }
 
       .languageselectionentry {
         color: rgba(255, 255, 255, 0.3);
       }
-
+      .languageselectionentry:hover{
+        color: rgba(255, 255, 255, 0.6);
+      }
       #subtitlesButton {
         color: rgba(255, 255, 255, 0.3);
       }
-
+      #subtitlesButton:hover {
+        color: rgba(255, 255, 255, 0.6);
+      }
       .video-dropdown-menu {
         color: rgba(255, 255, 255, 0.3);
       }
+
     </style>
 
     <iron-icon class="control" on-click="togglePlayPause" id="playPauseButton" icon="{{playIcon}}"></iron-icon>
@@ -161,7 +167,7 @@
 
     <td class="cc button">
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 34px; left: 81.7%; display: none;"></ul>
+      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 34px; left: 81.6%; display: none;"></ul>
     </td>
 
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
@@ -227,7 +233,7 @@
           type: String,
           value: 'av:play-arrow',
           notify: true
-        }
+        },
       },
 
       listeners: {
@@ -243,6 +249,7 @@
         this.currentSubLang='';
         this.showSubtitlesMenu=false;
         this.showSubtitlesChanged();
+        this.timeoutTime=3000;
       },
 
       // Called from video-player element
@@ -352,27 +359,32 @@
         this.isFullscreen = !this.isFullscreen;
       },
 
+
       showSubtitlesOptions: function() {
         this.showSubtitlesMenu=!this.showSubtitlesMenu;
-        if(this.showSubtitlesMenu) {
-          this.querySelector(".video-dropdown-menu").style.display="block";
+        this.querySelector(".video-dropdown-menu").style.display="block";
+        if(this.setDropdownTimer) {
+              window.clearTimeout(this.timeoutHandle);
+              this.timeoutHandle = window.setTimeout(this.func, this.timeoutTime);
+              this.dropClicked=false;
+              this.setDropdownTimer=true;
         }
         else {
-          this.querySelector(".video-dropdown-menu").style.display="none";
+          this.timeoutHandle = setTimeout(this.func = function () {
+              if(!document.querySelector("video-controlbar").dropClicked) {
+                document.querySelector("video-controlbar").showSubtitlesMenu=!document.querySelector("video-controlbar").showSubtitlesMenu;
+                document.querySelector(".video-dropdown-menu").style.display="none";
+                document.querySelector("video-controlbar").setDropdownTimer=false;
+              } else {
+                window.clearTimeout(this.timeoutHandle);
+                this.timeoutHandle = window.setTimeout( document.querySelector("video-controlbar").func, this.timeoutTime);
+                document.querySelector("video-controlbar").dropClicked=false;
+                document.querySelector("video-controlbar").setDropdownTimer=true;
+              }
+            }, this.timeoutTime);
+          this.dropClicked = false;
+          this.setDropdownTimer=true;
         }
-        var func;
-
-        var timeoutHandle = setTimeout(func = function () {
-            if(!document.querySelector("video-controlbar").dropClicked) {
-              document.querySelector("video-controlbar").showSubtitlesMenu=!document.querySelector("video-controlbar").showSubtitlesMenu;
-              document.querySelector(".video-dropdown-menu").style.display="none";
-            } else {
-              window.clearTimeout(timeoutHandle);
-              timeoutHandle = window.setTimeout(func, 3000);
-              document.querySelector("video-controlbar").dropClicked=false;
-            }
-          }, 3000);
-        this.dropClicked = false;
       },
 
       changeSubtitles: function(event) {

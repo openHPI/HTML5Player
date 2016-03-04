@@ -273,18 +273,31 @@
       subtitlesBindings: function() {
         //assuming the first video stream has the subs tracks
         var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
-        for (var i=0; i<trackElements.length; i++) {
+        for (var i=0, j=0; i<trackElements.length; i++) {
           if (trackElements[i] instanceof HTMLElement) {
             trackElements[i].setAttribute("hidden", true);
             this.getEffectiveChildren()[0].$$("video").appendChild(trackElements[i]);
             var ListItem = document.createElement("li");
             ListItem.className = "languageselectionentry";
             ListItem.setAttribute("data-srclang", trackElements[i].getAttribute("srclang"));
-            ListItem.setAttribute("data-index", i);
+            ListItem.setAttribute("data-index", ++j);
             ListItem.setAttribute("data-label", trackElements[i].getAttribute("label"));
+            //ListItem.setAttribute("padding", "8px 0px");
             var lang=document.createElement("span");
             lang.innerHTML=trackElements[i].getAttribute("srclang").toUpperCase();
             ListItem.appendChild(lang);
+
+            var queryString = ".languageselectionentry[data-srclang='"+trackElements[i].getAttribute("srclang")+"']";
+            ListItem.addEventListener("mouseover", function () {
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                    event.target.style.color = 'rgba(255, 255, 255, 0.6)';
+                  }
+                });
+            ListItem.addEventListener("mouseout", function () {
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                    event.target.style.color = 'rgba(255, 255, 255, 0.3)';
+                  }
+                });
             this.$$("video-controlbar").$$(".video-dropdown-menu").appendChild(ListItem);
             ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
           }
