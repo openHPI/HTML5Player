@@ -16,6 +16,9 @@
       :host(:hover){
         background-color: rgb(255, 255, 255);
       }
+      :host(:hover) .thumb{
+        visibility: visible;
+      }
       img{
         height: 150px;
         width: 200px;
@@ -61,7 +64,7 @@
     </style>
 
     <div class="thumb">
-      <img src$="[[src]]">
+      <img src$="[[img_src]]">
     </div>
 
   </template>
@@ -79,6 +82,10 @@
           reflectToAttribute: true
         }
       },
+
+     getStartTime: function(){
+       return this.starttime;
+     },
 
       setWidth: function(width) {
         this.style.width = width + '%';

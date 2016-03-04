@@ -126,14 +126,8 @@
       .languageselectionentry {
         color: rgba(255, 255, 255, 0.3);
       }
-      .languageselectionentry:hover{
-        color: rgba(255, 255, 255, 0.6);
-      }
       #subtitlesButton {
         color: rgba(255, 255, 255, 0.3);
-      }
-      #subtitlesButton:hover {
-        color: rgba(255, 255, 255, 0.6);
       }
       .video-dropdown-menu {
         color: rgba(255, 255, 255, 0.3);
@@ -145,7 +139,7 @@
     <div class="control flex-control" id="progress">
       <div class="flex-control">
         <div class="thumbnail-box">
-          <content></content>
+          <content select="video-thumbnail" id="thumbnails"></content>
         </div>
         <slider-bar
           id="progressBar"
@@ -163,7 +157,7 @@
 
     <td class="cc button">
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 34px; left: 81.6%; display: none;"></ul>
+      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 41px; left: 81.6%; display: none;"></ul>
     </td>
 
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
@@ -189,7 +183,8 @@
         progress: {
           type: Number,
           notify: true,
-          observer: 'updateIcon'
+          observer: 'updateIcon',
+          reflectToAttribute: true
         },
         buffered: Number,
         duration: Number,
@@ -245,8 +240,9 @@
         this.currentSubLang='';
         this.showSubtitlesMenu=false;
         this.showSubtitlesChanged();
-        this.timeoutTime=3000;
+        this.timeoutTime=3000; //timeout time for subtitles dropdown
       },
+
 
       // Called from video-player element
       initThumbnails: function(list) {
@@ -259,23 +255,22 @@
         for (var i = 0; i < this.thumbnails.length; i++) {
           if (i + 1 < this.thumbnails.length) {
             thumbnailTime = this.thumbnails[i+1].getStartTime(); // TODO: Replace getStartTime() with reading attribute
-            width = 100 * (thumbnailTime - lastThumbnailTime) / duration;
+            width = 100 * (thumbnailTime - lastThumbnailTime) / this.duration;
             lastThumbnailTime = this.thumbnails[i + 1].getStartTime();
           } else if (i + 1 == this.thumbnails.length) {
-            width = 100 * (duration - lastThumbnailTime) / duration;
+            width = 100 * (this.duration - lastThumbnailTime) / this.duration;
           }
           if (width < 0.5) {
             width = 0.5;
           }
           this.thumbnails[i].setWidth(width);
-          this.thumbnails[i].onClick.listen(handleThumbnailClick);
+          this.thumbnails[i].addEventListener("click",this.handleThumbnailClick);
         }
 
         if (this.thumbnails.length > 0) {
           this.$.progressBar.setAttribute("id", "progressBarWithThumbnails");
         }
       },
-
 
       /**
        * Observers
@@ -316,7 +311,10 @@
        */
 
       handleThumbnailClick: function(e) {
-        this.progress = Math.floor(e.currentTarget.getStartTime());
+        //this.progress = Math.floor(e.currentTarget.getStartTime());
+        this.fire('progressNavigation', {
+          newValueInSeconds: this.starttime
+        });
       },
 
       togglePlayPause: function() {
