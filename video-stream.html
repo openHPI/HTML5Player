@@ -122,19 +122,6 @@
         }
       },
 
-      /*is-playing-changed: function() {
-        console.log('stream isPlayingChanged', arguments);
-debugger;
-        if (this.isPlaying) {
-          console.log('video play', this.$);
-          this.$.myVideo.play();
-          this.notStarted = false;
-        } else {
-          console.log('video pause');
-          this.$.myVideo.pause();
-        }
-      },*/
-
       progressChanged: function(newValue, oldValue) {
         //console.log('stream progressChanged', arguments);
         if (Math.abs(oldValue - newValue) >= 3) {
@@ -174,28 +161,6 @@ debugger;
         }
       },
 
-        /****Old code
-        if (this.showSubtitles) {
-          this.$.myVideo.textTracks[0].mode = "showing";
-        } else {
-          this.$.myVideo.textTracks[0].mode = "disabled";
-        }
-        */
-
-
-      /*current-sub-lang-changed: function() {
-        console.log('stream currentSubLangChanged', arguments);
-debugger;
-        for (var i = 0; i < myVideo.textTracks.length; i++) {
-          if (myVideo.textTracks[i].language === this.currentSubLang) {
-            myVideo.textTracks[i].mode = 'showing';
-            this.setAttribute('data-state', 'active');
-          }
-          else {
-            myVideo.textTracks[i].mode = 'hidden';
-          }
-        }
-      },*/
       /**
        * Utility functions
        */
