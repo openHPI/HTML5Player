@@ -15,11 +15,13 @@
   </head>
   <body>
     <h1>Dual Stream Example</h1>
-    <video-player id="player" duration="1077" quality="hd">
-
+    <video-player id="player" quality="hd">
       <video-stream
         poster="https://i.vimeocdn.com/video/487220623_640.jpg"
+        duration="1077"
         sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
+        <track kind="subtitles" src="sub_demo.vtt" srclang="la" label="Latin">
+        <track kind="subtitles" src="sample-english-subtitles.vtt" srclang="en" label="English">
       </video-stream>
       <video-stream
         poster="https://i.vimeocdn.com/video/487308935_960.jpg"
@@ -27,10 +29,28 @@
         hd_src="https://player.vimeo.com/external/104693395.hd.mp4?s=58b93a8179c01c66fb3e33adf5b3e064&amp;download=1"
         ratio="4:3">
       </video-stream>
-      <slider-bar max="100" value="3" second-value="25" bubble-text="3"></slider-bar>
 
+      <video-thumbnail img_src="thumbnails/125.jpg" starttime="5"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/1850.jpg" starttime="74"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/3425.jpg" starttime="137"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/4300.jpg" starttime="172"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/5100.jpg" starttime="204"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/13275.jpg" starttime="531"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/13625.jpg" starttime="545"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/20075.jpg" starttime="803"></video-thumbnail>
+      <video-thumbnail img_src="thumbnails/26925.jpg" starttime="1077"></video-thumbnail>
     </video-player>
 
+    <h1>Single Stream Example</h1>
+    <video-player id="player2" quality="hd">
+      <video-stream
+        poster="https://i.vimeocdn.com/video/487220623_640.jpg"
+        duration="1077"
+        sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
+      </video-stream>
+
+
+    </video-player>
 
   </body>
 </html>

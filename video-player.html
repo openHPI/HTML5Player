@@ -102,6 +102,7 @@
       buffering="{{stream.buffering}}"
       progress="{{progress}}"
       show-subtitles="{{showSubtitles}}"
+      current-sub-lang="{{currentSubLang}}"
     >
       <content select=":not(video-stream)"></content>
     </video-controlbar>
@@ -147,17 +148,20 @@
         progress: {
           type: Number,
           value: 0,
-          reflectToAttribute: true,
+          reflectToAttribute: true
         },
         isPlaying: {
           type: Boolean,
           value: false,
+          notify: true
         },
-        showSubtitles: {
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
+
+        currentSubLang: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true
         },
+
         isFullscreen: {
           type: Boolean,
           value: false,
@@ -166,17 +170,20 @@
       },
 
       // These properties shall be mirrored to the video streams
-      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'showSubtitles'],
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
 
       observers: [
-        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, showSubtitles)'
+        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang)'
       ],
 
+      listeners: {
+        'progressNavigation': 'progressNavigation'
+      },
 
       startWidth: 0.0,
       mouseMoveListener: null,
       mouseUpListener: null,
-      showSubtitlesButton: false,
+      showSubtitlesButton: true,
       isDragging: false,
 
       videoStreamList: [],
@@ -213,7 +220,6 @@
         }
         //Polymer.dom(this.root).insertBefore(this.$.resizer, this.$.overlay);
 
-
         this.videoStreamList.forEach(function(stream) {
           console.log("initial resize", stream);
           stream.resize(_this.videoStreamList.length);
@@ -223,10 +229,11 @@
           this.stream = this.videoStreamList[0];
         }.bind(this));
 
-        document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 
         // manage bindings
         this.initBindings();
+        this.subtitlesBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
         var list = this.querySelectorAll("video-thumbnail");
@@ -256,13 +263,48 @@
             _this.set(prop, _this.videoStreamList[0][prop]);
           });
         });
-
+ 
 
         // this.videoStreamList.forEach(function(stream) {
         //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
         // });
       },
 
+      subtitlesBindings: function() {
+        //assuming the first video stream has the subs tracks
+        var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
+        for (var i=0, j=0; i<trackElements.length; i++) {
+          if (trackElements[i] instanceof HTMLElement) {
+            trackElements[i].setAttribute("hidden", true);
+            this.getEffectiveChildren()[0].$$("video").appendChild(trackElements[i]);
+            var ListItem = document.createElement("li");
+            ListItem.className = "languageselectionentry";
+            ListItem.setAttribute("data-srclang", trackElements[i].getAttribute("srclang"));
+            ListItem.setAttribute("data-index", ++j);
+            ListItem.setAttribute("data-label", trackElements[i].getAttribute("label"));
+            ListItem.style.paddingTop="4px";
+            ListItem.style.paddingBottom="4px";
+            var lang=document.createElement("span");
+            lang.innerHTML=trackElements[i].getAttribute("srclang").toUpperCase();
+            ListItem.appendChild(lang);
+
+            var queryString = ".languageselectionentry[data-srclang='"+trackElements[i].getAttribute("srclang")+"']";
+            ListItem.addEventListener("mouseover", function () {
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                    event.target.style.color = 'rgba(255, 255, 255, 0.6)';
+                  }
+                });
+            ListItem.addEventListener("mouseout", function () {
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                    event.target.style.color = 'rgba(255, 255, 255, 0.3)';
+                  }
+                });
+            this.$$("video-controlbar").$$(".video-dropdown-menu").appendChild(ListItem);
+            ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
+            ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
+          }
+        }   
+      },
 
       /**
        * Dragging stuff
@@ -320,7 +362,7 @@
           this.videoStreamList[0].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
-          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
 
         } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
@@ -328,14 +370,18 @@
                    (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
                    (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
                 this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
+
                 this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
+
           }
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[0].resize(this.videoStreamList.length);
-          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
         }
+        console.log('****' + this.videoStreamList[0].style.width);
+	      this.$.resizer.style.left = this.videoStreamList[0].style.width;
       },
 
       endDragging: function(detail) {
@@ -405,10 +451,17 @@
         this.videoStreamList[0].style.width = (parseFloat( window.getComputedStyle(this).width.replace('px', '')) / 2).toString() + "px";
 
         console.log('resize after fullscreen change');
+
+        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+
         var _this = this;
         this.videoStreamList.forEach(function(stream) {
           stream.resize(_this.videoStreamList.length);
         });
+      },
+
+      progressNavigation: function (e) {
+         this.progress = Math.floor(e.detail.newValueInSeconds) ;
       }
 
     })
