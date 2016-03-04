@@ -359,31 +359,36 @@
         this.isFullscreen = !this.isFullscreen;
       },
 
-
       showSubtitlesOptions: function() {
         this.showSubtitlesMenu=!this.showSubtitlesMenu;
         this.querySelector(".video-dropdown-menu").style.display="block";
-        if(this.setDropdownTimer) {
-              window.clearTimeout(this.timeoutHandle);
-              this.timeoutHandle = window.setTimeout(this.func, this.timeoutTime);
-              this.dropClicked=false;
-              this.setDropdownTimer=true;
+        this.subsTimer();
+      },
+
+
+      subsTimer: function () {
+        var obj=document.querySelector("video-controlbar");
+        if(obj.setDropdownTimer) {
+              window.clearTimeout(obj.timeoutHandle);
+              obj.timeoutHandle = window.setTimeout(obj.func, obj.timeoutTime);
+              obj.dropClicked=false;
+              obj.setDropdownTimer=true;
         }
         else {
-          this.timeoutHandle = setTimeout(this.func = function () {
+          obj.timeoutHandle = setTimeout(obj.func = function () {
               if(!document.querySelector("video-controlbar").dropClicked) {
                 document.querySelector("video-controlbar").showSubtitlesMenu=!document.querySelector("video-controlbar").showSubtitlesMenu;
                 document.querySelector(".video-dropdown-menu").style.display="none";
                 document.querySelector("video-controlbar").setDropdownTimer=false;
               } else {
-                window.clearTimeout(this.timeoutHandle);
-                this.timeoutHandle = window.setTimeout( document.querySelector("video-controlbar").func, this.timeoutTime);
+                window.clearTimeout(obj.timeoutHandle);
+                obj.timeoutHandle = window.setTimeout( document.querySelector("video-controlbar").func, obj.timeoutTime);
                 document.querySelector("video-controlbar").dropClicked=false;
                 document.querySelector("video-controlbar").setDropdownTimer=true;
               }
-            }, this.timeoutTime);
-          this.dropClicked = false;
-          this.setDropdownTimer=true;
+            }, obj.timeoutTime);
+          obj.dropClicked = false;
+          obj.setDropdownTimer=true;
         }
       },
 

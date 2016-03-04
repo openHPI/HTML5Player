@@ -300,6 +300,7 @@
                 });
             this.$$("video-controlbar").$$(".video-dropdown-menu").appendChild(ListItem);
             ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
+            ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
           }
         }   
       },
