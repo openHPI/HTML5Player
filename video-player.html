@@ -282,7 +282,8 @@
             ListItem.setAttribute("data-srclang", trackElements[i].getAttribute("srclang"));
             ListItem.setAttribute("data-index", ++j);
             ListItem.setAttribute("data-label", trackElements[i].getAttribute("label"));
-            //ListItem.setAttribute("padding", "8px 0px");
+            ListItem.style.paddingTop="4px";
+            ListItem.style.paddingBottom="4px";
             var lang=document.createElement("span");
             lang.innerHTML=trackElements[i].getAttribute("srclang").toUpperCase();
             ListItem.appendChild(lang);
@@ -361,7 +362,7 @@
           this.videoStreamList[0].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
-          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
 
         } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
@@ -376,7 +377,7 @@
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[0].resize(this.videoStreamList.length);
-          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
           this.videoStreamList[1].resize(this.videoStreamList.length);
         }
         console.log('****' + this.videoStreamList[0].style.width);
