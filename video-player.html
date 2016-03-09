@@ -381,7 +381,13 @@
           this.videoStreamList[1].resize(this.videoStreamList.length);
         }
         console.log('****' + this.videoStreamList[0].style.width);
-	      this.$.resizer.style.left = this.videoStreamList[0].style.width;
+	this.$.resizer.style.left = this.videoStreamList[0].style.width;
+
+        this.fire("resize", { 
+          newWidth: this.videoStreamList[0].style.width, 
+          newRatio: this.videoStreamList[0].ratio
+        });
+
       },
 
       endDragging: function(detail) {
@@ -442,6 +448,7 @@
             document.webkitExitFullscreen();
           }
         }
+        this.fire("fullscreen", {newValue: this.isFullscreen});
       },
 
       handleFullscreenChanged: function(e) {
@@ -462,6 +469,9 @@
 
       progressNavigation: function (e) {
          this.progress = Math.floor(e.detail.newValueInSeconds) ;
+         this.fire('progressChanged', {
+           newValue: this.progress
+         });
       }
 
     })

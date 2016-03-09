@@ -157,7 +157,7 @@
 
     <td class="cc button">
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 41px; left: 81.6%; display: none;"></ul>
+      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 36px; left: 81.6%; display: none;"></ul>
     </td>
 
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
@@ -172,6 +172,7 @@
 
     Polymer({
 
+      is: 'video-controlbar',
       properties: {
         isPlaying: {
           type: Boolean,
@@ -237,7 +238,16 @@
       thumbnails: [],
 
       attached: function() {
-        this.currentSubLang='';
+//this.updateIcon();
+      },
+
+      //Called from video-player element
+      initSubtitles: function(){
+        //this.currentSubLang='';
+        if (this.currentSubLang) {
+          this.showSubtitles=true;
+          this.changeSubtitles();
+        }
         this.showSubtitlesMenu=false;
         this.showSubtitlesChanged();
         this.timeoutTime=3000; //timeout time for subtitles dropdown
@@ -293,6 +303,9 @@
         if (this.volume > 30) icon = 'av:volume-down';
         if (this.volume > 70) icon = 'av:volume-up';
         this.$.volumeButton.icon = icon;
+        this.fire('volumeChanged', {
+          newValue: this.volume
+        });
       },
 
       isFullscreenChanged: function() {
@@ -319,6 +332,12 @@
 
       togglePlayPause: function() {
         this.isPlaying = !this.isPlaying;
+        if (this.isPlaying) {
+          this.fire("play", {newValue: this.isPlaying});
+        } else {
+          this.fire("pause", {newValue: !this.isPlaying});
+        }
+
       },
 
       toggleSpeed: function() {
@@ -330,6 +349,9 @@
         };
 
         this.speed = nextSpeed[this.speed] || 1.0;
+        this.fire('speedChanged', {
+          newValue: this.speed
+        });
       },
 
       toggleMute: function() {
@@ -343,6 +365,9 @@
 
       toggleQuality: function() {
         this.isHD = !this.isHD;
+        this.fire('qualityChanged', {
+          newValue: this.isHD
+        });
       },
 
       computeQuality: function(isHD) {
@@ -389,24 +414,38 @@
       changeSubtitles: function(event) {
         console.log('controlbar changeSubtitles');
         document.querySelector("video-controlbar").dropClicked = true;
-        var dataSrcLang = event.target.parentElement.getAttribute("data-srclang"); 
+        if(event) {
+          var dataSrcLang = event.target.parentElement.getAttribute("data-srclang");
+        }
+        var vidConElement = document.querySelector("video-controlbar"); 
         if(dataSrcLang) {
-          if (this.parentElement.parentElement.currentSubLang===dataSrcLang) {
-            this.parentElement.parentElement.showSubtitles=!this.parentElement.parentElement.showSubtitles;
-            this.parentElement.parentElement.currentSubLang='';
+          if (vidConElement.currentSubLang===dataSrcLang) {
+            vidConElement.showSubtitles=!vidConElement.showSubtitles;
+            vidConElement.currentSubLang='';
             event.target.style.color = 'rgba(255, 255, 255, 0.3)';
+            vidConElement.fire('subtitlesChanged', {
+              newValue: vidConElement.currentSubLang
+            });
           }
           else {
-            if (this.parentElement.parentElement.currentSubLang) {
-              var obj = "[data-srclang=" + this.parentElement.parentElement.currentSubLang + "]";
+            if (vidConElement.currentSubLang) {
+              var obj = "[data-srclang=" + vidConElement.currentSubLang + "]";
               (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 0.3)';
             }
             else { //initial
-              this.parentElement.parentElement.showSubtitles=!this.parentElement.parentElement.showSubtitles;
+              vidConElement.showSubtitles=!vidConElement.showSubtitles;
             }
             event.target.style.color = 'rgba(255, 255, 255, 1.0)';
 
-            this.parentElement.parentElement.currentSubLang=dataSrcLang;
+            vidConElement.currentSubLang=dataSrcLang;
+            vidConElement.fire('subtitlesChanged', {
+              newValue: vidConElement.currentSubLang
+            });
+          }
+        } else {
+          if (vidConElement.currentSubLang){
+            var obj = "[data-srclang=" + vidConElement.currentSubLang + "]";
+            (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 1.0)';
           }
         }
       },
