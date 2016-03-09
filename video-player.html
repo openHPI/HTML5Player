@@ -303,7 +303,8 @@
             ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
             ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
           }
-        }   
+        }
+        this.$.videoControlBar.initSubtitles();   
       },
 
       /**
