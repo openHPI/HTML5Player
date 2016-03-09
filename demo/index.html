@@ -15,10 +15,9 @@
   </head>
   <body>
     <h1>Dual Stream Example</h1>
-    <video-player id="player" quality="hd">
+    <video-player id="player" duration="1077" quality="hd" speed="0.7" autoplay current-sub-lang="en" progress="1020" volume="33">
       <video-stream
         poster="https://i.vimeocdn.com/video/487220623_640.jpg"
-        duration="1077"
         sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
         <track kind="subtitles" src="sub_demo.vtt" srclang="la" label="Latin">
         <track kind="subtitles" src="sample-english-subtitles.vtt" srclang="en" label="English">
@@ -42,15 +41,29 @@
     </video-player>
 
     <h1>Single Stream Example</h1>
-    <video-player id="player2" quality="hd">
+    <video-player id="player2" quality="hd" duration="1077">
       <video-stream
         poster="https://i.vimeocdn.com/video/487220623_640.jpg"
-        duration="1077"
         sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
       </video-stream>
-
-
     </video-player>
+
+    <script>
+      //var videoPlayerEvents = ["play","pause","fullscreen","subtitlesChanged","speedChanged","volumeChanged","qualityChanged","progressChanged","resize"];
+      var videoPlayerEvents = {play: '' , pause: '', fullscreen: '', subtitlesChanged: '', speedChanged: '', volumeChanged: '', qualityChanged: '', progressChanged: '', resize: ''}; 
+      // to test tracking data
+      function listenPersistor() {
+        var bodyObj = document.querySelector("body");
+        for (var key in videoPlayerEvents) {
+          bodyObj.addEventListener(key, toPersist); 
+        }
+      }
+      function toPersist(event) {
+        //track here
+        console.log("Persist :: " + event.type +": Details => " + event.detail);
+      }
+      window.onload = listenPersistor;
+    </script>
 
   </body>
 </html>

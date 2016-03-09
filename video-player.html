@@ -94,15 +94,17 @@
     <video-controlbar
       id="videoControlBar"
       is-fullscreen="{{isFullscreen}}"
+      is-hD="{{isHD}}"
       play-icon="{{playIcon}}"
       is-playing="{{isPlaying}}"
       speed="{{speed}}"
       volume="{{volume}}"
-      duration="{{stream.duration}}"
+      duration="{{duration}}"
       buffering="{{stream.buffering}}"
       progress="{{progress}}"
       show-subtitles="{{showSubtitles}}"
       current-sub-lang="{{currentSubLang}}"
+      show-subtitles-button="{{showSubtitlesButton}}"
     >
       <content select=":not(video-stream)"></content>
     </video-controlbar>
@@ -169,7 +171,7 @@
         }
       },
 
-      // These properties shall be mirrored to the video streams
+      // These properties shall be mirrored to the video streams //workaround for not being able to bind data with elements selected through <content>
       MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
 
       observers: [
@@ -177,7 +179,7 @@
       ],
 
       listeners: {
-        'progressNavigation': 'progressNavigation'
+        'progressNavigation': 'progressNavigationListener'
       },
 
       startWidth: 0.0,
@@ -240,7 +242,7 @@
         this.$.videoControlBar.initThumbnails(list);
       },
 
-      mirroredPropChanged: function() {
+      mirroredPropChanged: function() { //looks for changes in player and mirrors it to stream properties (downward)
         var _this = this;
         this.videoStreamList.forEach(function(stream) {
           _this.MIRROR.forEach(function(prop) {
@@ -249,15 +251,15 @@
         });
       },
 
-      initBindings: function() {
+      initBindings: function() { 
         this.isPlaying = this.autoplay;
-        this.$.videoControlBar.duration = this.duration;
+        //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
-        this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
+        //this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
 
         var _this = this;
 
-        this.MIRROR.forEach(function(prop) {
+        this.MIRROR.forEach(function(prop) { //looks for changes in streams and mirrors it to player properties (upward)
           console.log('register ' + prop + '-changed');
           _this.videoStreamList[0].addEventListener(prop + '-changed', function(newVal) {
             _this.set(prop, _this.videoStreamList[0][prop]);
@@ -270,7 +272,7 @@
         // });
       },
 
-      subtitlesBindings: function() {
+      subtitlesBindings: function() { //dynamically load subs tracks and options
         //assuming the first video stream has the subs tracks
         var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
         for (var i=0, j=0; i<trackElements.length; i++) {
@@ -303,7 +305,8 @@
             ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
             ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
           }
-        }   
+        }
+        this.$.videoControlBar.initSubtitles();   
       },
 
       /**
@@ -381,7 +384,13 @@
           this.videoStreamList[1].resize(this.videoStreamList.length);
         }
         console.log('****' + this.videoStreamList[0].style.width);
-	      this.$.resizer.style.left = this.videoStreamList[0].style.width;
+	this.$.resizer.style.left = this.videoStreamList[0].style.width;
+
+        this.fire("resize", { 
+          newWidth: this.videoStreamList[0].style.width, 
+          newRatio: this.videoStreamList[0].ratio
+        });
+
       },
 
       endDragging: function(detail) {
@@ -442,6 +451,7 @@
             document.webkitExitFullscreen();
           }
         }
+        this.fire("fullscreen", {newValue: this.isFullscreen});
       },
 
       handleFullscreenChanged: function(e) {
@@ -460,8 +470,11 @@
         });
       },
 
-      progressNavigation: function (e) {
+      progressNavigationListener: function (e) {
          this.progress = Math.floor(e.detail.newValueInSeconds) ;
+         this.fire('progressChanged', {
+           newValue: this.progress
+         });
       }
 
     })

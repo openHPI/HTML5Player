@@ -87,6 +87,7 @@
       secondStream: false,
 
       attached: function() {
+
         this.$.myVideo.addEventListener('durationchange', function(event) {
           this.duration = Math.floor(this.$.myVideo.duration);
         }.bind(this));
@@ -111,6 +112,7 @@
        */
 
       isPlayingChanged: function() {
+
         //console.log('stream isPlayingChanged', arguments);
         if (this.isPlaying) {
           //console.log('video play', this.$);
