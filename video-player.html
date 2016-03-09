@@ -171,7 +171,7 @@
         }
       },
 
-      // These properties shall be mirrored to the video streams
+      // These properties shall be mirrored to the video streams //workaround for not being able to bind data with elements selected through <content>
       MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
 
       observers: [
@@ -194,7 +194,7 @@
 
       attached: function() {
         this.videoStreamList = this.getContentChildren('#streams');
-debugger;
+//debugger;
         // CSS workarounds
         this.querySelector("video-stream:last-of-type").setAttribute("flex", "");
         var lastThumbnail = this.querySelector("video-thumbnail:last-of-type");
@@ -242,7 +242,7 @@ debugger;
         this.$.videoControlBar.initThumbnails(list);
       },
 
-      mirroredPropChanged: function() {
+      mirroredPropChanged: function() { //looks for changes in player and mirrors it to stream properties (downward)
         var _this = this;
         this.videoStreamList.forEach(function(stream) {
           _this.MIRROR.forEach(function(prop) {
@@ -251,7 +251,7 @@ debugger;
         });
       },
 
-      initBindings: function() { //is this a workaround for not being able to bind data with elements selected through <content> ???
+      initBindings: function() { 
         this.isPlaying = this.autoplay;
         //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
@@ -259,7 +259,7 @@ debugger;
 
         var _this = this;
 
-        this.MIRROR.forEach(function(prop) {
+        this.MIRROR.forEach(function(prop) { //looks for changes in streams and mirrors it to player properties (upward)
           console.log('register ' + prop + '-changed');
           _this.videoStreamList[0].addEventListener(prop + '-changed', function(newVal) {
             _this.set(prop, _this.videoStreamList[0][prop]);
@@ -272,7 +272,7 @@ debugger;
         // });
       },
 
-      subtitlesBindings: function() {
+      subtitlesBindings: function() { //dynamically load subs tracks and options
         //assuming the first video stream has the subs tracks
         var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
         for (var i=0, j=0; i<trackElements.length; i++) {
