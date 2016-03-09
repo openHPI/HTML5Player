@@ -27,7 +27,7 @@
 
     </style>
 
-    <video poster$="{{poster}}" id="myVideo">
+    <video poster$="{{poster}}" id="myVideo" autoplay$="{{autoplay}}">
       <source src$="{{hd_src}}" type="video/mp4" />
     </video>
 
@@ -71,7 +71,10 @@
           type: Number,
           observer: 'volumeChanged'
         },
-
+        autoplay: {
+          type: Boolean,
+          value: false
+        },
         currentSubLang: {
           type: String,
           reflectToAttribute: true,
@@ -87,7 +90,8 @@
       secondStream: false,
 
       attached: function() {
-
+debugger;
+        this.$.myVideo.autoplay=this.autoplay;
         this.$.myVideo.addEventListener('durationchange', function(event) {
           this.duration = Math.floor(this.$.myVideo.duration);
         }.bind(this));

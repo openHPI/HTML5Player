@@ -172,10 +172,10 @@
       },
 
       // These properties shall be mirrored to the video streams //workaround for not being able to bind data with elements selected through <content>
-      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang','autoplay'],
 
       observers: [
-        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang)'
+        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang, autoplay)'
       ],
 
       listeners: {
@@ -193,6 +193,7 @@
 
 
       attached: function() {
+debugger;
         this.videoStreamList = this.getContentChildren('#streams');
 
         // CSS workarounds
@@ -256,7 +257,7 @@
         //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
         //this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
-
+        this.videoStreamList[0].autoplay=this.autoplay;
         var _this = this;
 
         this.MIRROR.forEach(function(prop) { //looks for changes in streams and mirrors it to player properties (upward)
