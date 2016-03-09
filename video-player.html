@@ -177,7 +177,7 @@
       ],
 
       listeners: {
-        'progressNavigation': 'progressNavigation'
+        'progressNavigation': 'progressNavigationListener'
       },
 
       startWidth: 0.0,
@@ -192,7 +192,7 @@
 
       attached: function() {
         this.videoStreamList = this.getContentChildren('#streams');
-
+debugger;
         // CSS workarounds
         this.querySelector("video-stream:last-of-type").setAttribute("flex", "");
         var lastThumbnail = this.querySelector("video-thumbnail:last-of-type");
@@ -468,7 +468,7 @@
         });
       },
 
-      progressNavigation: function (e) {
+      progressNavigationListener: function (e) {
          this.progress = Math.floor(e.detail.newValueInSeconds) ;
          this.fire('progressChanged', {
            newValue: this.progress

@@ -145,7 +145,7 @@
           id="progressBar"
           max="{{duration}}"
           value="{{progress}}"
-          second-value="{{buffered}}"
+          second-value="{{buffering}}"
           bubble-text="{{ secondsToMinutes(progress) }}"
           change-eventname="setProgress"
         ></slider-bar>
@@ -187,7 +187,7 @@
           observer: 'updateIcon',
           reflectToAttribute: true
         },
-        buffered: Number,
+        buffering: Number,
         duration: Number,
         isHD: {
           type: Boolean,
@@ -238,6 +238,7 @@
       thumbnails: [],
 
       attached: function() {
+debugger;
 //this.updateIcon();
       },
 
