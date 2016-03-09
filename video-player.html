@@ -94,6 +94,7 @@
     <video-controlbar
       id="videoControlBar"
       is-fullscreen="{{isFullscreen}}"
+      is-hD="{{isHD}}"
       play-icon="{{playIcon}}"
       is-playing="{{isPlaying}}"
       speed="{{speed}}"
@@ -103,6 +104,7 @@
       progress="{{progress}}"
       show-subtitles="{{showSubtitles}}"
       current-sub-lang="{{currentSubLang}}"
+      show-subtitles-button="{{showSubtitlesButton}}"
     >
       <content select=":not(video-stream)"></content>
     </video-controlbar>
@@ -249,11 +251,11 @@ debugger;
         });
       },
 
-      initBindings: function() {
+      initBindings: function() { //is this a workaround for not being able to bind data with elements selected through <content> ???
         this.isPlaying = this.autoplay;
-        this.$.videoControlBar.duration = this.duration;
+        //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
-        this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
+        //this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
 
         var _this = this;
 
