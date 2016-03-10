@@ -180,26 +180,26 @@
       },
 
       resize: function(videoCount) {
-debugger;
         console.log('resizing stream with count', videoCount);
         var controlbarHeight = 48.0;
-        var minVideoWidth = 100.0;
 
         var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
 
+        var minVideoWidth = 100.0;
+        var maxVideoWidth = --videoCount*parentWidth - minVideoWidth;
+        var aspectRatio = this.ratioAsDouble(this.ratio);
+
         var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
         console.log('parent', parentWidth, 'new', newWidth);
-        newWidth = Math.min( --videoCount*parentWidth - minVideoWidth , Math.max(minVideoWidth, newWidth) );
 
-        var newHeight = newWidth * this.ratioAsDouble(this.ratio);
+        newWidth = Math.min( maxVideoWidth, Math.max(minVideoWidth, newWidth) );
+
+        
+        var newHeight = newWidth * aspectRatio;
         console.log('w', newWidth, 'h', newHeight);
         if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
           this.style.width = newWidth.toString() + "px";
           this.style.height = newHeight.toString() + "px";
-        }
-        if (videoCount == 2){
-          //this.style.width = '100%';
-          //this.style.height = 'auto';
         }
       },
 

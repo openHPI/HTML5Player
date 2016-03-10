@@ -347,27 +347,25 @@
 
         document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 debugger;
-        if (detail.dx > 0) {
+        if (width(this.videoStreamList[0]) < (this.startWidth + detail.dx)) {
           // We're making the first video bigger
           if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
                    (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
                    (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
-                this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px"; 
+            this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
+            this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px"; 
           }
           // Resize the first video, and then the second
           this.videoStreamList[0].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
 
-        } else if (detail.dx < 0) {
+        } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
           if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
                    (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
                    (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
-
-                this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
-
+            this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
+            this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
           }
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
@@ -460,7 +458,7 @@ debugger;
       initResize: function(){
         this.videoStreamList.forEach(function(stream) {
           console.log('resize after fullscreen change');
-          stream.style.width=(parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length).toString()+"px";
+          stream.style.width = (parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length).toString()+"px";
           stream.resize(this.videoStreamList.length);
         }, this);
         this.$.resizer.style.left = this.videoStreamList[0].style.width;
