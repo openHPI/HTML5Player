@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Stream Example</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <!-- import the video-player -->
+    <link rel="import" href="../video-player.html">
+
+    <link rel="stylesheet" href="video_player.css">
+  </head>
+  <body>
+    
+
+    <h1>Single Stream Example</h1>
+    <video-player id="player2" quality="hd" duration="1077">
+      <video-stream
+        poster="https://i.vimeocdn.com/video/487220623_640.jpg"
+        sd_src="https://player.vimeo.com/external/104624360.sd.mp4?s=a7a41026f4c356cc46de876e3e6072af&amp;download=1">
+      </video-stream>
+    </video-player>
+
+    <script>
+      //var videoPlayerEvents = ["play","pause","fullscreen","subtitlesChanged","speedChanged","volumeChanged","qualityChanged","progressChanged","resize"];
+      var videoPlayerEvents = {play: '' , pause: '', fullscreen: '', subtitlesChanged: '', speedChanged: '', volumeChanged: '', qualityChanged: '', progressChanged: '', resize: ''}; 
+      // to test tracking data
+      function listenPersistor() {
+        var bodyObj = document.querySelector("body");
+        for (var key in videoPlayerEvents) {
+          bodyObj.addEventListener(key, toPersist); 
+        }
+      }
+      function toPersist(event) {
+        //track here
+        console.log("Persist :: " + event.type +": Details => " + event.detail);
+      }
+      window.onload = listenPersistor;
+    </script>
+
+  </body>
+</html>
