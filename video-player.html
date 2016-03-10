@@ -221,13 +221,11 @@
         }
 
         var _this = this;
-        for (var i = 0; i < this.videoStreamList.length - 1; i++) {
-          //Polymer.dom(this.root).insertBefore(this.videoStreamList[i], this.$.resizer);
-        }
-        //Polymer.dom(this.root).insertBefore(this.$.resizer, this.$.overlay);
 
         this.videoStreamList.forEach(function(stream) {
           console.log("initial resize", stream);
+debugger;
+          stream.style.width=(parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/_this.videoStreamList.length).toString()+"px";
           stream.resize(_this.videoStreamList.length);
         });
 
@@ -245,9 +243,7 @@
         // Workaround because <content> cannot give thumbnails to controlbar
         var list = this.querySelectorAll("video-thumbnail");
         this.$.videoControlBar.initThumbnails(list);
-
       },
-
 
       mirroredPropChanged: function() { //looks for changes in player and mirrors it to stream properties (downward)
         var _this = this;
@@ -262,7 +258,6 @@
         this.isPlaying = this.autoplay;
         //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
-        //this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
         this.videoStreamList[0].autoplay = this.autoplay;
         var _this = this;
 
@@ -272,11 +267,6 @@
             _this.set(prop, _this.videoStreamList[0][prop]);
           });
         });
- 
-
-        // this.videoStreamList.forEach(function(stream) {
-        //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
-        // });
       },
 
       subtitlesBindings: function() { //dynamically load subs tracks and options
@@ -376,8 +366,6 @@
           // Resize the first video, and then the second
           this.videoStreamList[0].resize(this.videoStreamList.length);
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
-          this.videoStreamList[1].resize(this.videoStreamList.length);
-//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
 
         } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
           // We're making the first video smaller
@@ -392,8 +380,6 @@
           // Resize the second video, and then the first
           this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
           this.videoStreamList[0].resize(this.videoStreamList.length);
-//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
-          this.videoStreamList[1].resize(this.videoStreamList.length);
         }
         console.log('****' + this.videoStreamList[0].style.width);
 	this.$.resizer.style.left = this.videoStreamList[0].style.width;
