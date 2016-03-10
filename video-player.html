@@ -220,20 +220,11 @@
           this.$.resizer.style.display = "none";
         }
 
-        var _this = this;
-
-        this.videoStreamList.forEach(function(stream) {
-          console.log("initial resize", stream);
-debugger;
-          stream.style.width=(parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/_this.videoStreamList.length).toString()+"px";
-          stream.resize(_this.videoStreamList.length);
-        });
+        this.initResize();
 
         this.async(function() {
           this.stream = this.videoStreamList[0];
         }.bind(this));
-
-        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 
         // manage initial data bindings b/w videoplayer and streams workaround to track initial settings as <content> doesnt help binding
         this.initBindings();
@@ -456,16 +447,7 @@ debugger;
       handleFullscreenChanged: function(e) {
         // updates the video size
         this.isFullscreen = !!(document.fullScreen || document.msFullScreenElement || document.mozFullScreen || document.webkitIsFullScreen);
-
-        this.videoStreamList.forEach(function(stream) {
-          console.log('resize after fullscreen change');
-debugger;
-          stream.style.width=(parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/_this.videoStreamList.length).toString()+"px";
-          stream.resize(_this.videoStreamList.length);
-        });
-
-        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
-
+        this.initResize();
       },
 
       progressNavigationListener: function (e) {
@@ -473,6 +455,15 @@ debugger;
          this.fire('progressChanged', {
            newValue: this.progress
          });
+      },
+
+      initResize: function(){
+        this.videoStreamList.forEach(function(stream) {
+          console.log('resize after fullscreen change');
+          stream.style.width=(parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length).toString()+"px";
+          stream.resize(this.videoStreamList.length);
+        }, this);
+        this.$.resizer.style.left = this.videoStreamList[0].style.width;
       }
 
     })
