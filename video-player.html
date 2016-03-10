@@ -155,11 +155,13 @@
         isPlaying: {
           type: Boolean,
           value: false,
-          notify: true
+          notify: true,
+          reflectToAttribute: true
         },
 
         currentSubLang: {
           type: String,
+          value: '',
           reflectToAttribute: true,
           notify: true
         },
@@ -171,8 +173,9 @@
         }
       },
 
-      // These properties shall be mirrored to the video streams //workaround for not being able to bind data with elements selected through <content>
-      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang','autoplay'],
+      // These properties shall be mirrored to the video streams 
+      // Workaround for not being able to bind data with elements selected through <content>
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang', 'autoplay'],
 
       observers: [
         'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang, autoplay)'
@@ -234,14 +237,17 @@
 
         this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 
-        // manage bindings
+        // manage initial data bindings b/w videoplayer and streams workaround to track initial settings as <content> doesnt help binding
         this.initBindings();
+        
         this.subtitlesBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
         var list = this.querySelectorAll("video-thumbnail");
         this.$.videoControlBar.initThumbnails(list);
+
       },
+
 
       mirroredPropChanged: function() { //looks for changes in player and mirrors it to stream properties (downward)
         var _this = this;
@@ -307,7 +313,12 @@
             ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
           }
         }
-        this.$.videoControlBar.initSubtitles();   
+        if (j>0) {
+          this.videoStreamList[0].currentSubLang=this.currentSubLang;
+          this.$.videoControlBar.initSubtitles();
+        } else {
+          this.showSubtitlesButton = false;
+        }
       },
 
       /**
