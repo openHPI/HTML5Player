@@ -29,6 +29,7 @@
 
     <video poster$="{{poster}}" id="myVideo" autoplay$="{{autoplay}}">
       <source src$="{{hd_src}}" type="video/mp4" />
+      <source src$="{{sd_src}}" type="video/mp4" />
     </video>
 
   </template>
@@ -90,7 +91,7 @@
       secondStream: false,
 
       attached: function() {
-debugger;
+
         this.$.myVideo.autoplay=this.autoplay;
         this.$.myVideo.addEventListener('durationchange', function(event) {
           this.duration = Math.floor(this.$.myVideo.duration);
