@@ -329,9 +329,9 @@
       togglePlayPause: function() {
         this.isPlaying = !this.isPlaying;
         if (this.isPlaying) {
-          this.fire("play", {newValue: this.isPlaying});
+          this.fire("play"); 
         } else {
-          this.fire("pause", {newValue: !this.isPlaying});
+          this.fire("pause");
         }
 
       },
@@ -426,7 +426,7 @@
           else {
             if (vidConElement.currentSubLang) {
               var obj = "[data-srclang=" + vidConElement.currentSubLang + "]";
-              (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 0.3)';
+              document.querySelector(obj).children[0].style.color = 'rgba(255, 255, 255, 0.3)';
             }
             else { //initial
               vidConElement.showSubtitles=!vidConElement.showSubtitles;
