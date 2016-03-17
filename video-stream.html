@@ -44,7 +44,10 @@
         sd_src: String,
         hd_src: String,
         poster: String,
-        ratio: String,
+        ratio: {
+          type: String,
+          value: "16:9"
+        },
         subtitles: String,
         sublang: String,
         isPlaying: {
@@ -177,35 +180,6 @@
           this.$.myVideo.currentTime = currentTime;
           this.$.myVideo.play();
         }
-      },
-
-      resize: function(videoCount) {
-        console.log('resizing stream with count', videoCount);
-        var controlbarHeight = 48.0;
-
-        var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
-
-        var minVideoWidth = 100.0;
-        var maxVideoWidth = --videoCount*parentWidth - minVideoWidth;
-        var aspectRatio = this.ratioAsDouble(this.ratio);
-
-        var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
-        console.log('parent', parentWidth, 'new', newWidth);
-
-        newWidth = Math.min( maxVideoWidth, Math.max(minVideoWidth, newWidth) );
-
-        
-        var newHeight = newWidth * aspectRatio;
-        console.log('w', newWidth, 'h', newHeight);
-        if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
-          this.style.width = newWidth.toString() + "px";
-          this.style.height = newHeight.toString() + "px";
-        }
-      },
-
-      ratioAsDouble: function(ratio) {
-        // default ratio = 16:9
-        return ratio == '4:3' ? 3/4 : 9/16;
       }
 
     })
