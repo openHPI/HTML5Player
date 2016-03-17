@@ -125,6 +125,10 @@
           type: Number,
           value: 1
         },
+        streamRatio: {
+          type: Number,
+          value: 0.5
+        },
         quality: {
           type: String,
           value: 'sd'
@@ -356,6 +360,7 @@
 
         //console.log('****' + this.videoStreamList[0].style.width);
 	this.$.resizer.style.left = this.videoStreamList[0].style.width;
+        this.streamRatio = getComputedStyle(this.videoStreamList[0]).width.replace('px', '') / getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '');
 
         this.fire("resize", { 
           newWidth: this.videoStreamList[0].style.width, 
@@ -438,7 +443,7 @@
       },
 
       initResize: function(){
-        var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )/this.videoStreamList.length));
+        var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )*this.streamRatio));
         this.resize(this.videoStreamList.length, newWidth);
         this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
         //this.$.resizer.style.left = (this.videoStreamList[0].getBoundingClientRect().right - this.videoStreamList[0].getBoundingClientRect().left).toString()+"px";
