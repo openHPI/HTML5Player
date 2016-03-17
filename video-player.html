@@ -462,10 +462,14 @@
       initResize: function(){
         this.videoStreamList.forEach(function(stream) {
           console.log('resize after fullscreen change');
-          stream.style.width = (parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length).toString()+"px";
+//debugger;
+          stream.style.width = Math.floor((parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length)).toString()+"px";
           stream.resize(this.videoStreamList.length);
         }, this);
-        this.$.resizer.style.left = this.videoStreamList[0].style.width;
+//debugger;
+        this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.videoStreamList[0].ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
+
+        //this.$.resizer.style.left = (this.videoStreamList[0].getBoundingClientRect().right - this.videoStreamList[0].getBoundingClientRect().left).toString()+"px";
       }
 
     })
