@@ -308,6 +308,8 @@
        */
 
       trackResizing: function(e, detail) {
+        if(e.stopPropagation) e.stopPropagation();
+        if(e.preventDefault) e.preventDefault();
         switch (detail.state) {
           case 'start':
             this.startDragging(detail);
@@ -348,41 +350,17 @@
         // --------------------------------------------
 
         document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
+        var newWidth=this.startWidth[0] + detail.dx;
 
-        if(!((this.startWidth[0] + detail.dx < 100) || (this.startWidth[0] - detail.dx < 100) ||
-                   (this.startWidth[1] + detail.dx < 100) || (this.startWidth[0] - detail.dx < 100))) { 
-          if (width(this.videoStreamList[0]) < (this.startWidth[0] + detail.dx)) {
-            // We're making the first video bigger
-            if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
-                     (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                     (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-              this.videoStreamList[0].style.width = (this.startWidth[0] + detail.dx).toString() + "px";
-              this.videoStreamList[1].style.width = (this.startWidth[1] - detail.dx).toString() + "px"; 
-            }
-            // Resize the first video, and then the second
-            this.videoStreamList[0].resize(this.videoStreamList.length);
-            this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+        this.resize(this.videoStreamList.length, newWidth);
 
-          } else if (width(this.videoStreamList[0]) > (this.startWidth[0] + detail.dx)) {
-            // We're making the first video smaller
-            if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
-                     (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                     (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-              this.videoStreamList[0].style.width = (this.startWidth[0] + detail.dx).toString() + "px";
-              this.videoStreamList[1].style.width = (this.startWidth[1] - detail.dx).toString() + "px";
-            }
-            // Resize the second video, and then the first
-            this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
-            this.videoStreamList[0].resize(this.videoStreamList.length);
-          }
-          console.log('****' + this.videoStreamList[0].style.width);
-	  this.$.resizer.style.left = this.videoStreamList[0].style.width;
+        //console.log('****' + this.videoStreamList[0].style.width);
+	this.$.resizer.style.left = this.videoStreamList[0].style.width;
 
-          this.fire("resize", { 
-            newWidth: this.videoStreamList[0].style.width, 
-            newRatio: this.videoStreamList[0].ratio
-          });
-        }
+        this.fire("resize", { 
+          newWidth: this.videoStreamList[0].style.width, 
+          newRatio: this.videoStreamList[0].ratio
+        });
       },
 
       endDragging: function(detail) {
@@ -460,16 +438,61 @@
       },
 
       initResize: function(){
-        this.videoStreamList.forEach(function(stream) {
-          console.log('resize after fullscreen change');
-//debugger;
-          stream.style.width = Math.floor((parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length)).toString()+"px";
-          stream.resize(this.videoStreamList.length);
-        }, this);
-//debugger;
-        this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.videoStreamList[0].ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
+
+          var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )/this.videoStreamList.length));
+          this.resize(this.videoStreamList.length, newWidth);
+
+        this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
 
         //this.$.resizer.style.left = (this.videoStreamList[0].getBoundingClientRect().right - this.videoStreamList[0].getBoundingClientRect().left).toString()+"px";
+      },
+
+      resize: function(videoCount, newWidth) {
+        console.log('resizing stream with count', videoCount);
+        var controlbarHeight = 48.0;
+
+        var parentWidth = parseFloat( window.getComputedStyle(this.$.videoArea).width.replace('px', '') );
+
+        var minVideoWidth = 100.0;
+        var maxVideoWidth = (videoCount-1)*parentWidth - minVideoWidth;
+
+        var aspectRatio = [];
+        aspectRatio[0] = this.ratioAsDouble(this.videoStreamList[0].ratio);
+        
+        //var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
+        console.log('parent', parentWidth, 'new', newWidth);
+
+        newWidth = Math.min( maxVideoWidth, Math.max(minVideoWidth, newWidth) ); //if 1st stream is between min and max, so will second stream be, i.e. = parent - newWidth
+
+        var streamWidth = [];
+        streamWidth[0] = newWidth;
+
+        var newHeight = newWidth * aspectRatio[0];
+
+        var streamHeight = [];
+        streamHeight[0] = streamWidth[0] * aspectRatio[0];
+
+        if (videoCount>1) {
+          streamWidth[1] = parentWidth - newWidth;
+          aspectRatio[1] = this.ratioAsDouble(this.videoStreamList[1].ratio);
+          streamHeight[1] = streamWidth[1] * aspectRatio[1];
+        }
+
+        console.log('w', newWidth, 'h', newHeight);
+
+        if(!((streamHeight[0] + controlbarHeight > document.documentElement.clientHeight) || (streamHeight[1] + controlbarHeight > document.documentElement.clientHeight))) {
+          this.videoStreamList[0].style.width = streamWidth[0].toString() + "px";
+          this.videoStreamList[0].style.height = streamHeight[0].toString() + "px";
+          if (videoCount>1) {
+            this.videoStreamList[1].style.width = streamWidth[1].toString() + "px";
+            this.videoStreamList[1].style.height = streamHeight[1].toString() + "px";
+          }
+        }
+      },
+
+      ratioAsDouble: function(ratio) {
+        // default ratio = 16:9
+        return ratio == '4:3' ? 3/4 : 9/16;
       }
 
     })
