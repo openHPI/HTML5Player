@@ -130,7 +130,7 @@
       },
 
       progressChanged: function(newValue, oldValue) {
-        //console.log('stream progressChanged', arguments);
+        console.log('stream progressChanged', arguments);
         if (Math.abs(oldValue - newValue) >= 3) {
           this.$.myVideo.currentTime = newValue;
         }
