@@ -27,8 +27,9 @@
 
     </style>
 
-    <video poster$="{{poster}}" id="myVideo">
+    <video poster$="{{poster}}" id="myVideo" autoplay$="{{autoplay}}">
       <source src$="{{hd_src}}" type="video/mp4" />
+      <source src$="{{sd_src}}" type="video/mp4" />
     </video>
 
   </template>
@@ -71,7 +72,10 @@
           type: Number,
           observer: 'volumeChanged'
         },
-
+        autoplay: {
+          type: Boolean,
+          value: false
+        },
         currentSubLang: {
           type: String,
           reflectToAttribute: true,
@@ -87,7 +91,6 @@
       secondStream: false,
 
       attached: function() {
-
         this.$.myVideo.addEventListener('durationchange', function(event) {
           this.duration = Math.floor(this.$.myVideo.duration);
         }.bind(this));
@@ -112,7 +115,6 @@
        */
 
       isPlayingChanged: function() {
-
         //console.log('stream isPlayingChanged', arguments);
         if (this.isPlaying) {
           //console.log('video play', this.$);
@@ -180,23 +182,24 @@
       resize: function(videoCount) {
         console.log('resizing stream with count', videoCount);
         var controlbarHeight = 48.0;
-        var minVideoWidth = 100.0;
 
         var parentWidth = parseFloat( window.getComputedStyle(this.parentNode).width.replace('px', '') );
 
+        var minVideoWidth = 100.0;
+        var maxVideoWidth = --videoCount*parentWidth - minVideoWidth;
+        var aspectRatio = this.ratioAsDouble(this.ratio);
+
         var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
         console.log('parent', parentWidth, 'new', newWidth);
-        newWidth = Math.min( --videoCount*parentWidth - minVideoWidth , Math.max(minVideoWidth, newWidth) );
 
-        var newHeight = newWidth * this.ratioAsDouble(this.ratio);
+        newWidth = Math.min( maxVideoWidth, Math.max(minVideoWidth, newWidth) );
+
+        
+        var newHeight = newWidth * aspectRatio;
         console.log('w', newWidth, 'h', newHeight);
         if (!(newHeight + controlbarHeight > document.documentElement.clientHeight)) {
           this.style.width = newWidth.toString() + "px";
           this.style.height = newHeight.toString() + "px";
-        }
-        if (videoCount == 2){
-          //this.style.width = '100%';
-          //this.style.height = 'auto';
         }
       },
 

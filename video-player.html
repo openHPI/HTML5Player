@@ -155,11 +155,13 @@
         isPlaying: {
           type: Boolean,
           value: false,
-          notify: true
+          notify: true,
+          reflectToAttribute: true
         },
 
         currentSubLang: {
           type: String,
+          value: '',
           reflectToAttribute: true,
           notify: true
         },
@@ -171,18 +173,19 @@
         }
       },
 
-      // These properties shall be mirrored to the video streams //workaround for not being able to bind data with elements selected through <content>
-      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang'],
+      // These properties shall be mirrored to the video streams 
+      // Workaround for not being able to bind data with elements selected through <content>
+      MIRROR: ['isHD', 'speed', 'volume', 'progress', 'isPlaying', 'currentSubLang', 'autoplay'],
 
       observers: [
-        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang)'
+        'mirroredPropChanged(isHD, speed, volume, progress, isPlaying, currentSubLang, autoplay)'
       ],
 
       listeners: {
         'progressNavigation': 'progressNavigationListener'
       },
 
-      startWidth: 0.0,
+      startWidth: [0.0, 0.0],
       mouseMoveListener: null,
       mouseUpListener: null,
       showSubtitlesButton: true,
@@ -193,6 +196,7 @@
 
 
       attached: function() {
+
         this.videoStreamList = this.getContentChildren('#streams');
 
         // CSS workarounds
@@ -216,25 +220,15 @@
           this.$.resizer.style.display = "none";
         }
 
-        var _this = this;
-        for (var i = 0; i < this.videoStreamList.length - 1; i++) {
-          //Polymer.dom(this.root).insertBefore(this.videoStreamList[i], this.$.resizer);
-        }
-        //Polymer.dom(this.root).insertBefore(this.$.resizer, this.$.overlay);
-
-        this.videoStreamList.forEach(function(stream) {
-          console.log("initial resize", stream);
-          stream.resize(_this.videoStreamList.length);
-        });
+        this.initResize();
 
         this.async(function() {
           this.stream = this.videoStreamList[0];
         }.bind(this));
 
-        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
-
-        // manage bindings
+        // manage initial data bindings b/w videoplayer and streams workaround to track initial settings as <content> doesnt help binding
         this.initBindings();
+        
         this.subtitlesBindings();
 
         // Workaround because <content> cannot give thumbnails to controlbar
@@ -255,8 +249,7 @@
         this.isPlaying = this.autoplay;
         //this.$.videoControlBar.duration = this.duration;
         this.$.videoControlBar.isHD = this.quality === "hd";
-        //this.$.videoControlBar.showSubtitlesButton = this.showSubtitlesButton;
-
+        this.videoStreamList[0].autoplay = this.autoplay;
         var _this = this;
 
         this.MIRROR.forEach(function(prop) { //looks for changes in streams and mirrors it to player properties (upward)
@@ -265,17 +258,12 @@
             _this.set(prop, _this.videoStreamList[0][prop]);
           });
         });
- 
-
-        // this.videoStreamList.forEach(function(stream) {
-        //   _this.showSubtitlesButton = (_this.showSubtitlesButton || (stream.subtitles != null))
-        // });
       },
 
       subtitlesBindings: function() { //dynamically load subs tracks and options
         //assuming the first video stream has the subs tracks
         var trackElements = (this.getEffectiveChildren()[0]).getEffectiveChildNodes();
-        for (var i=0, j=0; i<trackElements.length; i++) {
+        for (var i = 0, j = 0; i<trackElements.length; i++) {
           if (trackElements[i] instanceof HTMLElement) {
             trackElements[i].setAttribute("hidden", true);
             this.getEffectiveChildren()[0].$$("video").appendChild(trackElements[i]);
@@ -284,29 +272,35 @@
             ListItem.setAttribute("data-srclang", trackElements[i].getAttribute("srclang"));
             ListItem.setAttribute("data-index", ++j);
             ListItem.setAttribute("data-label", trackElements[i].getAttribute("label"));
-            ListItem.style.paddingTop="4px";
-            ListItem.style.paddingBottom="4px";
-            var lang=document.createElement("span");
-            lang.innerHTML=trackElements[i].getAttribute("srclang").toUpperCase();
+            ListItem.style.paddingTop = "4px";
+            ListItem.style.paddingBottom = "4px";
+            ListItem.setAttribute("align", "center");
+            var lang = document.createElement("span");
+            lang.innerHTML = trackElements[i].getAttribute("srclang").toUpperCase();
             ListItem.appendChild(lang);
 
             var queryString = ".languageselectionentry[data-srclang='"+trackElements[i].getAttribute("srclang")+"']";
             ListItem.addEventListener("mouseover", function () {
-                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang === event.target.parentElement.getAttribute("data-srclang")))) { 
                     event.target.style.color = 'rgba(255, 255, 255, 0.6)';
                   }
                 });
             ListItem.addEventListener("mouseout", function () {
-                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang===event.target.parentElement.getAttribute("data-srclang")))) { 
+                  if ((!document.querySelector("video-controlbar").currentSubLang)||(!(document.querySelector("video-controlbar").currentSubLang === event.target.parentElement.getAttribute("data-srclang")))) { 
                     event.target.style.color = 'rgba(255, 255, 255, 0.3)';
                   }
                 });
             this.$$("video-controlbar").$$(".video-dropdown-menu").appendChild(ListItem);
-            ListItem.onclick=this.$$("video-controlbar").changeSubtitles;
-            ListItem.onmousemove=document.querySelector("video-controlbar").subsTimer;
+            ListItem.onclick = this.$$("video-controlbar").changeSubtitles;
+            ListItem.onmousemove = document.querySelector("video-controlbar").subsTimer;
           }
         }
-        this.$.videoControlBar.initSubtitles();   
+        if (j>0) {
+          this.videoStreamList[0].currentSubLang = this.currentSubLang;
+          this.$.videoControlBar.initSubtitles();
+        } else {
+          this.showSubtitlesButton = false;
+        }
       },
 
       /**
@@ -331,10 +325,12 @@
 
       startDragging: function(detail) {
         this.isDragging = true;
-        this.startWidth = parseFloat(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''));
+        this.startWidth[0] = parseFloat(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''));
+        this.startWidth[1] = parseFloat(window.getComputedStyle(this.videoStreamList[1]).width.replace('px', ''));
       },
 
       doDragging: function(detail) {
+
         var style = function(el) { return el.style; };
         var computed = window.getComputedStyle;
         var dimension = function(style, name) { return parseFloat(style[name].replace('px', '')); };
@@ -353,44 +349,40 @@
 
         document.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
 
-        if (width(this.videoStreamList[0]) < (this.startWidth + detail.dx)) {
-          // We're making the first video bigger
-          if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
-                   (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                   (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
-                this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px"; 
+        if(!((this.startWidth[0] + detail.dx < 100) || (this.startWidth[0] - detail.dx < 100) ||
+                   (this.startWidth[1] + detail.dx < 100) || (this.startWidth[0] - detail.dx < 100))) { 
+          if (width(this.videoStreamList[0]) < (this.startWidth[0] + detail.dx)) {
+            // We're making the first video bigger
+            if ((height(this.videoStreamList[0]) <= height(this.videoStreamList[1])) &&
+                     (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                     (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+              this.videoStreamList[0].style.width = (this.startWidth[0] + detail.dx).toString() + "px";
+              this.videoStreamList[1].style.width = (this.startWidth[1] - detail.dx).toString() + "px"; 
+            }
+            // Resize the first video, and then the second
+            this.videoStreamList[0].resize(this.videoStreamList.length);
+            this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+
+          } else if (width(this.videoStreamList[0]) > (this.startWidth[0] + detail.dx)) {
+            // We're making the first video smaller
+            if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
+                     (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
+                     (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
+              this.videoStreamList[0].style.width = (this.startWidth[0] + detail.dx).toString() + "px";
+              this.videoStreamList[1].style.width = (this.startWidth[1] - detail.dx).toString() + "px";
+            }
+            // Resize the second video, and then the first
+            this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
+            this.videoStreamList[0].resize(this.videoStreamList.length);
           }
-          // Resize the first video, and then the second
-          this.videoStreamList[0].resize(this.videoStreamList.length);
-          this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
-          this.videoStreamList[1].resize(this.videoStreamList.length);
-//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
+          console.log('****' + this.videoStreamList[0].style.width);
+	  this.$.resizer.style.left = this.videoStreamList[0].style.width;
 
-        } else if (width(this.videoStreamList[0]) > (this.startWidth + detail.dx)) {
-          // We're making the first video smaller
-          if ((height(this.videoStreamList[0]) >= height(this.videoStreamList[1])) &&
-                   (document.documentElement.clientHeight <= computedHeight(this) + controlbarHeight ) ||
-                   (document.documentElement.clientHeight > computedHeight(this) + controlbarHeight )) {
-                this.videoStreamList[0].style.width = (this.startWidth + detail.dx).toString() + "px";
-
-                this.videoStreamList[1].style.width = (this.startWidth - detail.dx).toString() + "px";
-
-          }
-          // Resize the second video, and then the first
-          this.videoStreamList.slice(-1)[0].resize(this.videoStreamList.length);
-          this.videoStreamList[0].resize(this.videoStreamList.length);
-//          this.videoStreamList.slice(-1)[1].resize(this.videoStreamList.length);
-          this.videoStreamList[1].resize(this.videoStreamList.length);
+          this.fire("resize", { 
+            newWidth: this.videoStreamList[0].style.width, 
+            newRatio: this.videoStreamList[0].ratio
+          });
         }
-        console.log('****' + this.videoStreamList[0].style.width);
-	this.$.resizer.style.left = this.videoStreamList[0].style.width;
-
-        this.fire("resize", { 
-          newWidth: this.videoStreamList[0].style.width, 
-          newRatio: this.videoStreamList[0].ratio
-        });
-
       },
 
       endDragging: function(detail) {
@@ -457,17 +449,7 @@
       handleFullscreenChanged: function(e) {
         // updates the video size
         this.isFullscreen = !!(document.fullScreen || document.msFullScreenElement || document.mozFullScreen || document.webkitIsFullScreen);
-
-        this.videoStreamList[0].style.width = (parseFloat( window.getComputedStyle(this).width.replace('px', '')) / 2).toString() + "px";
-
-        console.log('resize after fullscreen change');
-
-        this.querySelector("#resizer").style.left = this.videoStreamList[0].style.width;
-
-        var _this = this;
-        this.videoStreamList.forEach(function(stream) {
-          stream.resize(_this.videoStreamList.length);
-        });
+        this.initResize();
       },
 
       progressNavigationListener: function (e) {
@@ -475,6 +457,15 @@
          this.fire('progressChanged', {
            newValue: this.progress
          });
+      },
+
+      initResize: function(){
+        this.videoStreamList.forEach(function(stream) {
+          console.log('resize after fullscreen change');
+          stream.style.width = (parseFloat( getComputedStyle(stream.parentNode).width.replace('px', '') )/this.videoStreamList.length).toString()+"px";
+          stream.resize(this.videoStreamList.length);
+        }, this);
+        this.$.resizer.style.left = this.videoStreamList[0].style.width;
       }
 
     })

@@ -91,19 +91,13 @@
         content: "\e67e";
       }
 
-      ul .cc.button .video-dropdown-menu {
-        list-style: none;
-        list-style-type: none;
-        bottom: 100%;
-        width: 30px;
-        display: none;
-        margin: 0;
-        padding: 0;
-        left: -2px;
+      #subContainer {
+        position: relative;
       }
 
       .video-dropdown-menu {
         position: absolute;
+        left: -2px;
         background-color: rgb(66, 66, 66);
         color: white;
         font-family: NeoSansStdRegular, sans-serif;
@@ -154,12 +148,12 @@
     </div>
     <div class="control" id="speedButton" on-click="toggleSpeed">{{ formatSpeed(speed) }}</div>
     <div class="control" id="qualityButton" on-click="toggleQuality">{{quality}}</div>
-
-    <td class="cc button">
+    <div id="subContainer">
+    <td class="cc button" >
       <iron-icon id="subtitlesButton" icon="av:closed-caption" class="control" on-click="showSubtitlesOptions" hidden$="{{!showSubtitlesButton}}"></iron-icon>
-      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 2%; width: 5px; bottom: 36px; left: 81.6%; display: none;"></ul>
+      <ul class="video-dropdown-menu" style="list-style: none; cursor: pointer; cursor: hand; padding-left: 1%; padding-right: 1%; width: 43px; bottom: 36px; display: none;"></ul>
     </td>
-
+    </div>
     <iron-icon id="volumeButton" icon="av:volume-up" class="control" on-click="toggleMute"></iron-icon>
     <div id="volume" class="control">
       <slider-bar id="volumeBar" value="{{volume}}" max="100" change-eventname="setVolume"></slider-bar>
@@ -237,16 +231,16 @@
 
       thumbnails: [],
 
-      //Called from video-player element
+      // Called from video-player element
       initSubtitles: function(){
-        //this.currentSubLang='';
+        //this.currentSubLang = '';
         if (this.currentSubLang) {
-          this.showSubtitles=true;
+          this.showSubtitles = true;
           this.changeSubtitles();
         }
-        this.showSubtitlesMenu=false;
+        this.showSubtitlesMenu = false;
         this.showSubtitlesChanged();
-        this.timeoutTime=3000; //timeout time for subtitles dropdown
+        this.timeoutTime = 3000; //timeout time for subtitles dropdown
       },
 
 
@@ -329,9 +323,9 @@
       togglePlayPause: function() {
         this.isPlaying = !this.isPlaying;
         if (this.isPlaying) {
-          this.fire("play", {newValue: this.isPlaying});
+          this.fire("play"); 
         } else {
-          this.fire("pause", {newValue: !this.isPlaying});
+          this.fire("pause");
         }
 
       },
@@ -375,31 +369,31 @@
       },
 
       showSubtitlesOptions: function() {
-        this.showSubtitlesMenu=!this.showSubtitlesMenu;
-        this.querySelector(".video-dropdown-menu").style.display="block";
+        this.showSubtitlesMenu = !this.showSubtitlesMenu;
+        this.querySelector(".video-dropdown-menu").style.display = "block";
         this.subsTimer();
       },
 
 
       subsTimer: function () {
-        var obj=document.querySelector("video-controlbar");
+        var obj = document.querySelector("video-controlbar");
         if(obj.setDropdownTimer) {
               window.clearTimeout(obj.timeoutHandle);
               obj.timeoutHandle = window.setTimeout(obj.func, obj.timeoutTime);
-              obj.dropClicked=false;
-              obj.setDropdownTimer=true;
+              obj.dropClicked = false;
+              obj.setDropdownTimer = true;
         }
         else {
           obj.timeoutHandle = setTimeout(obj.func = function () {
               if(!document.querySelector("video-controlbar").dropClicked) {
-                document.querySelector("video-controlbar").showSubtitlesMenu=!document.querySelector("video-controlbar").showSubtitlesMenu;
-                document.querySelector(".video-dropdown-menu").style.display="none";
-                document.querySelector("video-controlbar").setDropdownTimer=false;
+                document.querySelector("video-controlbar").showSubtitlesMenu =! document.querySelector("video-controlbar").showSubtitlesMenu;
+                document.querySelector(".video-dropdown-menu").style.display = "none";
+                document.querySelector("video-controlbar").setDropdownTimer = false;
               } else {
                 window.clearTimeout(obj.timeoutHandle);
                 obj.timeoutHandle = window.setTimeout( document.querySelector("video-controlbar").func, obj.timeoutTime);
-                document.querySelector("video-controlbar").dropClicked=false;
-                document.querySelector("video-controlbar").setDropdownTimer=true;
+                document.querySelector("video-controlbar").dropClicked = false;
+                document.querySelector("video-controlbar").setDropdownTimer = true;
               }
             }, obj.timeoutTime);
           obj.dropClicked = false;
@@ -415,9 +409,9 @@
         }
         var vidConElement = document.querySelector("video-controlbar"); 
         if(dataSrcLang) {
-          if (vidConElement.currentSubLang===dataSrcLang) {
-            vidConElement.showSubtitles=!vidConElement.showSubtitles;
-            vidConElement.currentSubLang='';
+          if (vidConElement.currentSubLang === dataSrcLang) {
+            vidConElement.showSubtitles = !vidConElement.showSubtitles;
+            vidConElement.currentSubLang = '';
             event.target.style.color = 'rgba(255, 255, 255, 0.3)';
             vidConElement.fire('subtitlesChanged', {
               newValue: vidConElement.currentSubLang
@@ -426,14 +420,14 @@
           else {
             if (vidConElement.currentSubLang) {
               var obj = "[data-srclang=" + vidConElement.currentSubLang + "]";
-              (document.querySelector(obj).children[0]).style.color = 'rgba(255, 255, 255, 0.3)';
+              document.querySelector(obj).children[0].style.color = 'rgba(255, 255, 255, 0.3)';
             }
             else { //initial
-              vidConElement.showSubtitles=!vidConElement.showSubtitles;
+              vidConElement.showSubtitles = !vidConElement.showSubtitles;
             }
             event.target.style.color = 'rgba(255, 255, 255, 1.0)';
 
-            vidConElement.currentSubLang=dataSrcLang;
+            vidConElement.currentSubLang = dataSrcLang;
             vidConElement.fire('subtitlesChanged', {
               newValue: vidConElement.currentSubLang
             });
