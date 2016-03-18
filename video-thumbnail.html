@@ -16,9 +16,14 @@
       :host(:hover){
         background-color: rgb(255, 255, 255);
       }
+      :host(:hover) .thumb{
+        visibility: visible;
+      }
       img{
+        display:block;
         height: 150px;
         width: 200px;
+        padding: 0px;
       }
       .thumb {
         visibility: hidden;
@@ -30,6 +35,7 @@
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
+        padding: 0px;
       }
       .thumb:after, .thumb:before {
         top: 100%;
@@ -61,7 +67,7 @@
     </style>
 
     <div class="thumb">
-      <img src$="[[src]]">
+      <img src$="[[img_src]]">
     </div>
 
   </template>
@@ -79,6 +85,10 @@
           reflectToAttribute: true
         }
       },
+
+     getStartTime: function(){
+       return this.starttime;
+     },
 
       setWidth: function(width) {
         this.style.width = width + '%';
