@@ -359,6 +359,8 @@
         this.resize(this.videoStreamList.length, newWidth);
 
         //console.log('****' + this.videoStreamList[0].style.width);
+//debugger;
+        this.videoStreamList[0].style.flexShrink = 0;
 	this.$.resizer.style.left = this.videoStreamList[0].style.width;
         this.streamRatio = getComputedStyle(this.videoStreamList[0]).width.replace('px', '') / getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '');
 
@@ -443,8 +445,10 @@
       },
 
       initResize: function(){
+debugger;
         var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )*this.streamRatio));
         this.resize(this.videoStreamList.length, newWidth);
+        this.videoStreamList[0].style.flexShrink = 0;
         this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
         //this.$.resizer.style.left = (this.videoStreamList[0].getBoundingClientRect().right - this.videoStreamList[0].getBoundingClientRect().left).toString()+"px";
       },
