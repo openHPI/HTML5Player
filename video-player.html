@@ -125,6 +125,10 @@
           type: Number,
           value: 1
         },
+        streamRatio: {
+          type: Number,
+          value: 0.5
+        },
         quality: {
           type: String,
           value: 'sd'
@@ -355,7 +359,10 @@
         this.resize(this.videoStreamList.length, newWidth);
 
         //console.log('****' + this.videoStreamList[0].style.width);
+
+        //this.videoStreamList[0].style.flexShrink = 0;
 	this.$.resizer.style.left = this.videoStreamList[0].style.width;
+        this.streamRatio = getComputedStyle(this.videoStreamList[0]).width.replace('px', '') / getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '');
 
         this.fire("resize", { 
           newWidth: this.videoStreamList[0].style.width, 
@@ -427,7 +434,11 @@
       handleFullscreenChanged: function(e) {
         // updates the video size
         this.isFullscreen = !!(document.fullScreen || document.msFullScreenElement || document.mozFullScreen || document.webkitIsFullScreen);
-        this.initResize();
+        this.handleResizeOnFullscreenChange();
+      },
+
+      handleResizeOnFullscreenChange: function(){
+        this.initResize(false);
       },
 
       progressNavigationListener: function (e) {
@@ -437,14 +448,23 @@
          });
       },
 
-      initResize: function(){
+      initResize: function(isPlayerInitializing){
 
-          var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )/this.videoStreamList.length));
-          this.resize(this.videoStreamList.length, newWidth);
+        if (isPlayerInitializing===undefined) { // default is true
+          isPlayerInitializing = true;
+        }
 
-        this.$.resizer.style.left = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
-
+        var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )*this.streamRatio));
+        this.resize(this.videoStreamList.length, newWidth);
+        //this.videoStreamList[0].style.flexShrink = 0;
+        var leftResize = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio)));
+        if (!this.isFullscreen && !isPlayerInitializing) {
+          leftResize = leftResize*95.07/100; // this is the shrink factor of items in the flexbox
+        }
+        this.$.resizer.style.left = leftResize.toString()+"px";
         //this.$.resizer.style.left = (this.videoStreamList[0].getBoundingClientRect().right - this.videoStreamList[0].getBoundingClientRect().left).toString()+"px";
+        //this.$.resizer.style.left = (Math.min(this.videoStreamList[0].offsetWidth.replace('px', ''), this.videoStreamList[0].offsetHeight.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio))).toString()+"px";
+        //this.$.resizer.style.left = this.videoStreamList[0].offsetWidth;
       },
 
       resize: function(videoCount, newWidth) {
@@ -453,11 +473,17 @@
 
         var parentWidth = parseFloat( window.getComputedStyle(this.$.videoArea).width.replace('px', '') );
 
-        var minVideoWidth = 100.0;
-        var maxVideoWidth = (videoCount-1)*parentWidth - minVideoWidth;
-
         var aspectRatio = [];
         aspectRatio[0] = this.ratioAsDouble(this.videoStreamList[0].ratio);
+
+        if (videoCount == 1) {
+          this.videoStreamList[0].style.width = parentWidth.toString() + "px";
+          this.videoStreamList[0].style.height = (parentWidth * aspectRatio[0]).toString() + "px";
+          return;
+        }
+
+        var minVideoWidth = 100.0;
+        var maxVideoWidth = (videoCount-1)*parentWidth - minVideoWidth;
         
         //var newWidth = parseFloat( window.getComputedStyle(this).width.replace('px', '') );
         console.log('parent', parentWidth, 'new', newWidth);
@@ -472,21 +498,21 @@
         var streamHeight = [];
         streamHeight[0] = streamWidth[0] * aspectRatio[0];
 
-        if (videoCount>1) {
+        //if (videoCount>1) {
           streamWidth[1] = parentWidth - newWidth;
           aspectRatio[1] = this.ratioAsDouble(this.videoStreamList[1].ratio);
           streamHeight[1] = streamWidth[1] * aspectRatio[1];
-        }
+        //}
 
         console.log('w', newWidth, 'h', newHeight);
 
         if(!((streamHeight[0] + controlbarHeight > document.documentElement.clientHeight) || (streamHeight[1] + controlbarHeight > document.documentElement.clientHeight))) {
           this.videoStreamList[0].style.width = streamWidth[0].toString() + "px";
           this.videoStreamList[0].style.height = streamHeight[0].toString() + "px";
-          if (videoCount>1) {
+          //if (videoCount>1) {
             this.videoStreamList[1].style.width = streamWidth[1].toString() + "px";
             this.videoStreamList[1].style.height = streamHeight[1].toString() + "px";
-          }
+          //}
         }
       },
 
