@@ -224,7 +224,7 @@
           this.$.resizer.style.display = "none";
         }
 
-        this.initResize(true);
+        this.initResize();
 
         this.async(function() {
           this.stream = this.videoStreamList[0];
@@ -434,6 +434,10 @@
       handleFullscreenChanged: function(e) {
         // updates the video size
         this.isFullscreen = !!(document.fullScreen || document.msFullScreenElement || document.mozFullScreen || document.webkitIsFullScreen);
+        this.handleResizeOnFullscreenChange();
+      },
+
+      handleResizeOnFullscreenChange: function(){
         this.initResize(false);
       },
 
@@ -444,13 +448,17 @@
          });
       },
 
-      initResize: function(initializing){
+      initResize: function(isPlayerInitializing){
+
+        if (isPlayerInitializing===undefined) { // default is true
+          isPlayerInitializing = true;
+        }
 
         var newWidth = Math.floor((parseFloat( getComputedStyle(this.videoStreamList[0].parentNode).width.replace('px', '') )*this.streamRatio));
         this.resize(this.videoStreamList.length, newWidth);
         //this.videoStreamList[0].style.flexShrink = 0;
         var leftResize = (Math.min(window.getComputedStyle(this.videoStreamList[0]).width.replace('px', ''), window.getComputedStyle(this.videoStreamList[0]).height.replace('px', '')/this.ratioAsDouble(this.videoStreamList[0].ratio)));
-        if (!this.isFullscreen && !initializing) {
+        if (!this.isFullscreen && !isPlayerInitializing) {
           leftResize = leftResize*95.07/100; // this is the shrink factor of items in the flexbox
         }
         this.$.resizer.style.left = leftResize.toString()+"px";
